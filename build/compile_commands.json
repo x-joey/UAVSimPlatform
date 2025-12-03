@@ -1,0 +1,32 @@
+[
+{
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Core",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe  @CMakeFiles/Core.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\Core.dir\\Core_autogen\\mocs_compilation.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\build\\Core\\Core_autogen\\mocs_compilation.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/build/Core/Core_autogen/mocs_compilation.cpp",
+  "output": "Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.obj"
+},
+{
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Core",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe  @CMakeFiles/Core.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\Core.dir\\UavModel.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Core\\UavModel.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/Core/UavModel.cpp",
+  "output": "Core/CMakeFiles/Core.dir/UavModel.cpp.obj"
+},
+{
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB @CMakeFiles/UavSimApp.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\UavSimApp.dir\\UavSimApp_autogen\\mocs_compilation.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\build\\Gui\\UavSimApp_autogen\\mocs_compilation.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/UavSimApp_autogen/mocs_compilation.cpp",
+  "output": "Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj"
+},
+{
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB @CMakeFiles/UavSimApp.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\UavSimApp.dir\\main.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Gui\\main.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/Gui/main.cpp",
+  "output": "Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj"
+},
+{
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB @CMakeFiles/UavSimApp.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\UavSimApp.dir\\MainWindow.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Gui\\MainWindow.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/Gui/MainWindow.cpp",
+  "output": "Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj"
+}
+]

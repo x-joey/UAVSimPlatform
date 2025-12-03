@@ -1,0 +1,76 @@
+{
+	"AUTOGEN_COMMAND_LINE_LENGTH_MAX" : 32000,
+	"BUILD_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Core/Core_autogen",
+	"CMAKE_BINARY_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Core",
+	"CMAKE_CURRENT_SOURCE_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform/Core",
+	"CMAKE_EXECUTABLE" : "C:/Program Files/CMake/bin/cmake.exe",
+	"CMAKE_LIST_FILES" : [ "D:/myself/cpp/UAV/UAVSimPlatform/Core/CMakeLists.txt" ],
+	"CMAKE_SOURCE_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "",
+	"DEP_FILE_RULE_NAME" : "",
+	"HEADERS" : 
+	[
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Core/UavModel.h",
+			"MU",
+			"EWIEGA46WW/moc_UavModel.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Core/Core_autogen/include",
+	"MOC_COMPILATION_FILE" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Core/Core_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : [],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"D:/myself/cpp/UAV/UAVSimPlatform/Core",
+		"D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++",
+		"D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32",
+		"D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward",
+		"D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include",
+		"D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include-fixed",
+		"D:/software/qt/Tools/mingw730_32/i686-w64-mingw32/include"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE", "Q_NAMESPACE_EXPORT" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"D:/software/qt/Tools/mingw730_32/bin/g++.exe",
+		"-std=gnu++1z",
+		"-w",
+		"-dM",
+		"-E",
+		"C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Core/Core_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 8,
+	"PARSE_CACHE_FILE" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Core/CMakeFiles/Core_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "D:/software/qt/5.14.2/mingw73_32/bin/moc.exe",
+	"QT_UIC_EXECUTABLE" : "D:/software/qt/5.14.2/mingw73_32/bin/uic.exe",
+	"QT_VERSION_MAJOR" : 5,
+	"QT_VERSION_MINOR" : 14,
+	"SETTINGS_FILE" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Core/CMakeFiles/Core_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[ "D:/myself/cpp/UAV/UAVSimPlatform/Core/UavModel.cpp", "MU", null ]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : [],
+	"UIC_UI_FILES" : [],
+	"USE_BETTER_GRAPH" : false,
+	"VERBOSITY" : 0
+}

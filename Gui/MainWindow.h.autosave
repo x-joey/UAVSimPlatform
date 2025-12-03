@@ -1,0 +1,46 @@
+#pragma once
+
+#include "UavModel.h"   // 引用 Core 模块的头文件
+#include "pathitem.h"
+#include "simscene.h"
+#include "simview.h"
+#include "uavitem.h"
+#include <QDockWidget>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QLabel>
+#include <QMainWindow>
+#include <QPushButton>
+#include <QTimer>
+#include <memory>   // 引入智能指针
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT   // Qt 宏，允许使用信号和槽 (Signals & Slots)
+
+        public : MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+public slots:
+    void updatePathTimeout();
+    void toggleSimulation();
+
+private:
+    void setupUI();           // 新增一个初始化UI的私有函数
+    void updateTelemetry();   // 负责更新侧边栏数据
+
+    // 使用智能指针管理 Core 模块的对象
+    // std::unique_ptr 类似于 Java 的对象引用，但它会在 MainWindow 销毁时自动 delete uav，防止内存泄漏
+//    std::unique_ptr<UavModel> m_uav;
+    std::unique_ptr<UavModel> m_uav;
+    int                       m_currentStep   = 0;   // 记录当前飞到第几个点了
+    QTimer                   *updatePathTimer = nullptr;
+    QLabel                   *m_statusLabel   = nullptr;
+    QLabel                   *m_posLabel      = nullptr;
+    QPushButton              *m_controlButton = nullptr;
+    //    QPushButton              *btnMove         = nullptr;
+
+    // QGrahpicsView
+    SimScene *m_scene    = nullptr;   // 场景
+    SimView  *m_view     = nullptr;   // 视图
+    PathItem *m_pathItem = nullptr;   // 路径图元指针
+    UavItem  *m_uavItem  = nullptr;   // 无人机图元指针
+};

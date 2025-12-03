@@ -1,0 +1,10 @@
+D:/myself/cpp/UAV/UAVSimPlatform/build/CMakeFiles/edit_cache.dir
+D:/myself/cpp/UAV/UAVSimPlatform/build/CMakeFiles/rebuild_cache.dir
+D:/myself/cpp/UAV/UAVSimPlatform/build/Core/CMakeFiles/Core.dir
+D:/myself/cpp/UAV/UAVSimPlatform/build/Core/CMakeFiles/edit_cache.dir
+D:/myself/cpp/UAV/UAVSimPlatform/build/Core/CMakeFiles/rebuild_cache.dir
+D:/myself/cpp/UAV/UAVSimPlatform/build/Core/CMakeFiles/Core_autogen.dir
+D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/CMakeFiles/UavSimApp.dir
+D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/CMakeFiles/edit_cache.dir
+D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/CMakeFiles/rebuild_cache.dir
+D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/CMakeFiles/UavSimApp_autogen.dir

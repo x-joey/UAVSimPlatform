@@ -1,0 +1,2 @@
+D:\software\qt\Tools\mingw730_32\bin\ar.exe qc libCore.a CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.obj CMakeFiles/Core.dir/UavModel.cpp.obj
+D:\software\qt\Tools\mingw730_32\bin\ranlib.exe libCore.a
