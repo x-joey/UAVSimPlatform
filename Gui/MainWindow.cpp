@@ -1,60 +1,23 @@
 #include "MainWindow.h"
 #include "trajectorygenerator.h"
+#include <QDebug>
 #include <QGridLayout>
+#include <QHeaderView>
 #include <QLabel>
 #include <QPushButton>
 #include <QSlider>
 #include <QVBoxLayout>
 #include <QWidget>
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     updatePathTimer = new QTimer(this);
     connect(updatePathTimer, &QTimer::timeout, this, &MainWindow::updatePathTimeout, Qt::QueuedConnection);
-    // 1. 初始化 Core 模块的业务对象
-    m_uav = std::make_unique<UavModel>(101, "Phantom-X");
-    /**
-        // 1. 初始化 Core 模块的业务对象
-        m_uav = std::make_unique<UavModel>(101, "Phantom-X");
-        // 2. 生成航迹数据 (圆形，圆心在 100,100，半径 50，共 60 个点)
-        //    QVector<QPointF> circlePath = TrajectoryGenerator::createCirclePath(QPointF(100, 100), 50.0, 300);
-        QVector<QPointF> circlePath = TrajectoryGenerator::createEightShapePath(QPointF(100, 100), 50.0, 300);
-
-        // 3. 将航迹传给无人机
-        m_uav->setFlightPath(circlePath);
-
-        // 2. 设置简单的 UI (实际项目中通常使用 .ui 文件设计，这里为了演示纯代码构建)
-        QWidget *centralWidget = new QWidget(this);
-        setCentralWidget(centralWidget);
-
-        QVBoxLayout *layout = new QVBoxLayout(centralWidget);
-
-        QLabel *infoLabel = new QLabel("Ready to fly...", this);
-        btnMove           = new QPushButton("Next Step", this);
-
-        layout->addWidget(infoLabel);
-        layout->addWidget(btnMove);
-
-        // 3. 连接信号与槽 (Connect Signal & Slot)
-        // 当按钮被点击 (clicked) 时，执行 lambda 表达式中的代码
-        // 这类似于 Java 的 btn.addActionListener(() -> { ... });
-        connect(btnMove, &QPushButton::clicked, this, [this, infoLabel]() {
-            // 调用 Core 模块的逻辑
-            m_uav->updatePosition(m_currentStep);
-            m_currentStep++;
-
-            // 更新 UI
-            QString status = QString("Step: %1 | Pos: (%2, %3)")
-                                 .arg(m_currentStep)
-                                 // QString::number(val, format, precision) 控制小数位数
-                                 .arg(QString::number(m_uav->getX(), 'f', 2))
-                                 .arg(QString::number(m_uav->getY(), 'f', 2));
-            infoLabel->setText(status);
-        });
-        resize(400, 300);
-    **/
+    // 1. 初始化 Service 模块的业务对象
+    m_simManager = new SimulationManager();
     setupUI();
+    // 连接场景中点击无人机的信号
+    connect(m_scene, &SimScene::uavClicked, this, &MainWindow::onUavClicked);
     updatePathTimer->start(1000);
 }
 
@@ -67,15 +30,29 @@ MainWindow::~MainWindow()
 
 void MainWindow::updatePathTimeout()
 {
-    // 1. core逻辑更新
-    m_uav->updatePosition(m_currentStep);
-    m_currentStep++;
+    for (const auto &uav : m_simManager->getUavs()) {
+        uav->updatePosition(m_currentStep);
+        m_currentStep = (m_currentStep + 1) % uav->getPath().size();
+        uav->setCurrentPoint(m_currentStep);
+        // 更新图元位置
+        auto it = m_uavItemMap.find(uav->getId());
+        if (it != m_uavItemMap.end()) {
+            it.value()->setPos(uav->getX(), uav->getY());
+        }
+        // 更新标签虚线指向的无人机位置
+        auto labelIt = m_uavLabelMap.find(uav->getId());
+        if (labelIt != m_uavLabelMap.end()) {
+            labelIt.value()->setUavScenePos(QPointF(uav->getX(), uav->getY()));
+        }
 
-    // 2. gui界面更新，setPos()负责移动QGraphicsItem,但不会触发重绘，因为Qt优化
-    m_uavItem->setPos(m_uav->getX(), m_uav->getY());
-    updateTelemetry();
-    if (m_currentStep >= m_uav->getPath().size()) {
-        m_currentStep = 0;   // 重置到起点
+        // 更新侧边栏/表格中的遥测数据
+        updateTelemetry(uav.get());
+        updateUavRow(uav.get());
+        updateLabelInfo(uav.get());
+        qDebug() << "xujunwei:" << uav.get()->getId() << "," << m_currentStep << endl;
+        if (uav->getCurrentPoint() >= uav->getPath().size()) {
+            uav->setCurrentPoint(0);   // 重置到起点
+        }
     }
 }
 
@@ -103,9 +80,9 @@ void MainWindow::setupUI()
     // 我们之前设置圆心100，100，半径50.设置0，0到200，200足够显示
     //    m_scene->setSceneRect(0, 0, 200, 200);
     // 禁用view的滚动条，让它看起来更像一个固定画布
-    //    m_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //    m_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    m_scene->setSceneRect(-2000, -2000, 4000, 4000);
+    m_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_scene->setSceneRect(-20000, -20000, 40000, 40000);
     m_view->setDragMode(QGraphicsView::ScrollHandDrag);                 // 启用鼠标拖拽平移
     m_view->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);   // 设置缩放锚点为“鼠标下方”
     m_view->setRenderHint(QPainter::Antialiasing);                      // 开启抗锯齿，让圆和线更平滑，设置渲染质量
@@ -130,40 +107,23 @@ void MainWindow::setupUI()
     layout->addWidget(new QLabel("Simulation State:"), 0, 0);
     layout->addWidget(m_controlButton, 0, 1);
 
-    // --- 2b. 遥测数据显示 ---
-    layout->addWidget(new QLabel("UAV ID:"), 1, 0);
-    layout->addWidget(new QLabel(QString::number(m_uav->getId())), 1, 1);
-
-    layout->addWidget(new QLabel("Current X:"), 2, 0);
-    m_posLabel = new QLabel("N/A");   // 动态更新的坐标标签
-    layout->addWidget(m_posLabel, 2, 1);
-
-    layout->addWidget(new QLabel("Current Step:"), 3, 0);
-    m_statusLabel = new QLabel("0");   // 动态更新的步数标签
-    layout->addWidget(m_statusLabel, 3, 1);
+    // --- 2b. 多架无人机遥测数据显示表格 ---
+    m_uavTable = new QTableWidget(dockContents);
+    initUavTable();
+    layout->addWidget(new QLabel("UAV Telemetry:"), 1, 0, 1, 2);
+    layout->addWidget(m_uavTable, 2, 0, 1, 2);
 
     dockContents->setLayout(layout);
     controlDock->setWidget(dockContents);
     m_controlButton->setText("▶ Start Simulation");
 
     // 3. 航迹数据生成与图元创建
-    QPointF center(100.0, 100.0);
-    //    QVector<QPointF> CirclePath = TrajectoryGenerator::createCirclePath(center, 50.0, 60);
-    QVector<QPointF> CirclePath = TrajectoryGenerator::createEightShapePath(center, 50.0, 60);
-    m_uav->setFlightPath(CirclePath);
+    //    QPointF center(100.0, 100.0);
+    //    //    QVector<QPointF> CirclePath = TrajectoryGenerator::createCirclePath(center, 50.0, 60);
+    //    QVector<QPointF> CirclePath = TrajectoryGenerator::createEightShapePath(center, 50.0, 60);
+    //    m_uav->setFlightPath(CirclePath);
 
-    // 创建PathItem并添加到场景
-    m_pathItem = new PathItem(m_uav->getPath());
-    m_scene->addItem(m_pathItem);
 
-    // 创建UavItem 并添加到场景
-    m_uavItem = new UavItem();
-    m_scene->addItem(m_uavItem);
-
-    // 初始化无人机在航迹的第一个点
-    m_uav->updatePosition(0);
-    // 关键：将QGraphicsItem 移动到Service逻辑的位置
-    m_uavItem->setPos(m_uav->getX(), m_uav->getY());
 
     // 3. 布局与交互
     QWidget *centralWidget = new QWidget(this);
@@ -177,14 +137,135 @@ void MainWindow::setupUI()
     vlayout->addWidget(infoLabel);
     //    vlayout->addWidget(btnMove);
     connect(m_controlButton, &QPushButton::clicked, this, &MainWindow::toggleSimulation);
-    // 初始化遥测更新
-    updateTelemetry();
-    resize(500, 600);   // 调整窗口大小以容纳视图
+
+    for (const auto &uav : m_simManager->getUavs()) {
+        // 创建PathItem并添加到场景
+        m_pathItem = new PathItem(uav->getPath());
+        m_scene->addItem(m_pathItem);
+
+        // 创建UavItem 并添加到场景（目标点）
+        auto *uavItem = new UavItem();
+        uavItem->setId(uav->getId());
+        m_uavItemMap[uav->getId()] = uavItem;
+        m_scene->addItem(uavItem);
+        uavItem->setPos(uav->getX(), uav->getY());
+
+        // 创建标签图元，并与无人机通过虚线连接
+        auto *labelItem = new UavLabelItem();
+        labelItem->setId(uav->getId());
+        labelItem->setName(uav->getName());
+        labelItem->setUavScenePos(QPointF(uav->getX(), uav->getY()));
+        m_uavLabelMap[uav->getId()] = labelItem;
+        m_scene->addItem(labelItem);
+
+        // 初始化遥测、表格和标签信息
+        updateTelemetry(uav.get());
+        updateUavRow(uav.get());
+        updateLabelInfo(uav.get());
+    }
+
+    resize(1000, 600);   // 调整窗口大小以容纳视图
 }
 
-void MainWindow::updateTelemetry()
+void MainWindow::updateTelemetry(UavModel *uav)
 {
+    if (!m_statusLabel || !m_posLabel)
+        return;
+
     m_statusLabel->setText(QString::number(m_currentStep));
-    QString posText = QString("(%1, %2)").arg(QString::number(m_uav->getX(), 'f', 2)).arg(QString::number(m_uav->getY(), 'f', 2));
+    QString posText = QString("(%1, %2)").arg(QString::number(uav->getX(), 'f', 2)).arg(QString::number(uav->getY(), 'f', 2));
     m_posLabel->setText(posText);
+}
+
+void MainWindow::initUavTable()
+{
+    if (!m_simManager)
+        return;
+
+    const auto &uavs = m_simManager->getUavs();
+    m_uavTable->setColumnCount(4);
+    m_uavTable->setRowCount(static_cast<int>(uavs.size()));
+    QStringList headers;
+    headers << "ID"
+            << "Name"
+            << "X"
+            << "Y";
+    m_uavTable->setHorizontalHeaderLabels(headers);
+    m_uavTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    m_uavTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    m_uavTable->setSelectionMode(QAbstractItemView::SingleSelection);
+
+    int row = 0;
+    for (const auto &uav : uavs) {
+        int id          = uav->getId();
+        m_uavRowMap[id] = row;
+
+        m_uavTable->setItem(row, 0, new QTableWidgetItem(QString::number(id)));
+        m_uavTable->setItem(row, 1, new QTableWidgetItem(uav->getName()));
+        m_uavTable->setItem(row, 2, new QTableWidgetItem(QString::number(uav->getX(), 'f', 2)));
+        m_uavTable->setItem(row, 3, new QTableWidgetItem(QString::number(uav->getY(), 'f', 2)));
+        ++row;
+    }
+}
+
+void MainWindow::updateUavRow(UavModel *uav)
+{
+    if (!m_uavTable)
+        return;
+
+    int id = uav->getId();
+    if (!m_uavRowMap.contains(id))
+        return;
+
+    int row = m_uavRowMap.value(id);
+
+    // 只更新位置相关列
+    if (auto *itemX = m_uavTable->item(row, 2)) {
+        itemX->setText(QString::number(uav->getX(), 'f', 2));
+    }
+    if (auto *itemY = m_uavTable->item(row, 3)) {
+        itemY->setText(QString::number(uav->getY(), 'f', 2));
+    }
+}
+
+void MainWindow::onUavClicked(int uavId)
+{
+    if (!m_simManager || !m_uavTable)
+        return;
+
+    // 高亮表格中对应行
+    if (m_uavRowMap.contains(uavId)) {
+        int row = m_uavRowMap.value(uavId);
+        m_uavTable->selectRow(row);
+        m_uavTable->scrollToItem(m_uavTable->item(row, 0));
+    }
+
+    // 查找对应的 UavModel，更新标签下方的信息并高亮该标签
+    const auto &uavs = m_simManager->getUavs();
+    for (const auto &uavPtr : uavs) {
+        if (uavPtr->getId() == uavId) {
+            // 先关闭其他标签的信息显示
+            for (auto label : m_uavLabelMap) {
+                label->setShowInfo(false);
+            }
+            // 打开当前标签的信息显示
+            if (auto label = m_uavLabelMap.value(uavId, nullptr)) {
+                label->setShowInfo(true);
+                updateLabelInfo(uavPtr.get());
+            }
+            break;
+        }
+    }
+}
+
+void MainWindow::updateLabelInfo(UavModel *uav)
+{
+    if (!uav)
+        return;
+    auto *label = m_uavLabelMap.value(uav->getId(), nullptr);
+    if (!label || !label->showInfo())
+        return;
+
+    QString info = QString("(%1, %2)").arg(QString::number(uav->getX(), 'f', 2)).arg(QString::number(uav->getY(), 'f', 2));
+    label->setInfoText(info);
 }

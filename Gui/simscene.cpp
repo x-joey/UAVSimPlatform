@@ -1,4 +1,7 @@
 #include "simscene.h"
+#include "uavitem.h"
+#include "uavlabelitem.h"
+#include <QGraphicsSceneMouseEvent>
 #include <QPen>
 #include <cmath>
 
@@ -36,4 +39,26 @@ void SimScene::drawBackground(QPainter *painter, const QRectF &rect)
     painter->setPen(originPen);
     painter->drawLine(0, -10, 0, 10);   // Y轴标记
     painter->drawLine(-10, 0, 10, 0);   // X轴标记
+}
+
+void SimScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    // 先让基类处理选择等默认行为
+    QGraphicsScene::mousePressEvent(event);
+
+    // 在点击位置查找图元
+    QGraphicsItem *item = itemAt(event->scenePos(), QTransform());
+    if (!item)
+        return;
+
+    // 如果是无人机图元，则发出信号
+    if (auto *uavItem = dynamic_cast<UavItem *>(item)) {
+        emit uavClicked(uavItem->id());
+        return;
+    }
+
+    // 如果是标签图元，同样发出对应无人机 ID
+    if (auto *labelItem = dynamic_cast<UavLabelItem *>(item)) {
+        emit uavClicked(labelItem->id());
+    }
 }

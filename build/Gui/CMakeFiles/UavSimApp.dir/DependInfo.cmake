@@ -11,6 +11,11 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/myself/cpp/UAV/UAVSimPlatform/Gui/MainWindow.cpp" "Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj.d"
   "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/UavSimApp_autogen/mocs_compilation.cpp" "Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj.d"
   "D:/myself/cpp/UAV/UAVSimPlatform/Gui/main.cpp" "Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj.d"
+  "D:/myself/cpp/UAV/UAVSimPlatform/Gui/pathitem.cpp" "Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj.d"
+  "D:/myself/cpp/UAV/UAVSimPlatform/Gui/simscene.cpp" "Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.obj.d"
+  "D:/myself/cpp/UAV/UAVSimPlatform/Gui/simview.cpp" "Gui/CMakeFiles/UavSimApp.dir/simview.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/simview.cpp.obj.d"
+  "D:/myself/cpp/UAV/UAVSimPlatform/Gui/uavitem.cpp" "Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.obj.d"
+  "D:/myself/cpp/UAV/UAVSimPlatform/Gui/uavlabelitem.cpp" "Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

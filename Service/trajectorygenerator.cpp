@@ -1,6 +1,6 @@
 #include "trajectorygenerator.h"
+#include <QVector2D>
 #include <cmath>
-
 #ifndef M_PI
 #    define M_PI 3.14159265358979323846
 #endif
@@ -47,5 +47,35 @@ QVector<QPointF> TrajectoryGenerator::createEightShapePath(QPointF center, doubl
 
         path.append(QPointF(x, y));
     }
+    return path;
+}
+
+QVector<QPointF> TrajectoryGenerator::createPathFromWaypoints(const QVector<QPointF> &waypoints, double stepSize)
+{
+    QVector<QPointF> path;
+    if (waypoints.size() < 2)
+        return path;
+
+    // 遍历每一段线段 (Point A -> Point B)
+    for (int i = 0; i < waypoints.size() - 1; ++i) {
+        QPointF start = waypoints[i];
+        QPointF end   = waypoints[i + 1];
+
+        // 计算两点距离
+        QVector2D vec(end - start);
+        double    distance = vec.length();
+
+        // 归一化向量 (方向)
+        QVector2D direction = vec.normalized();
+
+        // 线性插值生成中间点
+        for (double d = 0; d < distance; d += stepSize) {
+            // 当前点 = 起点 + 方向 * 距离
+            QPointF p = start + (direction.toPointF() * d);
+            path.append(p);
+        }
+    }
+    // 确保把最后一个点加进去
+    path.append(waypoints.last());
     return path;
 }

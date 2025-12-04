@@ -15,19 +15,20 @@ public:
     void updatePosition(int stepIndex);
 
     void setFlightPath(const QVector<QPointF> &path);
-
+    void setCurrentPoint(int currentPoint);
     // Getters
     int                     getId() const;
+    int                     getCurrentPoint() const;
     double                  getX() const;
     double                  getY() const;
     QString                 getName() const;
     const QVector<QPointF> &getPath() const;
 
 private:
-    int     m_id;
-    QString m_name;
-    double  m_x;
-    double  m_y;
-
-    QVector<QPointF> m_path;   // 存储已生成的航迹点
+    int              m_id;
+    QString          m_name;
+    double           m_x;
+    double           m_y;
+    int              m_currentPoint;   // 当前处于第几个航迹点
+    QVector<QPointF> m_path;           // 存储已生成的航迹点
 };

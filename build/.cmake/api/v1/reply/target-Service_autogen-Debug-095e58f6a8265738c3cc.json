@@ -5,7 +5,7 @@
 		"commands" : [],
 		"files" : 
 		[
-			"Core/CMakeLists.txt"
+			"Service/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -14,13 +14,13 @@
 			}
 		]
 	},
-	"id" : "Core_autogen::@94795ff35dabbbd3a8ca",
+	"id" : "Service_autogen::@91bc7765fde5a1b73d63",
 	"isGeneratorProvided" : true,
-	"name" : "Core_autogen",
+	"name" : "Service_autogen",
 	"paths" : 
 	{
-		"build" : "Core",
-		"source" : "Core"
+		"build" : "Service",
+		"source" : "Service"
 	},
 	"sourceGroups" : 
 	[
@@ -44,13 +44,13 @@
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/Core/CMakeFiles/Core_autogen",
+			"path" : "build/Service/CMakeFiles/Service_autogen",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/Core/CMakeFiles/Core_autogen.rule",
+			"path" : "build/Service/CMakeFiles/Service_autogen.rule",
 			"sourceGroupIndex" : 1
 		}
 	],

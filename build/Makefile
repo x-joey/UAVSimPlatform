@@ -116,30 +116,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Core
+# Target rules for targets named Service
 
 # Build rule for target.
-Core: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Core
-.PHONY : Core
+Service: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Service
+.PHONY : Service
 
 # fast build rule for target.
-Core/fast:
-	$(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/build
-.PHONY : Core/fast
+Service/fast:
+	$(MAKE) $(MAKESILENT) -f Service\CMakeFiles\Service.dir\build.make Service/CMakeFiles/Service.dir/build
+.PHONY : Service/fast
 
 #=============================================================================
-# Target rules for targets named Core_autogen
+# Target rules for targets named Service_autogen
 
 # Build rule for target.
-Core_autogen: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Core_autogen
-.PHONY : Core_autogen
+Service_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Service_autogen
+.PHONY : Service_autogen
 
 # fast build rule for target.
-Core_autogen/fast:
-	$(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core_autogen.dir\build.make Core/CMakeFiles/Core_autogen.dir/build
-.PHONY : Core_autogen/fast
+Service_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f Service\CMakeFiles\Service_autogen.dir\build.make Service/CMakeFiles/Service_autogen.dir/build
+.PHONY : Service_autogen/fast
 
 #=============================================================================
 # Target rules for targets named UavSimApp
@@ -175,9 +175,9 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... Core_autogen
+	@echo ... Service_autogen
 	@echo ... UavSimApp_autogen
-	@echo ... Core
+	@echo ... Service
 	@echo ... UavSimApp
 .PHONY : help
 

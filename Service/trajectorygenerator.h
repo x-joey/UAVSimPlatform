@@ -25,6 +25,11 @@ public:
      **/
     static QVector<QPointF> createEightShapePath(QPointF center, double radius, int pointsCount);
 
+    // 新增：根据航点列表生成航迹
+    // waypoints: 用户点击的关键点
+    // speed: 插值密度（每两个点之间插入多少个点，或者步长）
+    static QVector<QPointF> createPathFromWaypoints(const QVector<QPointF> &waypoints, double stepSize = 2.0);
+
 public:
     QList<QPointF> m_path;
 };

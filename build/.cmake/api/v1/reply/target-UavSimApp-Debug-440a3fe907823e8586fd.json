@@ -40,7 +40,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 12,
+				"line" : 22,
 				"parent" : 0
 			},
 			{
@@ -120,7 +120,7 @@
 				},
 				{
 					"backtrace" : 2,
-					"path" : "D:/myself/cpp/UAV/UAVSimPlatform/Core"
+					"path" : "D:/myself/cpp/UAV/UAVSimPlatform/Service"
 				},
 				{
 					"backtrace" : 2,
@@ -176,7 +176,12 @@
 			[
 				0,
 				1,
-				2
+				2,
+				4,
+				6,
+				8,
+				10,
+				12
 			]
 		}
 	],
@@ -184,7 +189,7 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "Core::@94795ff35dabbbd3a8ca"
+			"id" : "Service::@91bc7765fde5a1b73d63"
 		},
 		{
 			"backtrace" : 0,
@@ -217,7 +222,7 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\Core\\libCore.a",
+				"fragment" : "..\\Service\\libService.a",
 				"role" : "libraries"
 			},
 			{
@@ -252,14 +257,24 @@
 			[
 				0,
 				1,
-				2
+				2,
+				4,
+				6,
+				8,
+				10,
+				12
 			]
 		},
 		{
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				3
+				3,
+				5,
+				7,
+				9,
+				11,
+				13
 			]
 		}
 	],
@@ -287,6 +302,61 @@
 		{
 			"backtrace" : 1,
 			"path" : "Gui/MainWindow.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Gui/pathitem.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Gui/pathitem.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Gui/uavitem.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Gui/uavitem.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Gui/uavlabelitem.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Gui/uavlabelitem.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Gui/simview.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Gui/simview.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Gui/simscene.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Gui/simscene.h",
 			"sourceGroupIndex" : 1
 		}
 	],

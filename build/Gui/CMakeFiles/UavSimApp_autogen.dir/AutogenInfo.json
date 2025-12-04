@@ -17,6 +17,36 @@
 			"MU",
 			"EWIEGA46WW/moc_MainWindow.cpp",
 			null
+		],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Gui/pathitem.h",
+			"MU",
+			"EWIEGA46WW/moc_pathitem.cpp",
+			null
+		],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Gui/simscene.h",
+			"MU",
+			"EWIEGA46WW/moc_simscene.cpp",
+			null
+		],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Gui/simview.h",
+			"MU",
+			"EWIEGA46WW/moc_simview.cpp",
+			null
+		],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Gui/uavitem.h",
+			"MU",
+			"EWIEGA46WW/moc_uavitem.cpp",
+			null
+		],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Gui/uavlabelitem.h",
+			"MU",
+			"EWIEGA46WW/moc_uavlabelitem.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -39,7 +69,7 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"D:/myself/cpp/UAV/UAVSimPlatform/Core",
+		"D:/myself/cpp/UAV/UAVSimPlatform/Service",
 		"D:/software/qt/5.14.2/mingw73_32/include",
 		"D:/software/qt/5.14.2/mingw73_32/include/QtWidgets",
 		"D:/software/qt/5.14.2/mingw73_32/include/QtGui",
@@ -81,7 +111,12 @@
 	"SOURCES" : 
 	[
 		[ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/MainWindow.cpp", "MU", null ],
-		[ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/main.cpp", "MU", null ]
+		[ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/main.cpp", "MU", null ],
+		[ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/pathitem.cpp", "MU", null ],
+		[ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/simscene.cpp", "MU", null ],
+		[ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/simview.cpp", "MU", null ],
+		[ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/uavitem.cpp", "MU", null ],
+		[ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/uavlabelitem.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

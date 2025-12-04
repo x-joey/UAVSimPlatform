@@ -1,0 +1,2 @@
+D:\software\qt\Tools\mingw730_32\bin\ar.exe qc libService.a CMakeFiles/Service.dir/Service_autogen/mocs_compilation.cpp.obj CMakeFiles/Service.dir/UavModel.cpp.obj CMakeFiles/Service.dir/flightpath.cpp.obj CMakeFiles/Service.dir/trajectorygenerator.cpp.obj CMakeFiles/Service.dir/simulationmanager.cpp.obj
+D:\software\qt\Tools\mingw730_32\bin\ranlib.exe libService.a

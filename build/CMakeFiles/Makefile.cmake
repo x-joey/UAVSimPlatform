@@ -34,8 +34,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Program Files/CMake/share/cmake-4.0/Modules/Platform/Windows.cmake"
   "C:/Program Files/CMake/share/cmake-4.0/Modules/Platform/WindowsPaths.cmake"
   "D:/myself/cpp/UAV/UAVSimPlatform/CMakeLists.txt"
-  "D:/myself/cpp/UAV/UAVSimPlatform/Core/CMakeLists.txt"
   "D:/myself/cpp/UAV/UAVSimPlatform/Gui/CMakeLists.txt"
+  "D:/myself/cpp/UAV/UAVSimPlatform/Service/CMakeLists.txt"
   "CMakeFiles/4.0.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.0.2/CMakeRCCompiler.cmake"
   "CMakeFiles/4.0.2/CMakeSystem.cmake"
@@ -91,16 +91,16 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "Core/CMakeFiles/Core_autogen.dir/AutogenInfo.json"
-  "Core/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "Service/CMakeFiles/Service_autogen.dir/AutogenInfo.json"
+  "Service/CMakeFiles/CMakeDirectoryInformation.cmake"
   "Gui/CMakeFiles/UavSimApp_autogen.dir/AutogenInfo.json"
   "Gui/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "Core/CMakeFiles/Core.dir/DependInfo.cmake"
-  "Core/CMakeFiles/Core_autogen.dir/DependInfo.cmake"
+  "Service/CMakeFiles/Service.dir/DependInfo.cmake"
+  "Service/CMakeFiles/Service_autogen.dir/DependInfo.cmake"
   "Gui/CMakeFiles/UavSimApp.dir/DependInfo.cmake"
   "Gui/CMakeFiles/UavSimApp_autogen.dir/DependInfo.cmake"
   )

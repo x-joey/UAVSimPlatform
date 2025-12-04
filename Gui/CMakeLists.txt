@@ -9,6 +9,8 @@
      pathitem.h
      uavitem.cpp
      uavitem.h
+    uavlabelitem.cpp
+    uavlabelitem.h
      simview.cpp
      simview.h
      simscene.cpp

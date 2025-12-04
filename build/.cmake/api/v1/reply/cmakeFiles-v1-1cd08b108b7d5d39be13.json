@@ -316,7 +316,7 @@
 			"path" : "D:/software/qt/5.14.2/mingw73_32/lib/cmake/Qt5Sql/Qt5Sql_QSQLiteDriverPlugin.cmake"
 		},
 		{
-			"path" : "Core/CMakeLists.txt"
+			"path" : "Service/CMakeLists.txt"
 		},
 		{
 			"path" : "Gui/CMakeLists.txt"

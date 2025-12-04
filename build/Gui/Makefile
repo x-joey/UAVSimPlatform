@@ -215,6 +215,126 @@ main.cpp.s:
 	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+pathitem.obj: pathitem.cpp.obj
+.PHONY : pathitem.obj
+
+# target to build an object file
+pathitem.cpp.obj:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj
+.PHONY : pathitem.cpp.obj
+
+pathitem.i: pathitem.cpp.i
+.PHONY : pathitem.i
+
+# target to preprocess a source file
+pathitem.cpp.i:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.i
+.PHONY : pathitem.cpp.i
+
+pathitem.s: pathitem.cpp.s
+.PHONY : pathitem.s
+
+# target to generate assembly for a file
+pathitem.cpp.s:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.s
+.PHONY : pathitem.cpp.s
+
+simscene.obj: simscene.cpp.obj
+.PHONY : simscene.obj
+
+# target to build an object file
+simscene.cpp.obj:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.obj
+.PHONY : simscene.cpp.obj
+
+simscene.i: simscene.cpp.i
+.PHONY : simscene.i
+
+# target to preprocess a source file
+simscene.cpp.i:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.i
+.PHONY : simscene.cpp.i
+
+simscene.s: simscene.cpp.s
+.PHONY : simscene.s
+
+# target to generate assembly for a file
+simscene.cpp.s:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.s
+.PHONY : simscene.cpp.s
+
+simview.obj: simview.cpp.obj
+.PHONY : simview.obj
+
+# target to build an object file
+simview.cpp.obj:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/simview.cpp.obj
+.PHONY : simview.cpp.obj
+
+simview.i: simview.cpp.i
+.PHONY : simview.i
+
+# target to preprocess a source file
+simview.cpp.i:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/simview.cpp.i
+.PHONY : simview.cpp.i
+
+simview.s: simview.cpp.s
+.PHONY : simview.s
+
+# target to generate assembly for a file
+simview.cpp.s:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/simview.cpp.s
+.PHONY : simview.cpp.s
+
+uavitem.obj: uavitem.cpp.obj
+.PHONY : uavitem.obj
+
+# target to build an object file
+uavitem.cpp.obj:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.obj
+.PHONY : uavitem.cpp.obj
+
+uavitem.i: uavitem.cpp.i
+.PHONY : uavitem.i
+
+# target to preprocess a source file
+uavitem.cpp.i:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.i
+.PHONY : uavitem.cpp.i
+
+uavitem.s: uavitem.cpp.s
+.PHONY : uavitem.s
+
+# target to generate assembly for a file
+uavitem.cpp.s:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.s
+.PHONY : uavitem.cpp.s
+
+uavlabelitem.obj: uavlabelitem.cpp.obj
+.PHONY : uavlabelitem.obj
+
+# target to build an object file
+uavlabelitem.cpp.obj:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj
+.PHONY : uavlabelitem.cpp.obj
+
+uavlabelitem.i: uavlabelitem.cpp.i
+.PHONY : uavlabelitem.i
+
+# target to preprocess a source file
+uavlabelitem.cpp.i:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.i
+.PHONY : uavlabelitem.cpp.i
+
+uavlabelitem.s: uavlabelitem.cpp.s
+.PHONY : uavlabelitem.s
+
+# target to generate assembly for a file
+uavlabelitem.cpp.s:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.s
+.PHONY : uavlabelitem.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -234,6 +354,21 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... pathitem.obj
+	@echo ... pathitem.i
+	@echo ... pathitem.s
+	@echo ... simscene.obj
+	@echo ... simscene.i
+	@echo ... simscene.s
+	@echo ... simview.obj
+	@echo ... simview.i
+	@echo ... simview.s
+	@echo ... uavitem.obj
+	@echo ... uavitem.i
+	@echo ... uavitem.s
+	@echo ... uavlabelitem.obj
+	@echo ... uavlabelitem.i
+	@echo ... uavlabelitem.s
 .PHONY : help
 
 

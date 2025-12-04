@@ -1,15 +1,33 @@
 [
 {
-  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Core",
-  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe  @CMakeFiles/Core.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\Core.dir\\Core_autogen\\mocs_compilation.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\build\\Core\\Core_autogen\\mocs_compilation.cpp",
-  "file": "D:/myself/cpp/UAV/UAVSimPlatform/build/Core/Core_autogen/mocs_compilation.cpp",
-  "output": "Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.obj"
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Service",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CORE_LIB @CMakeFiles/Service.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\Service.dir\\Service_autogen\\mocs_compilation.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\build\\Service\\Service_autogen\\mocs_compilation.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/build/Service/Service_autogen/mocs_compilation.cpp",
+  "output": "Service/CMakeFiles/Service.dir/Service_autogen/mocs_compilation.cpp.obj"
 },
 {
-  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Core",
-  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe  @CMakeFiles/Core.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\Core.dir\\UavModel.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Core\\UavModel.cpp",
-  "file": "D:/myself/cpp/UAV/UAVSimPlatform/Core/UavModel.cpp",
-  "output": "Core/CMakeFiles/Core.dir/UavModel.cpp.obj"
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Service",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CORE_LIB @CMakeFiles/Service.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\Service.dir\\UavModel.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Service\\UavModel.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/Service/UavModel.cpp",
+  "output": "Service/CMakeFiles/Service.dir/UavModel.cpp.obj"
+},
+{
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Service",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CORE_LIB @CMakeFiles/Service.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\Service.dir\\flightpath.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Service\\flightpath.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/Service/flightpath.cpp",
+  "output": "Service/CMakeFiles/Service.dir/flightpath.cpp.obj"
+},
+{
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Service",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CORE_LIB @CMakeFiles/Service.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\Service.dir\\trajectorygenerator.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Service\\trajectorygenerator.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/Service/trajectorygenerator.cpp",
+  "output": "Service/CMakeFiles/Service.dir/trajectorygenerator.cpp.obj"
+},
+{
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Service",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CORE_LIB @CMakeFiles/Service.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\Service.dir\\simulationmanager.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Service\\simulationmanager.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/Service/simulationmanager.cpp",
+  "output": "Service/CMakeFiles/Service.dir/simulationmanager.cpp.obj"
 },
 {
   "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui",
@@ -28,5 +46,35 @@
   "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB @CMakeFiles/UavSimApp.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\UavSimApp.dir\\MainWindow.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Gui\\MainWindow.cpp",
   "file": "D:/myself/cpp/UAV/UAVSimPlatform/Gui/MainWindow.cpp",
   "output": "Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj"
+},
+{
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB @CMakeFiles/UavSimApp.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\UavSimApp.dir\\pathitem.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Gui\\pathitem.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/Gui/pathitem.cpp",
+  "output": "Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj"
+},
+{
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB @CMakeFiles/UavSimApp.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\UavSimApp.dir\\uavitem.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Gui\\uavitem.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/Gui/uavitem.cpp",
+  "output": "Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.obj"
+},
+{
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB @CMakeFiles/UavSimApp.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\UavSimApp.dir\\uavlabelitem.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Gui\\uavlabelitem.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/Gui/uavlabelitem.cpp",
+  "output": "Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj"
+},
+{
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB @CMakeFiles/UavSimApp.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\UavSimApp.dir\\simview.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Gui\\simview.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/Gui/simview.cpp",
+  "output": "Gui/CMakeFiles/UavSimApp.dir/simview.cpp.obj"
+},
+{
+  "directory": "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui",
+  "command": "D:\\software\\qt\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB @CMakeFiles/UavSimApp.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\UavSimApp.dir\\simscene.cpp.obj -c D:\\myself\\cpp\\UAV\\UAVSimPlatform\\Gui\\simscene.cpp",
+  "file": "D:/myself/cpp/UAV/UAVSimPlatform/Gui/simscene.cpp",
+  "output": "Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.obj"
 }
 ]

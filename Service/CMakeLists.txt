@@ -7,6 +7,8 @@
     flightpath.h
     trajectorygenerator.cpp
     trajectorygenerator.h
+    simulationmanager.cpp
+    simulationmanager.h
 )
 
  # 这里只是一个“纯逻辑”核心模块，目前没有直接使用 Qt 类型，
@@ -18,4 +20,4 @@
  # 1. 编译 Service 模块自己时，能找到当前目录 (.)
  # 2. 任何依赖 Core 的其他模块 (比如 Gui)，也会自动获得这个搜索路径
  target_include_directories(Service PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
- target_link_libraries(Service PRIVATE Qt5::Core)
+ target_link_libraries(Service PRIVATE Qt5::Core Qt5::Gui)

@@ -35,9 +35,19 @@ void UavModel::setFlightPath(const QVector<QPointF> &path)
     m_path = path;
 }
 
+void UavModel::setCurrentPoint(int currentPoint)
+{
+    m_currentPoint = currentPoint;
+}
+
 int UavModel::getId() const
 {
     return m_id;
+}
+
+int UavModel::getCurrentPoint() const
+{
+    return m_currentPoint;
 }
 double UavModel::getX() const
 {

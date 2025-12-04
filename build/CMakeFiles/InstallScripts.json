@@ -2,7 +2,7 @@
 	"InstallScripts" : 
 	[
 		"D:/myself/cpp/UAV/UAVSimPlatform/build/cmake_install.cmake",
-		"D:/myself/cpp/UAV/UAVSimPlatform/build/Core/cmake_install.cmake",
+		"D:/myself/cpp/UAV/UAVSimPlatform/build/Service/cmake_install.cmake",
 		"D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/cmake_install.cmake"
 	],
 	"Parallel" : false
