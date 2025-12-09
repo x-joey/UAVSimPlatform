@@ -9,6 +9,8 @@
 #include "simview.h"
 #include "uavitem.h"
 #include "uavlabelitem.h"
+#include "PPIGraphicsItem.h"        // 新增：PPI图元
+#include "PPIDataManager.h"         // 新增：PPI数据管理器
 
 #include <QDockWidget>
 #include <QGraphicsScene>
@@ -19,7 +21,14 @@
 #include <QTableWidget>
 #include <QTimer>
 #include <memory>   // 引入智能指针
-    class MainWindow : public QMainWindow
+
+// 显示模式枚举
+enum class DisplayMode {
+    RadarOnly,      // 纯雷达模式
+    MapRadar        // 地图+雷达模式
+};
+
+class MainWindow : public QMainWindow
 {
     Q_OBJECT   // Qt 宏，允许使用信号和槽 (Signals & Slots)
 
@@ -29,6 +38,8 @@ public slots:
     void updatePathTimeout();
     void toggleSimulation();
     void onUavClicked(int uavId);
+    void switchDisplayMode();  // 新增：切换显示模式
+    void togglePPIDrag();      // 新增：切换PPI拖动
 
 private:
     void setupUI();                        // 初始化UI
@@ -36,26 +47,43 @@ private:
     void initUavTable();                   // 初始化无人机表格
     void updateUavRow(UavModel *uav);      // 更新单个无人机在表格中的数据
     void updateLabelInfo(UavModel *uav);   // 更新标签下方展示的信息
+    void syncUavDataToPPI();               // 新增：同步UAV数据到PPI
 
-    // 使用智能指针管理 Core 模块的对象
-    // std::unique_ptr 类似于 Java 的对象引用，但它会在 MainWindow 销毁时自动 delete uav，防止内存泄漏
-    //    std::unique_ptr<UavModel> m_uav;
-    SimulationManager *m_simManager    = nullptr;
-    int                m_currentStep   = 0;   // 记录当前飞到第几个点了
-    QTimer            *updatePathTimer = nullptr;
-    QLabel            *m_statusLabel   = nullptr;
-    QLabel            *m_posLabel      = nullptr;
-    QPushButton       *m_controlButton = nullptr;
-    QTableWidget      *m_uavTable      = nullptr;   // 展示多架无人机状态的表格
-    //    QPushButton              *btnMove         = nullptr;
+    // 显示模式控制
+    void applyRadarOnlyMode();             // 应用纯雷达模式
+    void applyMapRadarMode();              // 应用地图+雷达模式
 
-    // QGrahpicsView
-    SimScene *m_scene    = nullptr;            // 场景
-    SimView  *m_view     = nullptr;            // 视图
-    PathItem *m_pathItem = nullptr;            // 路径图元指针
-                                               //    UavItem  *m_uavItem  = nullptr;   // 无人机图元指针
-    QMap<int, UavItem *>      m_uavItemMap;    // 无人机 ID -> 目标点图元
-    QMap<int, UavLabelItem *> m_uavLabelMap;   // 无人机 ID -> 标签图元
-    QMap<int, int>            m_uavRowMap;     // 无人机 ID -> 表格行号
+    // 数据管理
+    std::unique_ptr<SimulationManager> m_simManager;
+    std::unique_ptr<PPIDataManager> m_ppiDataManager;  // 新增：PPI数据管理器
+    int m_currentStep = 0;                              // 记录当前飞到第几个点了
+
+    // 定时器
+    std::unique_ptr<QTimer> updatePathTimer;
+
+    // 控制面板
+    QLabel       *m_statusLabel   = nullptr;
+    QLabel       *m_posLabel      = nullptr;
+    QPushButton  *m_controlButton = nullptr;
+    QPushButton  *m_modeButton    = nullptr;           // 新增：模式切换按钮
+    QPushButton  *m_dragButton    = nullptr;           // 新增：PPI拖动切换按钮
+    QTableWidget *m_uavTable      = nullptr;           // 展示多架无人机状态的表格
+
+    // QGraphicsView相关
+    SimScene *m_scene    = nullptr;                    // 场景
+    SimView  *m_view     = nullptr;                    // 视图
+
+    // PPI图元（新增）
+    PPIGraphicsItem *m_ppiItem = nullptr;              // PPI雷达显示图元
+
+    // 传统图元（可选保留）
+    PathItem *m_pathItem = nullptr;                    // 路径图元指针
+    QMap<int, UavItem *>      m_uavItemMap;            // 无人机 ID -> 目标点图元
+    QMap<int, UavLabelItem *> m_uavLabelMap;           // 无人机 ID -> 标签图元
+    QMap<int, int>            m_uavRowMap;             // 无人机 ID -> 表格行号
+    QMap<int, PathItem *>     m_pathItemMap;           // 无人机 ID -> 路径图元
+
+    // 显示模式
+    DisplayMode m_displayMode = DisplayMode::MapRadar; // 默认地图+雷达模式
 };
 #endif   // UAVITEM_H

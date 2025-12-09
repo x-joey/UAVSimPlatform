@@ -8,16 +8,32 @@
 #include <QSlider>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <limits>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    updatePathTimer = new QTimer(this);
-    connect(updatePathTimer, &QTimer::timeout, this, &MainWindow::updatePathTimeout, Qt::QueuedConnection);
+    updatePathTimer = std::make_unique<QTimer>(this);
+    connect(updatePathTimer.get(), &QTimer::timeout, this, &MainWindow::updatePathTimeout, Qt::QueuedConnection);
+
     // 1. 初始化 Service 模块的业务对象
-    m_simManager = new SimulationManager();
+    m_simManager = std::make_unique<SimulationManager>();
+
+    // 2. 初始化 PPI 数据管理器
+    m_ppiDataManager = std::make_unique<PPIDataManager>(this);
+
     setupUI();
+
     // 连接场景中点击无人机的信号
     connect(m_scene, &SimScene::uavClicked, this, &MainWindow::onUavClicked);
+
+    // 连接PPI图元的信号
+    if (m_ppiItem) {
+        connect(m_ppiItem, &PPIGraphicsItem::targetClicked, this, &MainWindow::onUavClicked);
+        connect(m_ppiItem, &PPIGraphicsItem::targetDoubleClicked, this, [this](int id) {
+            qDebug() << "Target" << id << "double clicked - 可以添加导引等功能";
+        });
+    }
+
     updatePathTimer->start(1000);
 }
 
@@ -26,33 +42,51 @@ MainWindow::~MainWindow()
     // 这里的 m_uav 会被 std::unique_ptr 自动释放，不需要手动 delete
     // QGraphicsView/Scene都会被其parent自动释放，无需手动delete
     // 只有非QObject的指针或裸指针才需要手动delete
+    //    delete m_simManager;
+    //    delete updatePathTimer;
 }
 
 void MainWindow::updatePathTimeout()
 {
+    // 先更新所有UAV的位置
     for (const auto &uav : m_simManager->getUavs()) {
         uav->updatePosition(m_currentStep);
-        m_currentStep = (m_currentStep + 1) % uav->getPath().size();
-        uav->setCurrentPoint(m_currentStep);
-        // 更新图元位置
-        auto it = m_uavItemMap.find(uav->getId());
-        if (it != m_uavItemMap.end()) {
-            it.value()->setPos(uav->getX(), uav->getY());
-        }
-        // 更新标签虚线指向的无人机位置
-        auto labelIt = m_uavLabelMap.find(uav->getId());
-        if (labelIt != m_uavLabelMap.end()) {
-            labelIt.value()->setUavScenePos(QPointF(uav->getX(), uav->getY()));
-        }
+        uav->setCurrentPoint(m_currentStep % uav->getPath().size());
+    }
 
-        // 更新侧边栏/表格中的遥测数据
-        updateTelemetry(uav.get());
-        updateUavRow(uav.get());
-        updateLabelInfo(uav.get());
-        qDebug() << "xujunwei:" << uav.get()->getId() << "," << m_currentStep << endl;
-        if (uav->getCurrentPoint() >= uav->getPath().size()) {
-            uav->setCurrentPoint(0);   // 重置到起点
+    // 同步数据到PPI
+    syncUavDataToPPI();
+
+    // 更新传统图元和UI（仅更新可见区域）
+    QRectF visibleRect = m_view->mapToScene(m_view->viewport()->rect()).boundingRect();
+    for (const auto &uav : m_simManager->getUavs()) {
+        QPointF pos(uav->getX(), uav->getY());
+
+        // 只更新可见区域的UAV
+        if (visibleRect.contains(pos)) {
+            // 更新图元位置
+            auto it = m_uavItemMap.find(uav->getId());
+            if (it != m_uavItemMap.end()) {
+                it.value()->setPos(uav->getX(), uav->getY());
+            }
+
+            // 更新标签虚线指向的无人机位置
+            auto labelIt = m_uavLabelMap.find(uav->getId());
+            if (labelIt != m_uavLabelMap.end()) {
+                labelIt.value()->setUavScenePos(QPointF(uav->getX(), uav->getY()));
+            }
+
+            // 更新侧边栏/表格中的遥测数据
+            updateTelemetry(uav.get());
+            updateUavRow(uav.get());
+            updateLabelInfo(uav.get());
         }
+    }
+
+    // 步进计数器（在循环外递增）
+    m_currentStep++;
+    if (m_currentStep >= std::numeric_limits<int>::max()) {
+        m_currentStep = 0;
     }
 }
 
@@ -76,24 +110,30 @@ void MainWindow::setupUI()
     m_scene = new SimScene(this);
     m_view  = new SimView(m_scene, this);
 
-    // 设置场景的边界（坐标范围），根据你的航迹数据设定，保证内容在区域内
-    // 我们之前设置圆心100，100，半径50.设置0，0到200，200足够显示
-    //    m_scene->setSceneRect(0, 0, 200, 200);
-    // 禁用view的滚动条，让它看起来更像一个固定画布
+    // 设置场景的边界（坐标范围）
+    m_scene->setSceneRect(-20000, -20000, 40000, 40000);
     m_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    m_scene->setSceneRect(-20000, -20000, 40000, 40000);
-    m_view->setDragMode(QGraphicsView::ScrollHandDrag);                 // 启用鼠标拖拽平移
-    m_view->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);   // 设置缩放锚点为“鼠标下方”
-    m_view->setRenderHint(QPainter::Antialiasing);                      // 开启抗锯齿，让圆和线更平滑，设置渲染质量
+    m_view->setDragMode(QGraphicsView::ScrollHandDrag);
+    m_view->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+    m_view->setRenderHint(QPainter::Antialiasing);
+
+    // ========== 新增：创建PPI图元 ==========
+    m_ppiItem = new PPIGraphicsItem();
+    m_ppiItem->setRadius(340);          // 设置PPI半径
+    m_ppiItem->setHuanJu(5000);         // 设置距离环为5km
+    m_ppiItem->setPos(0, 0);            // 设置PPI位置在场景中心
+    m_ppiItem->setZValue(-10);          // 设置为最底层
+    m_scene->addItem(m_ppiItem);
+    // =======================================
 
     // --- 2. 遥测控制台 (QDockWidget) Setup ---
     QDockWidget *controlDock = new QDockWidget("Simulation Control", this);
     controlDock->setAllowedAreas(Qt::RightDockWidgetArea | Qt::LeftDockWidgetArea);
-    addDockWidget(Qt::RightDockWidgetArea, controlDock);   // 停靠在右侧
+    addDockWidget(Qt::RightDockWidgetArea, controlDock);
     controlDock->setWindowFlags(Qt::FramelessWindowHint);
 
-    // 去掉返回栏
+    // 去掉标题栏
     QWidget *titleBarWidget = controlDock->titleBarWidget();
     QWidget *lEmptyWidget   = new QWidget();
     controlDock->setTitleBarWidget(lEmptyWidget);
@@ -107,41 +147,44 @@ void MainWindow::setupUI()
     layout->addWidget(new QLabel("Simulation State:"), 0, 0);
     layout->addWidget(m_controlButton, 0, 1);
 
-    // --- 2b. 多架无人机遥测数据显示表格 ---
+    // --- 2b. 模式切换按钮 ---
+    m_modeButton = new QPushButton("Switch to Radar-Only Mode");
+    layout->addWidget(new QLabel("Display Mode:"), 1, 0);
+    layout->addWidget(m_modeButton, 1, 1);
+
+    // --- 2c. PPI拖动切换按钮 ---
+    m_dragButton = new QPushButton("Enable PPI Drag");
+    layout->addWidget(new QLabel("PPI Drag:"), 2, 0);
+    layout->addWidget(m_dragButton, 2, 1);
+
+    // --- 2d. 多架无人机遥测数据显示表格 ---
     m_uavTable = new QTableWidget(dockContents);
     initUavTable();
-    layout->addWidget(new QLabel("UAV Telemetry:"), 1, 0, 1, 2);
-    layout->addWidget(m_uavTable, 2, 0, 1, 2);
+    layout->addWidget(new QLabel("UAV Telemetry:"), 3, 0, 1, 2);
+    layout->addWidget(m_uavTable, 4, 0, 1, 2);
 
     dockContents->setLayout(layout);
     controlDock->setWidget(dockContents);
-    m_controlButton->setText("▶ Start Simulation");
-
-    // 3. 航迹数据生成与图元创建
-    //    QPointF center(100.0, 100.0);
-    //    //    QVector<QPointF> CirclePath = TrajectoryGenerator::createCirclePath(center, 50.0, 60);
-    //    QVector<QPointF> CirclePath = TrajectoryGenerator::createEightShapePath(center, 50.0, 60);
-    //    m_uav->setFlightPath(CirclePath);
-
-
 
     // 3. 布局与交互
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
 
     QVBoxLayout *vlayout   = new QVBoxLayout(centralWidget);
-    QLabel      *infoLabel = new QLabel("Ready to fly...", this);
-    //    btnMove                = new QPushButton("next step", this);
+    QLabel      *infoLabel = new QLabel("PPI Radar Display - Ready to fly...", this);
 
     vlayout->addWidget(m_view);
     vlayout->addWidget(infoLabel);
-    //    vlayout->addWidget(btnMove);
     connect(m_controlButton, &QPushButton::clicked, this, &MainWindow::toggleSimulation);
+    connect(m_modeButton, &QPushButton::clicked, this, &MainWindow::switchDisplayMode);
+    connect(m_dragButton, &QPushButton::clicked, this, &MainWindow::togglePPIDrag);
 
+    // 4. 创建传统图元（可选，用于对比）
     for (const auto &uav : m_simManager->getUavs()) {
         // 创建PathItem并添加到场景
-        m_pathItem = new PathItem(uav->getPath());
-        m_scene->addItem(m_pathItem);
+        auto *pathItem = new PathItem(uav->getPath());
+        m_pathItemMap[uav->getId()] = pathItem;
+        m_scene->addItem(pathItem);
 
         // 创建UavItem 并添加到场景（目标点）
         auto *uavItem = new UavItem();
@@ -164,7 +207,7 @@ void MainWindow::setupUI()
         updateLabelInfo(uav.get());
     }
 
-    resize(1000, 600);   // 调整窗口大小以容纳视图
+    resize(1400, 800);   // 调整窗口大小
 }
 
 void MainWindow::updateTelemetry(UavModel *uav)
@@ -268,4 +311,143 @@ void MainWindow::updateLabelInfo(UavModel *uav)
 
     QString info = QString("(%1, %2)").arg(QString::number(uav->getX(), 'f', 2)).arg(QString::number(uav->getY(), 'f', 2));
     label->setInfoText(info);
+}
+
+void MainWindow::syncUavDataToPPI()
+{
+    if (!m_ppiItem || !m_ppiDataManager) return;
+
+    // 获取PPI参数
+    QPointF ppiCenter = m_ppiItem->pos();  // PPI在场景中的位置
+    double radius = m_ppiItem->getRadius();
+    uint32_t huanJu = m_ppiItem->getHuanJu();
+
+    // 更新UAV数据到PPI数据管理器
+    // 注意：PPI中心在场景坐标系中是(0,0)，所以传入0,0
+    m_ppiDataManager->updateFromUavs(
+        m_simManager->getUavs(),
+        0.0,  // PPI中心X（场景坐标）
+        0.0,  // PPI中心Y（场景坐标）
+        radius,
+        huanJu
+    );
+
+    // 获取更新后的数据并同步到PPI图元
+    LockedHash<Mubiao>& sourceData = m_ppiDataManager->getMubiaoHash();
+    LockedHash<Mubiao>& targetData = m_ppiItem->getMubiaoHash();
+
+    // 清空旧数据
+    targetData.clear();
+
+    // 批量复制新数据
+    QList<int> keys = sourceData.keys();
+    for (int id : keys)
+    {
+        QSharedPointer<Mubiao> mubiao = sourceData.value(id);
+        if (mubiao)
+        {
+            targetData.insert(id, mubiao);
+        }
+    }
+
+    // 触发PPI图元重绘
+    m_ppiItem->update();
+}
+
+void MainWindow::switchDisplayMode()
+{
+    if (m_displayMode == DisplayMode::MapRadar) {
+        // 切换到纯雷达模式
+        m_displayMode = DisplayMode::RadarOnly;
+        applyRadarOnlyMode();
+        m_modeButton->setText("Switch to Map+Radar Mode");
+    } else {
+        // 切换到地图+雷达模式
+        m_displayMode = DisplayMode::MapRadar;
+        applyMapRadarMode();
+        m_modeButton->setText("Switch to Radar-Only Mode");
+    }
+}
+
+void MainWindow::applyRadarOnlyMode()
+{
+    if (!m_ppiItem || !m_scene || !m_view) return;
+
+    // 1. 隐藏网格背景
+    m_scene->setShowGrid(false);
+
+    // 2. 放大PPI半径
+    m_ppiItem->setRadius(900);
+    m_ppiItem->setPPIOpacity(1.0);
+    m_ppiItem->setDrawBackground(true);
+    m_ppiItem->setZValue(10);  // 提升到前景
+
+    // 3. 隐藏传统图元
+    for (auto* pathItem : m_pathItemMap) {
+        if (pathItem) pathItem->setVisible(false);
+    }
+    for (auto* uavItem : m_uavItemMap) {
+        if (uavItem) uavItem->setVisible(false);
+    }
+    for (auto* labelItem : m_uavLabelMap) {
+        if (labelItem) labelItem->setVisible(false);
+    }
+
+    // 4. 调整视图（可选）
+    m_view->resetTransform();
+    m_view->scale(0.8, 0.8);
+    m_view->centerOn(0, 0);
+
+    qDebug() << "Switched to Radar-Only Mode";
+}
+
+void MainWindow::applyMapRadarMode()
+{
+    if (!m_ppiItem || !m_scene || !m_view) return;
+
+    // 1. 显示网格背景
+    m_scene->setShowGrid(true);
+
+    // 2. 缩小PPI半径，添加透明度
+    m_ppiItem->setRadius(400);
+    m_ppiItem->setPPIOpacity(0.6);
+    m_ppiItem->setDrawBackground(false);
+    m_ppiItem->setZValue(-10);  // 降到背景层
+
+    // 3. 显示传统图元
+    for (auto* pathItem : m_pathItemMap) {
+        if (pathItem) pathItem->setVisible(true);
+    }
+    for (auto* uavItem : m_uavItemMap) {
+        if (uavItem) uavItem->setVisible(true);
+    }
+    for (auto* labelItem : m_uavLabelMap) {
+        if (labelItem) labelItem->setVisible(true);
+    }
+
+    // 4. 恢复视图
+    m_view->resetTransform();
+    m_view->scale(1.0, 1.0);
+    m_view->centerOn(0, 0);
+
+    qDebug() << "Switched to Map+Radar Mode";
+}
+
+void MainWindow::togglePPIDrag()
+{
+    if (!m_ppiItem) return;
+
+    bool currentState = m_ppiItem->getDraggable();
+    bool newState = !currentState;
+
+    m_ppiItem->setDraggable(newState);
+
+    // 更新按钮文本
+    if (newState) {
+        m_dragButton->setText("Disable PPI Drag");
+        qDebug() << "PPI Drag Enabled - You can now drag the radar display";
+    } else {
+        m_dragButton->setText("Enable PPI Drag");
+        qDebug() << "PPI Drag Disabled - Click targets to select them";
+    }
 }

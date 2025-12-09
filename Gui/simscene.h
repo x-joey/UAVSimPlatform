@@ -11,6 +11,10 @@ class SimScene : public QGraphicsScene
 public:
     using QGraphicsScene::QGraphicsScene;
 
+    // 设置是否显示网格背景
+    void setShowGrid(bool show) { m_showGrid = show; update(); }
+    bool showGrid() const { return m_showGrid; }
+
 signals:
     // 当用户点击某个无人机图元时，发出对应的无人机 ID
     void uavClicked(int uavId);
@@ -22,6 +26,9 @@ protected:
 
     // 处理鼠标点击，识别被点击的图元（UavItem 或 UavLabelItem）
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+
+private:
+    bool m_showGrid = true;  // 默认显示网格
 };
 
 #endif   // SIMSCENE_H
