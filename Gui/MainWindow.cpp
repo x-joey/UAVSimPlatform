@@ -29,9 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     // 连接PPI图元的信号
     if (m_ppiItem) {
         connect(m_ppiItem, &PPIGraphicsItem::targetClicked, this, &MainWindow::onUavClicked);
-        connect(m_ppiItem, &PPIGraphicsItem::targetDoubleClicked, this, [this](int id) {
-            qDebug() << "Target" << id << "double clicked - 可以添加导引等功能";
-        });
+        connect(m_ppiItem, &PPIGraphicsItem::targetDoubleClicked, this, [this](int id) { qDebug() << "Target" << id << "double clicked - 可以添加导引等功能"; });
     }
 
     updatePathTimer->start(1000);
@@ -120,10 +118,10 @@ void MainWindow::setupUI()
 
     // ========== 新增：创建PPI图元 ==========
     m_ppiItem = new PPIGraphicsItem();
-    m_ppiItem->setRadius(340);          // 设置PPI半径
-    m_ppiItem->setHuanJu(5000);         // 设置距离环为5km
-    m_ppiItem->setPos(0, 0);            // 设置PPI位置在场景中心
-    m_ppiItem->setZValue(-10);          // 设置为最底层
+    m_ppiItem->setRadius(340);    // 设置PPI半径
+    m_ppiItem->setHuanJu(1000);   // 设置距离环为1km，使当前仿真尺度下目标分布更均匀
+    m_ppiItem->setPos(0, 0);      // 设置PPI位置在场景中心
+    m_ppiItem->setZValue(-10);    // 设置为最底层
     m_scene->addItem(m_ppiItem);
     // =======================================
 
@@ -180,32 +178,32 @@ void MainWindow::setupUI()
     connect(m_dragButton, &QPushButton::clicked, this, &MainWindow::togglePPIDrag);
 
     // 4. 创建传统图元（可选，用于对比）
-    for (const auto &uav : m_simManager->getUavs()) {
-        // 创建PathItem并添加到场景
-        auto *pathItem = new PathItem(uav->getPath());
-        m_pathItemMap[uav->getId()] = pathItem;
-        m_scene->addItem(pathItem);
+    //    for (const auto &uav : m_simManager->getUavs()) {
+    //        // 创建PathItem并添加到场景
+    //        auto *pathItem              = new PathItem(uav->getPath());
+    //        m_pathItemMap[uav->getId()] = pathItem;
+    //        m_scene->addItem(pathItem);
 
-        // 创建UavItem 并添加到场景（目标点）
-        auto *uavItem = new UavItem();
-        uavItem->setId(uav->getId());
-        m_uavItemMap[uav->getId()] = uavItem;
-        m_scene->addItem(uavItem);
-        uavItem->setPos(uav->getX(), uav->getY());
+    //        // 创建UavItem 并添加到场景（目标点）
+    //        auto *uavItem = new UavItem();
+    //        uavItem->setId(uav->getId());
+    //        m_uavItemMap[uav->getId()] = uavItem;
+    //        m_scene->addItem(uavItem);
+    //        uavItem->setPos(uav->getX(), uav->getY());
 
-        // 创建标签图元，并与无人机通过虚线连接
-        auto *labelItem = new UavLabelItem();
-        labelItem->setId(uav->getId());
-        labelItem->setName(uav->getName());
-        labelItem->setUavScenePos(QPointF(uav->getX(), uav->getY()));
-        m_uavLabelMap[uav->getId()] = labelItem;
-        m_scene->addItem(labelItem);
+    //        // 创建标签图元，并与无人机通过虚线连接
+    //        auto *labelItem = new UavLabelItem();
+    //        labelItem->setId(uav->getId());
+    //        labelItem->setName(uav->getName());
+    //        labelItem->setUavScenePos(QPointF(uav->getX(), uav->getY()));
+    //        m_uavLabelMap[uav->getId()] = labelItem;
+    //        m_scene->addItem(labelItem);
 
-        // 初始化遥测、表格和标签信息
-        updateTelemetry(uav.get());
-        updateUavRow(uav.get());
-        updateLabelInfo(uav.get());
-    }
+    //        // 初始化遥测、表格和标签信息
+    //        updateTelemetry(uav.get());
+    //        updateUavRow(uav.get());
+    //        updateLabelInfo(uav.get());
+    //    }
 
     resize(1400, 800);   // 调整窗口大小
 }
@@ -315,37 +313,36 @@ void MainWindow::updateLabelInfo(UavModel *uav)
 
 void MainWindow::syncUavDataToPPI()
 {
-    if (!m_ppiItem || !m_ppiDataManager) return;
-
-    // 获取PPI参数
-    QPointF ppiCenter = m_ppiItem->pos();  // PPI在场景中的位置
-    double radius = m_ppiItem->getRadius();
+    if (!m_ppiItem || !m_ppiDataManager)
+        return;
+    QPointF ppiCenter = m_ppiItem->pos();   // PPI在场景中的位置
+    // 获取PPI参数（这里只关心PPI自身的显示半径和量程）
+    // 注意：PPI在场景中的平移由QGraphicsItem自身的transform处理，
+    //       数据层统一以(0,0)作为雷达中心，避免目标跟着PPI拖动而重新投影。
+    double   radius = m_ppiItem->getRadius();
     uint32_t huanJu = m_ppiItem->getHuanJu();
 
     // 更新UAV数据到PPI数据管理器
-    // 注意：PPI中心在场景坐标系中是(0,0)，所以传入0,0
-    m_ppiDataManager->updateFromUavs(
-        m_simManager->getUavs(),
-        0.0,  // PPI中心X（场景坐标）
-        0.0,  // PPI中心Y（场景坐标）
-        radius,
-        huanJu
-    );
+    // 这里固定以(0,0)作为雷达中心来计算极坐标，PPI图元的位置只通过QGraphicsItem平移来体现。
+    // 这样可以保证：拖动PPI时，PPI上的目标和航迹整体一起移动，而不是重新计算方位/距离导致“飘动”。
+    m_ppiDataManager->updateFromUavs(m_simManager->getUavs(),
+                                     0.0,   // 雷达中心X（数据坐标系）
+                                     0.0,   // 雷达中心Y（数据坐标系）
+                                     radius,
+                                     huanJu);
 
     // 获取更新后的数据并同步到PPI图元
-    LockedHash<Mubiao>& sourceData = m_ppiDataManager->getMubiaoHash();
-    LockedHash<Mubiao>& targetData = m_ppiItem->getMubiaoHash();
+    LockedHash<Mubiao> &sourceData = m_ppiDataManager->getMubiaoHash();
+    LockedHash<Mubiao> &targetData = m_ppiItem->getMubiaoHash();
 
     // 清空旧数据
     targetData.clear();
 
     // 批量复制新数据
     QList<int> keys = sourceData.keys();
-    for (int id : keys)
-    {
+    for (int id : keys) {
         QSharedPointer<Mubiao> mubiao = sourceData.value(id);
-        if (mubiao)
-        {
+        if (mubiao) {
             targetData.insert(id, mubiao);
         }
     }
@@ -361,7 +358,8 @@ void MainWindow::switchDisplayMode()
         m_displayMode = DisplayMode::RadarOnly;
         applyRadarOnlyMode();
         m_modeButton->setText("Switch to Map+Radar Mode");
-    } else {
+    }
+    else {
         // 切换到地图+雷达模式
         m_displayMode = DisplayMode::MapRadar;
         applyMapRadarMode();
@@ -371,7 +369,8 @@ void MainWindow::switchDisplayMode()
 
 void MainWindow::applyRadarOnlyMode()
 {
-    if (!m_ppiItem || !m_scene || !m_view) return;
+    if (!m_ppiItem || !m_scene || !m_view)
+        return;
 
     // 1. 隐藏网格背景
     m_scene->setShowGrid(false);
@@ -380,17 +379,20 @@ void MainWindow::applyRadarOnlyMode()
     m_ppiItem->setRadius(900);
     m_ppiItem->setPPIOpacity(1.0);
     m_ppiItem->setDrawBackground(true);
-    m_ppiItem->setZValue(10);  // 提升到前景
+    m_ppiItem->setZValue(10);   // 提升到前景
 
     // 3. 隐藏传统图元
-    for (auto* pathItem : m_pathItemMap) {
-        if (pathItem) pathItem->setVisible(false);
+    for (auto *pathItem : m_pathItemMap) {
+        if (pathItem)
+            pathItem->setVisible(false);
     }
-    for (auto* uavItem : m_uavItemMap) {
-        if (uavItem) uavItem->setVisible(false);
+    for (auto *uavItem : m_uavItemMap) {
+        if (uavItem)
+            uavItem->setVisible(false);
     }
-    for (auto* labelItem : m_uavLabelMap) {
-        if (labelItem) labelItem->setVisible(false);
+    for (auto *labelItem : m_uavLabelMap) {
+        if (labelItem)
+            labelItem->setVisible(false);
     }
 
     // 4. 调整视图（可选）
@@ -403,7 +405,8 @@ void MainWindow::applyRadarOnlyMode()
 
 void MainWindow::applyMapRadarMode()
 {
-    if (!m_ppiItem || !m_scene || !m_view) return;
+    if (!m_ppiItem || !m_scene || !m_view)
+        return;
 
     // 1. 显示网格背景
     m_scene->setShowGrid(true);
@@ -412,17 +415,20 @@ void MainWindow::applyMapRadarMode()
     m_ppiItem->setRadius(400);
     m_ppiItem->setPPIOpacity(0.6);
     m_ppiItem->setDrawBackground(false);
-    m_ppiItem->setZValue(-10);  // 降到背景层
+    m_ppiItem->setZValue(-10);   // 降到背景层
 
     // 3. 显示传统图元
-    for (auto* pathItem : m_pathItemMap) {
-        if (pathItem) pathItem->setVisible(true);
+    for (auto *pathItem : m_pathItemMap) {
+        if (pathItem)
+            pathItem->setVisible(true);
     }
-    for (auto* uavItem : m_uavItemMap) {
-        if (uavItem) uavItem->setVisible(true);
+    for (auto *uavItem : m_uavItemMap) {
+        if (uavItem)
+            uavItem->setVisible(true);
     }
-    for (auto* labelItem : m_uavLabelMap) {
-        if (labelItem) labelItem->setVisible(true);
+    for (auto *labelItem : m_uavLabelMap) {
+        if (labelItem)
+            labelItem->setVisible(true);
     }
 
     // 4. 恢复视图
@@ -435,10 +441,11 @@ void MainWindow::applyMapRadarMode()
 
 void MainWindow::togglePPIDrag()
 {
-    if (!m_ppiItem) return;
+    if (!m_ppiItem)
+        return;
 
     bool currentState = m_ppiItem->getDraggable();
-    bool newState = !currentState;
+    bool newState     = !currentState;
 
     m_ppiItem->setDraggable(newState);
 
@@ -446,7 +453,8 @@ void MainWindow::togglePPIDrag()
     if (newState) {
         m_dragButton->setText("Disable PPI Drag");
         qDebug() << "PPI Drag Enabled - You can now drag the radar display";
-    } else {
+    }
+    else {
         m_dragButton->setText("Enable PPI Drag");
         qDebug() << "PPI Drag Disabled - Click targets to select them";
     }

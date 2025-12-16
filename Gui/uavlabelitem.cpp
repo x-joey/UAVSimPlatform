@@ -1,9 +1,9 @@
 #include "uavlabelitem.h"
 
+#include <QDebug>
 #include <QFont>
 #include <QFontMetricsF>
 #include <QStyleOptionGraphicsItem>
-
 UavLabelItem::UavLabelItem(QGraphicsItem *parent)
     : QGraphicsItem(parent)
 {
@@ -49,10 +49,10 @@ QRectF UavLabelItem::boundingRect() const
 
 void UavLabelItem::updateBounds()
 {
-    QFont font;
+    QFont         font;
     QFontMetricsF fm(font);
 
-    QString idText = QString::number(m_id);
+    QString idText   = QString::number(m_id);
     QRectF  textRect = fm.boundingRect(idText);
 
     QRectF infoRect;
@@ -99,6 +99,9 @@ void UavLabelItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     }
     painter->drawRoundedRect(bgRect, 3, 3);
 
+    //    qDebug() << "画笔颜色:" << painter->pen().color();
+    //    qDebug() << "背景颜色:" << painter->brush().color();
+
     // 绘制 ID 文本
     painter->setPen(Qt::black);
     painter->drawText(idRect.topLeft() + QPointF(0, fm.ascent()), idText);
@@ -109,10 +112,11 @@ void UavLabelItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
         infoRect.moveTopLeft(QPointF(4, idRect.bottom() + 4));
         painter->drawText(infoRect.topLeft() + QPointF(0, fm.ascent()), m_infoText);
     }
-
+    qDebug() << "画笔颜色:" << painter->pen().color();
+    qDebug() << "背景颜色:" << painter->brush().color();
     // 绘制虚线（从标签中心到底层无人机位置）
     painter->setPen(QPen(Qt::darkGray, 1, Qt::DashLine));
-    QPointF uavLocal = mapFromScene(m_uavScenePos);
+    QPointF uavLocal    = mapFromScene(m_uavScenePos);
     QPointF labelCenter = bgRect.center();
     painter->drawLine(labelCenter, uavLocal);
 }
@@ -132,5 +136,3 @@ QVariant UavLabelItem::itemChange(QGraphicsItem::GraphicsItemChange change, cons
 
     return QGraphicsItem::itemChange(change, value);
 }
-
-
