@@ -28,8 +28,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 连接PPI图元的信号
     if (m_ppiItem) {
-        connect(m_ppiItem, &PPIGraphicsItem::targetClicked, this, &MainWindow::onUavClicked);
-        connect(m_ppiItem, &PPIGraphicsItem::targetDoubleClicked, this, [this](int id) { qDebug() << "Target" << id << "double clicked - 可以添加导引等功能"; });
+        connect(m_ppiItem, &PPIGraphicsItem::targetClicked, this, &MainWindow::onUavClicked, Qt::QueuedConnection);
+        connect(m_ppiItem, &PPIGraphicsItem::targetDoubleClicked, this, &MainWindow::onTargetDoubleClicked, Qt::QueuedConnection);
+        connect(m_ppiItem, &PPIGraphicsItem::targetFocusToggled, this, &MainWindow::onTargetFocusToggled, Qt::QueuedConnection);
+        connect(m_ppiItem, &PPIGraphicsItem::targetGuidanceToggled, this, &MainWindow::onTargetGuidanceToggled, Qt::QueuedConnection);
     }
 
     updatePathTimer->start(1000);
@@ -155,11 +157,47 @@ void MainWindow::setupUI()
     layout->addWidget(new QLabel("PPI Drag:"), 2, 0);
     layout->addWidget(m_dragButton, 2, 1);
 
-    // --- 2d. 多架无人机遥测数据显示表格 ---
+    // --- 2d. 目标详情标签 ---
+    m_targetDetailLabel = new QLabel("Click on a target to see details", dockContents);
+    m_targetDetailLabel->setWordWrap(true);
+    m_targetDetailLabel->setMinimumHeight(150);                        // 设置最小高度
+    m_targetDetailLabel->setAlignment(Qt::AlignLeft | Qt::AlignTop);   // 左上对齐
+    m_targetDetailLabel->setStyleSheet("QLabel { background-color: #f0f0f0; padding: 8px; border: 1px solid #ccc; border-radius: 3px; }");
+    layout->addWidget(new QLabel("Target Details:"), 3, 0, 1, 2);
+    layout->addWidget(m_targetDetailLabel, 4, 0, 1, 2);
+
+    // --- 2e. 多架无人机遥测数据显示表格 ---
     m_uavTable = new QTableWidget(dockContents);
+    m_uavTable->setStyleSheet("QTableWidget::item:selected { "
+                              "background-color: #66ccff; "
+                              "color: white; "
+                              "} "
+
+                              "QTableWidget::item:focus { "
+                              "background-color: #ffcc00; "
+                              "border: 1px solid #ff6600; "
+                              "color: black; "
+                              "} "
+
+                              // 鼠标悬停时的高亮效果
+                              "QTableWidget::item:hover { "
+                              "background-color: #cce6ff; "   // 悬停时的浅蓝色
+                              "}");
+
+    // 创建可拖动列的表头
+    DraggableHeaderView *draggableHeader = new DraggableHeaderView(Qt::Horizontal, m_uavTable);
+    draggableHeader->setColumnDraggingEnabled(true);
+    m_uavTable->setHorizontalHeader(draggableHeader);
+
+    // 连接列交换信号（可选，用于调试或保存列顺序）
+    connect(draggableHeader, &DraggableHeaderView::columnSwapped, this, [](int oldIndex, int newIndex) { qDebug() << "User swapped columns:" << oldIndex << "<->" << newIndex; });
+
+    // 连接表头点击信号，记录排序列
+    connect(m_uavTable->horizontalHeader(), &QHeaderView::sectionClicked, this, &MainWindow::onTableHeaderClicked);
+
     initUavTable();
-    layout->addWidget(new QLabel("UAV Telemetry:"), 3, 0, 1, 2);
-    layout->addWidget(m_uavTable, 4, 0, 1, 2);
+    layout->addWidget(new QLabel("UAV Telemetry:"), 5, 0, 1, 2);
+    layout->addWidget(m_uavTable, 6, 0, 1, 2);
 
     dockContents->setLayout(layout);
     controlDock->setWidget(dockContents);
@@ -224,17 +262,21 @@ void MainWindow::initUavTable()
         return;
 
     const auto &uavs = m_simManager->getUavs();
-    m_uavTable->setColumnCount(4);
+    m_uavTable->setColumnCount(5);   // 增加一列用于显示状态
     m_uavTable->setRowCount(static_cast<int>(uavs.size()));
     QStringList headers;
     headers << "ID"
             << "Name"
             << "X"
-            << "Y";
+            << "Y"
+            << "Status";   // 新增状态列
     m_uavTable->setHorizontalHeaderLabels(headers);
     m_uavTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     m_uavTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     m_uavTable->setSelectionMode(QAbstractItemView::SingleSelection);
+
+    // 启用排序功能
+    m_uavTable->setSortingEnabled(false);   // 先禁用排序，填充完数据后再启用
 
     int row = 0;
     for (const auto &uav : uavs) {
@@ -245,7 +287,21 @@ void MainWindow::initUavTable()
         m_uavTable->setItem(row, 1, new QTableWidgetItem(uav->getName()));
         m_uavTable->setItem(row, 2, new QTableWidgetItem(QString::number(uav->getX(), 'f', 2)));
         m_uavTable->setItem(row, 3, new QTableWidgetItem(QString::number(uav->getY(), 'f', 2)));
+
+        // 初始化状态列（使用自定义排序表格项）
+        SortableTableWidgetItem *statusItem = new SortableTableWidgetItem("Normal");
+        statusItem->setData(Qt::UserRole, 2);   // 设置排序键：Normal=2
+        m_uavTable->setItem(row, 4, statusItem);
+
         ++row;
+    }
+
+    // 填充完数据后启用排序并按状态列排序
+    m_uavTable->setSortingEnabled(true);
+    m_sortColumnName = "Status";   // 记录排序列名
+    int statusCol    = getColumnIndexByName(m_sortColumnName);
+    if (statusCol >= 0) {
+        m_uavTable->sortItems(statusCol, Qt::AscendingOrder);   // 按状态列升序排序（0=Guidance, 1=Priority, 2=Normal）
     }
 }
 
@@ -258,14 +314,83 @@ void MainWindow::updateUavRow(UavModel *uav)
     if (!m_uavRowMap.contains(id))
         return;
 
-    int row = m_uavRowMap.value(id);
+    // 动态获取列索引
+    int idCol = getColumnIndexByName("ID");
+    int xCol  = getColumnIndexByName("X");
+    int yCol  = getColumnIndexByName("Y");
 
-    // 只更新位置相关列
-    if (auto *itemX = m_uavTable->item(row, 2)) {
-        itemX->setText(QString::number(uav->getX(), 'f', 2));
+    if (idCol < 0 || xCol < 0 || yCol < 0)
+        return;   // 列名不存在
+
+    // 注意：由于启用了排序，需要通过ID查找实际行号
+    // 遍历所有行查找匹配的ID
+    for (int row = 0; row < m_uavTable->rowCount(); ++row) {
+        QTableWidgetItem *idItem = m_uavTable->item(row, idCol);
+        if (idItem && idItem->text().toInt() == id) {
+            // 只更新位置相关列
+            if (auto *itemX = m_uavTable->item(row, xCol)) {
+                itemX->setText(QString::number(uav->getX(), 'f', 2));
+            }
+            if (auto *itemY = m_uavTable->item(row, yCol)) {
+                itemY->setText(QString::number(uav->getY(), 'f', 2));
+            }
+            break;
+        }
     }
-    if (auto *itemY = m_uavTable->item(row, 3)) {
-        itemY->setText(QString::number(uav->getY(), 'f', 2));
+}
+
+void MainWindow::updateUavStatus(int uavId)
+{
+    if (!m_uavTable || !m_ppiItem)
+        return;
+
+    // 获取目标的当前状态
+    QSharedPointer<Mubiao> mb = m_ppiItem->getMubiaoHash().value(uavId);
+    if (!mb)
+        return;
+
+    // 动态获取列索引
+    int idCol     = getColumnIndexByName("ID");
+    int statusCol = getColumnIndexByName("Status");
+
+    if (idCol < 0 || statusCol < 0)
+        return;   // 列名不存在
+
+    // 遍历表格查找对应的行（因为排序可能改变了行号）
+    for (int row = 0; row < m_uavTable->rowCount(); ++row) {
+        QTableWidgetItem *idItem = m_uavTable->item(row, idCol);
+        if (idItem && idItem->text().toInt() == uavId) {
+            // 找到对应行，更新状态（使用自定义排序表格项）
+            SortableTableWidgetItem *statusItem = dynamic_cast<SortableTableWidgetItem *>(m_uavTable->item(row, statusCol));
+            if (!statusItem) {
+                statusItem = new SortableTableWidgetItem();
+                m_uavTable->setItem(row, statusCol, statusItem);
+            }
+
+            // 根据状态设置文本和排序键（移除数字前缀，使用UserRole排序）
+            if (mb->daoyin_flag) {
+                statusItem->setText("★ Guidance");
+                statusItem->setData(Qt::UserRole, 0);   // Guidance=0，排在最前
+                statusItem->setForeground(QBrush(Qt::red));
+            }
+            else if (mb->zhongdian) {
+                statusItem->setText("◆ Priority");
+                statusItem->setData(Qt::UserRole, 1);                     // Priority=1，排在中间
+                statusItem->setForeground(QBrush(QColor(255, 165, 0)));   // 橙色
+            }
+            else {
+                statusItem->setText("Normal");
+                statusItem->setData(Qt::UserRole, 2);   // Normal=2，排在最后
+                statusItem->setForeground(QBrush(Qt::black));
+            }
+
+            // 触发表格重新排序（动态获取当前排序列的索引，支持列拖动）
+            int currentSortCol = getColumnIndexByName(m_sortColumnName);
+            if (currentSortCol >= 0) {
+                m_uavTable->sortItems(currentSortCol, Qt::AscendingOrder);
+            }
+            break;
+        }
     }
 }
 
@@ -274,17 +399,86 @@ void MainWindow::onUavClicked(int uavId)
     if (!m_simManager || !m_uavTable)
         return;
 
-    // 高亮表格中对应行
-    if (m_uavRowMap.contains(uavId)) {
-        int row = m_uavRowMap.value(uavId);
-        m_uavTable->selectRow(row);
-        m_uavTable->scrollToItem(m_uavTable->item(row, 0));
+    // 切换重点关注状态
+    if (m_ppiItem) {
+        m_ppiItem->toggleTargetFocus(uavId);
     }
 
-    // 查找对应的 UavModel，更新标签下方的信息并高亮该标签
+    // 动态获取ID列索引
+    int idCol = getColumnIndexByName("ID");
+    if (idCol < 0)
+        return;   // ID列不存在
+
+    // 高亮表格中对应行（需要遍历查找，因为排序改变了行号）
+    for (int row = 0; row < m_uavTable->rowCount(); ++row) {
+        QTableWidgetItem *idItem = m_uavTable->item(row, idCol);
+        if (idItem && idItem->text().toInt() == uavId) {
+            m_uavTable->selectRow(row);
+            m_uavTable->scrollToItem(idItem);
+            break;
+        }
+    }
+
+    // 查找对应的 UavModel，更新目标详情和标签信息
     const auto &uavs = m_simManager->getUavs();
     for (const auto &uavPtr : uavs) {
         if (uavPtr->getId() == uavId) {
+            // 检查目标的当前状态（是否在导引中）
+            QSharedPointer<Mubiao> mb        = m_ppiItem->getMubiaoHash().value(uavId);
+            bool                   isGuiding = mb && mb->daoyin_flag;
+
+            // 更新目标详情显示
+            if (m_targetDetailLabel) {
+                if (isGuiding) {
+                    // 如果正在导引，显示导引状态（保持红框样式）
+                    QString guidanceInfo = QString("<div style='text-align: center;'>"
+                                                   "<b>=========================</b><br>"
+                                                   "<span style='color: red; font-size: 14pt;'><b>GUIDANCE INITIATED</b></span><br>"
+                                                   "<b>=========================</b><br>"
+                                                   "</div>"
+                                                   "<br>"
+                                                   "<b>Target ID:</b> %1<br>"
+                                                   "<b>Name:</b> %2<br>"
+                                                   "<b>Position:</b> (%3, %4)<br>"
+                                                   "<b>Status:</b> <span style='color: red;'>★ TRACKING</span><br>"
+                                                   "<br>"
+                                                   "<div style='text-align: center;'>"
+                                                   "<b>=========================</b><br>"
+                                                   "<i>Double-click to cancel</i>"
+                                                   "</div>")
+                                               .arg(uavPtr->getId())
+                                               .arg(uavPtr->getName())
+                                               .arg(QString::number(uavPtr->getX(), 'f', 2))
+                                               .arg(QString::number(uavPtr->getY(), 'f', 2));
+
+                    m_targetDetailLabel->setStyleSheet("QLabel { "
+                                                       "background-color: #ffe6e6; "
+                                                       "padding: 10px; "
+                                                       "border: 3px solid #ff0000; "
+                                                       "border-radius: 5px; "
+                                                       "font-weight: bold; "
+                                                       "}");
+                    m_targetDetailLabel->setText(guidanceInfo);
+                }
+                else {
+                    // 非导引状态，显示普通信息（恢复默认样式）
+                    QString details = QString("Target ID: %1\n"
+                                              "Name: %2\n"
+                                              "Position: (%3, %4)\n"
+                                              "Click to toggle focus\n"
+                                              "Double-click for guidance")
+                                          .arg(uavPtr->getId())
+                                          .arg(uavPtr->getName())
+                                          .arg(QString::number(uavPtr->getX(), 'f', 2))
+                                          .arg(QString::number(uavPtr->getY(), 'f', 2));
+                    m_targetDetailLabel->setText(details);
+
+                    // 恢复默认样式
+                    m_targetDetailLabel->setStyleSheet("QLabel { background-color: #f0f0f0; padding: 8px; border: 1px solid #ccc; border-radius: 3px; }");
+                }
+            }
+
+            // 更新标签下方的信息（如果有传统图元）
             // 先关闭其他标签的信息显示
             for (auto label : m_uavLabelMap) {
                 label->setShowInfo(false);
@@ -293,6 +487,170 @@ void MainWindow::onUavClicked(int uavId)
             if (auto label = m_uavLabelMap.value(uavId, nullptr)) {
                 label->setShowInfo(true);
                 updateLabelInfo(uavPtr.get());
+            }
+            break;
+        }
+    }
+}
+
+void MainWindow::onTargetFocusToggled(int targetId, bool focused)
+{
+    qDebug() << "Target" << targetId << (focused ? "marked as PRIORITY" : "unmarked from priority");
+
+    // 更新表格状态列
+    updateUavStatus(targetId);
+
+    // 检查目标是否处于导引状态
+    QSharedPointer<Mubiao> mb        = m_ppiItem->getMubiaoHash().value(targetId);
+    bool                   isGuiding = mb && mb->daoyin_flag;
+
+    // 动态获取ID列索引
+    int idCol = getColumnIndexByName("ID");
+    if (idCol < 0)
+        return;   // ID列不存在
+
+    // 如果目标正在导引，不更新详情标签（让导引样式保持）
+    if (isGuiding) {
+        // 只高亮表格行，不更新详情
+        for (int row = 0; row < m_uavTable->rowCount(); ++row) {
+            QTableWidgetItem *idItem = m_uavTable->item(row, idCol);
+            if (idItem && idItem->text().toInt() == targetId) {
+                m_uavTable->selectRow(row);
+                m_uavTable->scrollToItem(idItem);
+                break;
+            }
+        }
+        return;
+    }
+
+    // 更新UI显示（仅当不在导引状态时）
+    if (m_targetDetailLabel) {
+        // 在详情中添加关注状态
+        const auto &uavs = m_simManager->getUavs();
+        for (const auto &uavPtr : uavs) {
+            if (uavPtr->getId() == targetId) {
+                QString details = QString("Target ID: %1\n"
+                                          "Name: %2\n"
+                                          "Position: (%3, %4)\n"
+                                          "Status: %5\n"
+                                          "Click to toggle focus\n"
+                                          "Double-click for guidance")
+                                      .arg(uavPtr->getId())
+                                      .arg(uavPtr->getName())
+                                      .arg(QString::number(uavPtr->getX(), 'f', 2))
+                                      .arg(QString::number(uavPtr->getY(), 'f', 2))
+                                      .arg(focused ? "PRIORITY" : "Regular");
+                m_targetDetailLabel->setText(details);
+
+                // 恢复默认样式
+                m_targetDetailLabel->setStyleSheet("QLabel { background-color: #f0f0f0; padding: 5px; border: 1px solid #ccc; border-radius: 3px; }");
+                break;
+            }
+        }
+    }
+
+    // 高亮表格中对应行（需要遍历查找，因为排序改变了行号）
+    for (int row = 0; row < m_uavTable->rowCount(); ++row) {
+        QTableWidgetItem *idItem = m_uavTable->item(row, idCol);
+        if (idItem && idItem->text().toInt() == targetId) {
+            m_uavTable->selectRow(row);
+            m_uavTable->scrollToItem(idItem);
+            break;
+        }
+    }
+}
+
+void MainWindow::onTargetDoubleClicked(int targetId)
+{
+    // 切换导引状态
+    if (m_ppiItem) {
+        m_ppiItem->toggleTargetGuidance(targetId);
+    }
+}
+
+void MainWindow::onTargetGuidanceToggled(int targetId, bool guiding)
+{
+    if (guiding) {
+        qDebug() << "Initiating GUIDANCE for Target" << targetId;
+    }
+    else {
+        qDebug() << "Canceling GUIDANCE for Target" << targetId;
+    }
+
+    // 先更新表格状态列（这会触发排序）
+    updateUavStatus(targetId);
+
+    // 然后更新详情显示（确保在状态更新之后）
+    const auto &uavs = m_simManager->getUavs();
+    for (const auto &uavPtr : uavs) {
+        if (uavPtr->getId() == targetId) {
+            if (guiding) {
+                // 导引中 - 使用HTML格式确保正确显示
+                QString guidanceInfo = QString("<div style='text-align: center;'>"
+                                               "<b>=========================</b><br>"
+                                               "<span style='color: red; font-size: 14pt;'><b>GUIDANCE INITIATED</b></span><br>"
+                                               "<b>=========================</b><br>"
+                                               "</div>"
+                                               "<br>"
+                                               "<b>Target ID:</b> %1<br>"
+                                               "<b>Name:</b> %2<br>"
+                                               "<b>Position:</b> (%3, %4)<br>"
+                                               "<b>Status:</b> <span style='color: red;'>★ TRACKING</span><br>"
+                                               "<br>"
+                                               "<div style='text-align: center;'>"
+                                               "<b>=========================</b><br>"
+                                               "<i>Double-click to cancel</i>"
+                                               "</div>")
+                                           .arg(uavPtr->getId())
+                                           .arg(uavPtr->getName())
+                                           .arg(QString::number(uavPtr->getX(), 'f', 2))
+                                           .arg(QString::number(uavPtr->getY(), 'f', 2));
+
+                m_targetDetailLabel->setStyleSheet("QLabel { "
+                                                   "background-color: #ffe6e6; "
+                                                   "padding: 10px; "
+                                                   "border: 3px solid #ff0000; "
+                                                   "border-radius: 5px; "
+                                                   "font-weight: bold; "
+                                                   "}");
+                m_targetDetailLabel->setText(guidanceInfo);
+            }
+            else {
+                // 取消导引
+                QString guidanceInfo = QString("<b>Target ID:</b> %1<br>"
+                                               "<b>Name:</b> %2<br>"
+                                               "<b>Position:</b> (%3, %4)<br>"
+                                               "<b>Status:</b> Guidance Canceled<br>"
+                                               "<br>"
+                                               "Click to toggle focus<br>"
+                                               "Double-click for guidance")
+                                           .arg(uavPtr->getId())
+                                           .arg(uavPtr->getName())
+                                           .arg(QString::number(uavPtr->getX(), 'f', 2))
+                                           .arg(QString::number(uavPtr->getY(), 'f', 2));
+
+                m_targetDetailLabel->setStyleSheet("QLabel { "
+                                                   "background-color: #f0f0f0; "
+                                                   "padding: 8px; "
+                                                   "border: 1px solid #ccc; "
+                                                   "border-radius: 3px; "
+                                                   "}");
+                m_targetDetailLabel->setText(guidanceInfo);
+            }
+
+            // 动态获取ID列索引
+            int idCol = getColumnIndexByName("ID");
+            if (idCol < 0)
+                return;   // ID列不存在
+
+            // 高亮对应表格行（需要遍历查找，因为排序改变了行号）
+            for (int row = 0; row < m_uavTable->rowCount(); ++row) {
+                QTableWidgetItem *idItem = m_uavTable->item(row, idCol);
+                if (idItem && idItem->text().toInt() == targetId) {
+                    m_uavTable->selectRow(row);
+                    m_uavTable->scrollToItem(idItem);
+                    break;
+                }
             }
             break;
         }
@@ -324,7 +682,7 @@ void MainWindow::syncUavDataToPPI()
 
     // 更新UAV数据到PPI数据管理器
     // 这里固定以(0,0)作为雷达中心来计算极坐标，PPI图元的位置只通过QGraphicsItem平移来体现。
-    // 这样可以保证：拖动PPI时，PPI上的目标和航迹整体一起移动，而不是重新计算方位/距离导致“飘动”。
+    // 这样可以保证：拖动PPI时，PPI上的目标和航迹整体一起移动，而不是重新计算方位/距离导致"飘动"。
     m_ppiDataManager->updateFromUavs(m_simManager->getUavs(),
                                      0.0,   // 雷达中心X（数据坐标系）
                                      0.0,   // 雷达中心Y（数据坐标系）
@@ -335,15 +693,37 @@ void MainWindow::syncUavDataToPPI()
     LockedHash<Mubiao> &sourceData = m_ppiDataManager->getMubiaoHash();
     LockedHash<Mubiao> &targetData = m_ppiItem->getMubiaoHash();
 
-    // 清空旧数据
-    targetData.clear();
+    // 保留现有的状态标志（zhongdian、daoyin_flag、labelOffset等）
+    // 不要直接清空，而是更新现有数据
+    QList<int> sourceKeys = sourceData.keys();
 
-    // 批量复制新数据
-    QList<int> keys = sourceData.keys();
-    for (int id : keys) {
-        QSharedPointer<Mubiao> mubiao = sourceData.value(id);
-        if (mubiao) {
-            targetData.insert(id, mubiao);
+    for (int id : sourceKeys) {
+        QSharedPointer<Mubiao> sourceMubiao = sourceData.value(id);
+        if (!sourceMubiao)
+            continue;
+
+        // 检查目标是否已存在
+        QSharedPointer<Mubiao> targetMubiao = targetData.value(id);
+        if (targetMubiao) {
+            // 目标已存在，只更新位置和航迹数据，保留状态标志
+            targetMubiao->fangwei = sourceMubiao->fangwei;
+            targetMubiao->gaodi   = sourceMubiao->gaodi;
+            targetMubiao->juli    = sourceMubiao->juli;
+            targetMubiao->circleppi_hangji.copyFrom(sourceMubiao->circleppi_hangji);
+            targetMubiao->new_time = sourceMubiao->new_time;
+            // 不更新 zhongdian、daoyin_flag、labelOffset 等用户交互状态
+        }
+        else {
+            // 新目标，直接插入
+            targetData.insert(id, sourceMubiao);
+        }
+    }
+
+    // 移除不存在的目标
+    QList<int> targetKeys = targetData.keys();
+    for (int id : targetKeys) {
+        if (!sourceData.contains(id)) {
+            targetData.remove(id);
         }
     }
 
@@ -457,5 +837,34 @@ void MainWindow::togglePPIDrag()
     else {
         m_dragButton->setText("Enable PPI Drag");
         qDebug() << "PPI Drag Disabled - Click targets to select them";
+    }
+}
+
+int MainWindow::getColumnIndexByName(const QString &columnName) const
+{
+    if (!m_uavTable)
+        return -1;
+
+    // 遍历所有列，查找匹配的列名
+    for (int col = 0; col < m_uavTable->columnCount(); ++col) {
+        QString headerText = m_uavTable->horizontalHeaderItem(col)->text();
+        if (headerText == columnName) {
+            return col;
+        }
+    }
+
+    return -1;   // 未找到
+}
+
+void MainWindow::onTableHeaderClicked(int logicalIndex)
+{
+    // 当用户点击表头排序时，记录当前排序的列名
+    if (!m_uavTable || logicalIndex < 0 || logicalIndex >= m_uavTable->columnCount())
+        return;
+
+    QTableWidgetItem *headerItem = m_uavTable->horizontalHeaderItem(logicalIndex);
+    if (headerItem) {
+        m_sortColumnName = headerItem->text();
+        qDebug() << "Sorting by column:" << m_sortColumnName;
     }
 }

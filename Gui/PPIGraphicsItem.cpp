@@ -89,7 +89,10 @@ void PPIGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         paintDianji(painter);
     }
 }
-
+/**
+ * @brief PPIGraphicsItem::paintRuler 绘制距离环
+ * @param painter
+ */
 void PPIGraphicsItem::paintRuler(QPainter *painter)
 {
     painter->save();
@@ -196,6 +199,10 @@ void PPIGraphicsItem::paintRuler(QPainter *painter)
     painter->restore();
 }
 
+/**
+ * @brief PPIGraphicsItem::paintFireLine 绘制火力线
+ * @param painter
+ */
 void PPIGraphicsItem::paintFireLine(QPainter *painter)
 {
     painter->save();
@@ -221,6 +228,10 @@ void PPIGraphicsItem::paintFireLine(QPainter *painter)
     painter->restore();
 }
 
+/**
+ * @brief PPIGraphicsItem::paintTargets绘制目标
+ * @param painter
+ */
 void PPIGraphicsItem::paintTargets(QPainter *painter)
 {
     painter->save();
@@ -251,18 +262,71 @@ void PPIGraphicsItem::paintTargets(QPainter *painter)
         // 绘制目标符号
         mb->draw_mubiao(painter, pos);
 
-        // 绘制航迹点
-        QPen trackPen(QColor(100, 100, 100), 2);
-        painter->setPen(trackPen);
-        for (const QPointF &point : trajectoryDisplay) {
-            painter->drawPoint(point);
+        // 绘制目标标牌（ID标签）
+        QPointF labelPos = pos + mb->labelOffset;
+
+        // 绘制连接线（虚线）
+        QPen labelLinePen(QColor(150, 150, 150, 200), 1, Qt::DashLine);
+        painter->setPen(labelLinePen);
+        painter->drawLine(pos, labelPos);
+
+        // 绘制标牌背景
+        QString labelText = QString::number(mb->pihao);
+        QFont   labelFont = painter->font();
+        labelFont.setPointSize(9);
+        labelFont.setBold(true);
+        painter->setFont(labelFont);
+
+        QFontMetricsF fm(labelFont);
+        QRectF        textRect = fm.boundingRect(labelText);
+        QRectF        bgRect   = textRect.adjusted(-4, -2, 4, 2);
+        bgRect.moveCenter(labelPos);
+
+        // 根据状态设置标牌背景色
+        QColor bgColor;
+        if (mb->daoyin_flag) {
+            bgColor = QColor(255, 200, 200, 230);   // 淡红色背景
+        }
+        else if (mb->zhongdian) {
+            bgColor = QColor(255, 255, 200, 230);   // 淡黄色背景
+        }
+        else {
+            bgColor = QColor(200, 255, 200, 230);   // 淡绿色背景
         }
 
-        // 如果是重点目标，绘制连线到航迹
-        if (mb->zhongdian && trajectoryDisplay.size() > 1) {
-            QPen linePen(Qt::yellow, 1, Qt::DashLine);
+        painter->setBrush(QBrush(bgColor));
+        painter->setPen(QPen(QColor(100, 100, 100), 1));
+        painter->drawRoundedRect(bgRect, 3, 3);
+
+        // 绘制标牌文本
+        painter->setPen(Qt::black);
+        painter->drawText(bgRect, Qt::AlignCenter, labelText);
+
+        // 绘制航迹点（比目标小）
+        QPen trackPen(QColor(100, 100, 100, 150), 1);   // 半透明灰色
+        painter->setPen(trackPen);
+        painter->setBrush(QBrush(QColor(100, 100, 100, 100)));   // 半透明填充
+
+        for (const QPointF &point : trajectoryDisplay) {
+            painter->drawEllipse(point, 1, 1);   // 半径1像素，比目标小
+        }
+
+        // 如果是重点目标或导引目标，绘制连线到航迹
+        if (mb->zhongdian || mb->daoyin_flag) {
+            QPen linePen;
+            if (mb->daoyin_flag) {
+                // 导引中：红色虚线
+                linePen = QPen(Qt::red, 1.5, Qt::DashLine);
+            }
+            else {
+                // 重点关注：黄色虚线
+                linePen = QPen(Qt::yellow, 1, Qt::DashLine);
+            }
             painter->setPen(linePen);
-            painter->drawPolyline(QPolygonF::fromList(trajectoryDisplay.toList()));
+
+            if (trajectoryDisplay.size() > 1) {
+                painter->drawPolyline(QPolygonF::fromList(trajectoryDisplay.toList()));
+            }
         }
     }
 
@@ -395,18 +459,67 @@ int PPIGraphicsItem::getCurrentTarget(const QPointF &pos)
     QList<int> keyList = m_rhkq.keys();
     for (int pihao : keyList) {
         QSharedPointer<Mubiao> mb = m_rhkq.value(pihao);
-        if (!mb)
+        if (!mb || mb->daji_flag)
             continue;
 
-        QVector<QPointF> trajectory = mb->circleppi_hangji.get_data();
-        if (trajectory.isEmpty())
+        // 获取目标航迹（物理坐标，米）
+        QVector<QPointF> trajectoryMeters = mb->circleppi_hangji.get_data();
+        if (trajectoryMeters.isEmpty())
             continue;
 
-        QPointF targetPos = trajectory.last();
-        double  distance  = QLineF(pos, targetPos).length();
+        // 将最后一个物理坐标点转换为显示坐标（像素）
+        QPointF  meterPt = trajectoryMeters.last();
+        float    fw;
+        uint32_t jl;
+        MubiaoAdapter::cartesianToPolar(meterPt.x(), meterPt.y(), fw, jl);
+        QPointF targetDisplayPos = MubiaoAdapter::polarToCartesian(fw, jl, 0.0, 0.0, m_radius, m_huan_ju);
 
-        if (distance <= 10.0)   // 10像素容差
+        // 计算鼠标点击位置和目标显示位置的距离
+        double distance = QLineF(pos, targetDisplayPos).length();
+
+        if (distance <= 5.0)   // 5像素容差
         {
+            return mb->pihao;
+        }
+    }
+    return -1;
+}
+
+int PPIGraphicsItem::getCurrentTargetLabel(const QPointF &pos)
+{
+    QList<int> keyList = m_rhkq.keys();
+    for (int pihao : keyList) {
+        QSharedPointer<Mubiao> mb = m_rhkq.value(pihao);
+        if (!mb || mb->daji_flag)
+            continue;
+
+        // 获取目标航迹（物理坐标，米）
+        QVector<QPointF> trajectoryMeters = mb->circleppi_hangji.get_data();
+        if (trajectoryMeters.isEmpty())
+            continue;
+
+        // 计算目标位置
+        QPointF  meterPt = trajectoryMeters.last();
+        float    fw;
+        uint32_t jl;
+        MubiaoAdapter::cartesianToPolar(meterPt.x(), meterPt.y(), fw, jl);
+        QPointF targetDisplayPos = MubiaoAdapter::polarToCartesian(fw, jl, 0.0, 0.0, m_radius, m_huan_ju);
+
+        // 计算标牌位置
+        QPointF labelPos = targetDisplayPos + mb->labelOffset;
+
+        // 计算标牌尺寸（与paintTargets中的计算保持一致）
+        QString labelText = QString::number(mb->pihao);
+        QFont   labelFont;
+        labelFont.setPointSize(9);
+        labelFont.setBold(true);
+        QFontMetricsF fm(labelFont);
+        QRectF        textRect = fm.boundingRect(labelText);
+        QRectF        bgRect   = textRect.adjusted(-4, -2, 4, 2);
+        bgRect.moveCenter(labelPos);
+
+        // 检查点击位置是否在标牌矩形内
+        if (bgRect.contains(pos)) {
             return mb->pihao;
         }
     }
@@ -506,8 +619,18 @@ void PPIGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
         QGraphicsItem::mousePressEvent(event);
     }
     else {
-        // 不拖动：不调用基类，避免触发移动
-        event->accept();
+        // 非拖动模式：检测是否点击了标牌
+        int labelId = getCurrentTargetLabel(event->pos());
+        if (labelId > 0) {
+            // 点击了标牌，进入标牌拖动模式
+            m_draggingLabelId = labelId;
+            setCursor(QCursor(Qt::ClosedHandCursor));
+            event->accept();
+        }
+        else {
+            // 未点击标牌，正常处理
+            event->accept();
+        }
     }
 }
 
@@ -517,6 +640,8 @@ void PPIGraphicsItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     int     targetId = getCurrentTarget(pos);
 
     if (targetId > 0) {
+        // 标记为双击事件，阻止后续的单击事件处理
+        m_isDoubleClick = true;
         emit targetDoubleClicked(targetId);
     }
 
@@ -532,7 +657,21 @@ void PPIGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         setCursor(QCursor(Qt::OpenHandCursor));
         QGraphicsItem::mouseReleaseEvent(event);
     }
+    else if (m_draggingLabelId > 0) {
+        // 标牌拖动模式：结束拖动
+        m_draggingLabelId = -1;
+        setCursor(QCursor(Qt::ArrowCursor));
+        event->accept();
+    }
     else {
+        // 检查是否是双击的一部分
+        if (m_isDoubleClick) {
+            // 是双击的一部分，重置标志并跳过单击处理
+            m_isDoubleClick = false;
+            event->accept();
+            return;
+        }
+
         // 非拖动模式：检测是否点击了目标
         if (QLineF(pos, m_lastClickPos).length() < 5.0)   // 判断是点击而非拖拽
         {
@@ -550,6 +689,28 @@ void PPIGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     if (m_draggable) {
         // 拖动模式：调用基类处理移动
         QGraphicsItem::mouseMoveEvent(event);
+    }
+    else if (m_draggingLabelId > 0) {
+        // 标牌拖动模式：更新标牌偏移
+        QSharedPointer<Mubiao> mb = m_rhkq.value(m_draggingLabelId);
+        if (mb) {
+            // 获取目标当前位置
+            QVector<QPointF> trajectoryMeters = mb->circleppi_hangji.get_data();
+            if (!trajectoryMeters.isEmpty()) {
+                QPointF  meterPt = trajectoryMeters.last();
+                float    fw;
+                uint32_t jl;
+                MubiaoAdapter::cartesianToPolar(meterPt.x(), meterPt.y(), fw, jl);
+                QPointF targetDisplayPos = MubiaoAdapter::polarToCartesian(fw, jl, 0.0, 0.0, m_radius, m_huan_ju);
+
+                // 计算新的偏移量
+                mb->labelOffset = event->pos() - targetDisplayPos;
+
+                // 触发重绘
+                update();
+            }
+        }
+        event->accept();
     }
     else {
         // 非拖动模式：不处理移动
@@ -584,4 +745,42 @@ void PPIGraphicsItem::updateRulerBufferSize()
     m_rulerBuffer = QPixmap(bufferSize, bufferSize);
     m_rulerBuffer.fill(Qt::transparent);
     m_needRedrawRuler = true;
+}
+
+void PPIGraphicsItem::toggleTargetFocus(int targetId)
+{
+    QSharedPointer<Mubiao> mb = m_rhkq.value(targetId);
+    if (!mb)
+        return;
+
+    // 切换重点关注状态
+    mb->zhongdian = !mb->zhongdian;
+
+    // 发出状态切换信号
+    emit targetFocusToggled(targetId, mb->zhongdian);
+
+    // 触发重绘
+    update();
+}
+
+void PPIGraphicsItem::toggleTargetGuidance(int targetId)
+{
+    QSharedPointer<Mubiao> mb = m_rhkq.value(targetId);
+    if (!mb)
+        return;
+
+    // 切换导引状态
+    mb->daoyin_flag = !mb->daoyin_flag;
+    qDebug() << "current daoyin id: " << targetId << "daoyin_flag" << mb->daoyin_flag << endl;
+    // 如果开始导引，自动标记为重点关注
+    if (mb->daoyin_flag && !mb->zhongdian) {
+        mb->zhongdian = true;
+        emit targetFocusToggled(targetId, true);
+    }
+
+    // 发出导引状态切换信号
+    emit targetGuidanceToggled(targetId, mb->daoyin_flag);
+
+    // 触发重绘
+    update();
 }

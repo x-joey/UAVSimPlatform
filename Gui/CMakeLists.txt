@@ -17,6 +17,8 @@
      simscene.h
      PPIGraphicsItem.cpp
      PPIGraphicsItem.h
+     DraggableHeaderView.cpp
+     DraggableHeaderView.h
  )
 
  # 核心步骤：将 Gui 链接到 Core 库，以及需要的 Qt 模块

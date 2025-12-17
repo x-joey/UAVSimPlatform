@@ -18,6 +18,8 @@
 #include "uavlabelitem.h"
 #include "PPIGraphicsItem.h"        // 新增：PPI图元
 #include "PPIDataManager.h"         // 新增：PPI数据管理器
+#include "DraggableHeaderView.h"    // 新增：可拖动列表头
+#include "SortableTableWidgetItem.h" // 新增：自定义排序表格项
 
 #include <QDockWidget>
 #include <QGraphicsScene>
@@ -100,6 +102,32 @@ public slots:
     void onUavClicked(int uavId);
 
     /**
+     * @brief 处理目标重点关注状态切换
+     * @param targetId 目标ID
+     * @param focused 是否为重点关注状态
+     * @details 当目标的重点关注状态变化时更新UI显示
+     *          提升：提供状态反馈，便于用户了解目标状态
+     */
+    void onTargetFocusToggled(int targetId, bool focused);
+
+    /**
+     * @brief 处理目标双击导引事件
+     * @param targetId 被双击的目标ID
+     * @details 当用户双击目标时，执行导引操作
+     *          提升：提供快捷操作，提升用户效率
+     */
+    void onTargetDoubleClicked(int targetId);
+
+    /**
+     * @brief 处理目标导引状态切换
+     * @param targetId 目标ID
+     * @param guiding 是否为导引状态
+     * @details 当目标的导引状态变化时更新UI显示
+     *          提升：提供状态反馈，便于用户了解导引状态
+     */
+    void onTargetGuidanceToggled(int targetId, bool guiding);
+
+    /**
      * @brief 切换显示模式
      * @details 在纯雷达模式和地图+雷达模式之间切换
      *          提升：支持多种显示方式，适应不同使用场景
@@ -112,6 +140,14 @@ public slots:
      *          提升：支持灵活的交互方式，提升用户体验
      */
     void togglePPIDrag();
+
+    /**
+     * @brief 处理表头排序变化
+     * @param logicalIndex 被点击的列索引
+     * @details 当用户点击表头排序时，记录当前排序列名
+     *          支持列拖动后的正确排序
+     */
+    void onTableHeaderClicked(int logicalIndex);
 
 private:
     /**
@@ -145,6 +181,14 @@ private:
     void updateUavRow(UavModel *uav);
 
     /**
+     * @brief 更新表格中指定UAV的状态显示
+     * @param uavId UAV的ID
+     * @details 根据UAV的导引和重点关注状态更新表格显示
+     *          使用Qt的UserRole设置排序键，实现智能排序
+     */
+    void updateUavStatus(int uavId);
+
+    /**
      * @brief 更新标签下方显示的信息
      * @param uav 无人机模型指针
      * @details 更新无人机标签下方显示的详细信息
@@ -173,6 +217,15 @@ private:
      *          提升：提供多视角显示，便于综合分析
      */
     void applyMapRadarMode();
+
+    /**
+     * @brief 根据列名查找列索引
+     * @param columnName 列名（表头文本）
+     * @return 列索引，如果未找到返回-1
+     * @details 支持列拖动后动态查找列索引，避免硬编码列位置
+     *          提升：支持灵活的列顺序，提升用户体验
+     */
+    int getColumnIndexByName(const QString &columnName) const;
 
     // ========== 数据管理 ==========
     /**
@@ -216,6 +269,12 @@ private:
      * @details 显示当前选中UAV的位置信息
      */
     QLabel *m_posLabel = nullptr;
+
+    /**
+     * @brief 目标详情标签
+     * @details 显示选中目标的详细信息
+     */
+    QLabel *m_targetDetailLabel = nullptr;
 
     /**
      * @brief 控制按钮
@@ -306,5 +365,13 @@ private:
      *          提升：支持模式切换，提升系统灵活性
      */
     DisplayMode m_displayMode = DisplayMode::MapRadar;
+
+    // ========== 表格排序 ==========
+    /**
+     * @brief 当前排序的列名
+     * @details 记录当前用于排序的列名（而非索引），以支持列拖动后的正确排序
+     *          当列被拖动时，通过列名动态查找新的列索引进行排序
+     */
+    QString m_sortColumnName = "Status";
 };
 #endif   // UAVITEM_H

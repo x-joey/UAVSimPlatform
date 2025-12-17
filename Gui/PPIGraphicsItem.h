@@ -79,6 +79,8 @@ public:
 signals:
     void targetClicked(int targetId);
     void targetDoubleClicked(int targetId);
+    void targetFocusToggled(int targetId, bool focused);      // 重点关注状态切换信号
+    void targetGuidanceToggled(int targetId, bool guiding);   // 导引状态切换信号
 
 protected:
     // 事件处理
@@ -103,11 +105,16 @@ private:
     // 工具函数
     QPointF polarToCartesian(float fangwei, uint32_t juli);   // 极坐标转笛卡尔
     int     getCurrentTarget(const QPointF &pos);             // 获取点击位置的目标
+    int     getCurrentTargetLabel(const QPointF &pos);        // 获取点击位置的标牌对应的目标
     void    updateRulerBufferSize();                          // 更新标尺缓存大小
 
+public slots:
+    void toggleTargetFocus(int targetId);      // 切换目标重点关注状态
+    void toggleTargetGuidance(int targetId);   // 切换目标导引状态
+public:
     // PPI参数
     double   m_radius     = 340;    // PPI显示半径（像素）
-    uint32_t m_huan_ju    = 5000;   // 距离环距离（米，默认5km）
+    uint32_t m_huan_ju    = 2000;   // 距离环距离（米，默认5km）
     int      m_huanjianju = 0;      // 圆环间距（像素，自动计算）
 
     // 显示控制
@@ -138,8 +145,10 @@ private:
     QTimer *m_updateTimer = nullptr;
 
     // 辅助变量
-    QPointF  m_lastClickPos;     // 最后点击位置
-    uint64_t m_time_count = 0;   // 时间计数
+    QPointF  m_lastClickPos;           // 最后点击位置
+    uint64_t m_time_count      = 0;    // 时间计数
+    int      m_draggingLabelId = -1;   // 正在拖动的标牌对应的目标ID
+    bool     m_isDoubleClick   = false;   // 标记是否为双击事件
 };
 
 #endif   // PPIGRAPHICSITEM_H
