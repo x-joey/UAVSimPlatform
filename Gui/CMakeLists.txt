@@ -19,6 +19,10 @@
      PPIGraphicsItem.h
      DraggableHeaderView.cpp
      DraggableHeaderView.h
+     SortableTableWidgetItem.h
+     MapWidget.cpp
+     MapWidget.h
+     resources.qrc
  )
 
  # 核心步骤：将 Gui 链接到 Core 库，以及需要的 Qt 模块
@@ -28,6 +32,10 @@
      Qt5::Core
      Qt5::Concurrent
      Qt5::Sql
+     Qt5::Location
+     Qt5::Positioning
+     Qt5::Quick
+     Qt5::QuickWidgets
      Core
      Service
  )

@@ -67,7 +67,7 @@ include Service/CMakeFiles/Service_autogen.dir/progress.make
 
 Service/CMakeFiles/Service_autogen:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target Service"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && "C:\Program Files\CMake\bin\cmake.exe" -E cmake_autogen D:/myself/cpp/UAV/UAVSimPlatform/build/Service/CMakeFiles/Service_autogen.dir/AutogenInfo.json Debug
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && "C:\Program Files\CMake\bin\cmake.exe" -E cmake_autogen D:/myself/cpp/UAV/UAVSimPlatform/build/Service/CMakeFiles/Service_autogen.dir/AutogenInfo.json ""
 
 Service/CMakeFiles/Service_autogen.dir/codegen:
 .PHONY : Service/CMakeFiles/Service_autogen.dir/codegen

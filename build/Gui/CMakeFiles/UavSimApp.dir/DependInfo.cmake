@@ -8,7 +8,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "D:/myself/cpp/UAV/UAVSimPlatform/Gui/DraggableHeaderView.cpp" "Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.obj.d"
   "D:/myself/cpp/UAV/UAVSimPlatform/Gui/MainWindow.cpp" "Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj.d"
+  "D:/myself/cpp/UAV/UAVSimPlatform/Gui/MapWidget.cpp" "Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.obj.d"
+  "D:/myself/cpp/UAV/UAVSimPlatform/Gui/PPIGraphicsItem.cpp" "Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.obj.d"
+  "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp" "Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj.d"
   "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/UavSimApp_autogen/mocs_compilation.cpp" "Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj.d"
   "D:/myself/cpp/UAV/UAVSimPlatform/Gui/main.cpp" "Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj.d"
   "D:/myself/cpp/UAV/UAVSimPlatform/Gui/pathitem.cpp" "Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj" "gcc" "Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj.d"

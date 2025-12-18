@@ -13,16 +13,46 @@
 	"HEADERS" : 
 	[
 		[
-			"D:/myself/cpp/UAV/UAVSimPlatform/Core/UavModel.h",
+			"D:/myself/cpp/UAV/UAVSimPlatform/Core/CoordinateConverter.h",
 			"MU",
-			"EWIEGA46WW/moc_UavModel.cpp",
+			"EWIEGA46WW/moc_CoordinateConverter.cpp",
+			null
+		],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Core/LockedHash.h",
+			"MU",
+			"EWIEGA46WW/moc_LockedHash.cpp",
+			null
+		],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Core/LockedVector.h",
+			"MU",
+			"EWIEGA46WW/moc_LockedVector.cpp",
+			null
+		],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Core/Mubiao.h",
+			"MU",
+			"EWIEGA46WW/moc_Mubiao.cpp",
+			null
+		],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Core/MubiaoAdapter.h",
+			"MU",
+			"EWIEGA46WW/moc_MubiaoAdapter.cpp",
+			null
+		],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Core/PPIDataManager.h",
+			"MU",
+			"EWIEGA46WW/moc_PPIDataManager.cpp",
 			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Core/Core_autogen/include",
 	"MOC_COMPILATION_FILE" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Core/Core_autogen/mocs_compilation.cpp",
-	"MOC_DEFINITIONS" : [],
+	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_GUI_LIB", "QT_NO_DEBUG", "QT_POSITIONING_LIB" ],
 	"MOC_DEPEND_FILTERS" : 
 	[
 		[
@@ -33,6 +63,13 @@
 	"MOC_INCLUDES" : 
 	[
 		"D:/myself/cpp/UAV/UAVSimPlatform/Core",
+		"D:/myself/cpp/UAV/UAVSimPlatform/Service",
+		"D:/software/qt/5.14.2/mingw73_32/include",
+		"D:/software/qt/5.14.2/mingw73_32/include/QtCore",
+		"D:/software/qt/5.14.2/mingw73_32/mkspecs/win32-g++",
+		"D:/software/qt/5.14.2/mingw73_32/include/QtGui",
+		"D:/software/qt/5.14.2/mingw73_32/include/QtANGLE",
+		"D:/software/qt/5.14.2/mingw73_32/include/QtPositioning",
 		"D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++",
 		"D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32",
 		"D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward",
@@ -45,7 +82,7 @@
 	"MOC_PATH_PREFIX" : false,
 	"MOC_PREDEFS_CMD" : 
 	[
-		"D:/software/qt/Tools/mingw730_32/bin/g++.exe",
+		"D:/software/qt/Tools/mingw730_32/bin/c++.exe",
 		"-std=gnu++1z",
 		"-w",
 		"-dM",
@@ -65,7 +102,17 @@
 	"SETTINGS_FILE" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Core/CMakeFiles/Core_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
-		[ "D:/myself/cpp/UAV/UAVSimPlatform/Core/UavModel.cpp", "MU", null ]
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Core/CoordinateConverter.cpp",
+			"MU",
+			null
+		],
+		[ "D:/myself/cpp/UAV/UAVSimPlatform/Core/MubiaoAdapter.cpp", "MU", null ],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Core/PPIDataManager.cpp",
+			"MU",
+			null
+		]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

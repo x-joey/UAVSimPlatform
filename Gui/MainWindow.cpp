@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QSlider>
+#include <QSplitter>
 #include <QVBoxLayout>
 #include <QWidget>
 #include <limits>
@@ -34,6 +35,11 @@ MainWindow::MainWindow(QWidget *parent)
         connect(m_ppiItem, &PPIGraphicsItem::targetGuidanceToggled, this, &MainWindow::onTargetGuidanceToggled, Qt::QueuedConnection);
     }
 
+    // 连接地图组件的信号
+    if (m_mapWidget) {
+        connect(m_mapWidget, &MapWidget::uavMarkerClicked, this, &MainWindow::onUavClicked, Qt::QueuedConnection);
+    }
+
     updatePathTimer->start(1000);
 }
 
@@ -56,6 +62,11 @@ void MainWindow::updatePathTimeout()
 
     // 同步数据到PPI
     syncUavDataToPPI();
+
+    // 同步数据到地图
+    if (m_displayMode == DisplayMode::MapRadar && m_mapWidget) {
+        syncUavDataToMap();
+    }
 
     // 更新传统图元和UI（仅更新可见区域）
     QRectF visibleRect = m_view->mapToScene(m_view->viewport()->rect()).boundingRect();
@@ -125,6 +136,13 @@ void MainWindow::setupUI()
     m_ppiItem->setPos(0, 0);      // 设置PPI位置在场景中心
     m_ppiItem->setZValue(-10);    // 设置为最底层
     m_scene->addItem(m_ppiItem);
+    // =======================================
+
+    // ========== 新增：创建地图组件 ==========
+    m_mapWidget = new MapWidget(this);
+    m_mapWidget->setMinimumSize(400, 400);
+    m_mapWidget->setCenter(m_refLatitude, m_refLongitude);
+    m_mapWidget->setZoomLevel(14);
     // =======================================
 
     // --- 2. 遥测控制台 (QDockWidget) Setup ---
@@ -206,10 +224,17 @@ void MainWindow::setupUI()
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
 
+    // 使用 QSplitter 支持地图和雷达同时显示
+    QSplitter *splitter = new QSplitter(Qt::Horizontal, centralWidget);
+    splitter->addWidget(m_mapWidget);   // 左侧显示地图
+    splitter->addWidget(m_view);        // 右侧显示雷达
+    splitter->setStretchFactor(0, 1);   // 地图和雷达各占一半
+    splitter->setStretchFactor(1, 1);
+
     QVBoxLayout *vlayout   = new QVBoxLayout(centralWidget);
     QLabel      *infoLabel = new QLabel("PPI Radar Display - Ready to fly...", this);
 
-    vlayout->addWidget(m_view);
+    vlayout->addWidget(splitter);
     vlayout->addWidget(infoLabel);
     connect(m_controlButton, &QPushButton::clicked, this, &MainWindow::toggleSimulation);
     connect(m_modeButton, &QPushButton::clicked, this, &MainWindow::switchDisplayMode);
@@ -752,16 +777,21 @@ void MainWindow::applyRadarOnlyMode()
     if (!m_ppiItem || !m_scene || !m_view)
         return;
 
-    // 1. 隐藏网格背景
+    // 1. 隐藏地图组件
+    if (m_mapWidget) {
+        m_mapWidget->hide();
+    }
+
+    // 2. 隐藏网格背景
     m_scene->setShowGrid(false);
 
-    // 2. 放大PPI半径
+    // 3. 放大PPI半径
     m_ppiItem->setRadius(900);
     m_ppiItem->setPPIOpacity(1.0);
     m_ppiItem->setDrawBackground(true);
     m_ppiItem->setZValue(10);   // 提升到前景
 
-    // 3. 隐藏传统图元
+    // 4. 隐藏传统图元
     for (auto *pathItem : m_pathItemMap) {
         if (pathItem)
             pathItem->setVisible(false);
@@ -775,7 +805,7 @@ void MainWindow::applyRadarOnlyMode()
             labelItem->setVisible(false);
     }
 
-    // 4. 调整视图（可选）
+    // 5. 调整视图（可选）
     m_view->resetTransform();
     m_view->scale(0.8, 0.8);
     m_view->centerOn(0, 0);
@@ -788,16 +818,23 @@ void MainWindow::applyMapRadarMode()
     if (!m_ppiItem || !m_scene || !m_view)
         return;
 
-    // 1. 显示网格背景
+    // 1. 显示地图组件
+    if (m_mapWidget) {
+        m_mapWidget->show();
+        // 同步当前UAV数据到地图
+        syncUavDataToMap();
+    }
+
+    // 2. 显示网格背景
     m_scene->setShowGrid(true);
 
-    // 2. 缩小PPI半径，添加透明度
+    // 3. 缩小PPI半径，添加透明度
     m_ppiItem->setRadius(400);
     m_ppiItem->setPPIOpacity(0.6);
     m_ppiItem->setDrawBackground(false);
     m_ppiItem->setZValue(-10);   // 降到背景层
 
-    // 3. 显示传统图元
+    // 4. 显示传统图元
     for (auto *pathItem : m_pathItemMap) {
         if (pathItem)
             pathItem->setVisible(true);
@@ -811,7 +848,7 @@ void MainWindow::applyMapRadarMode()
             labelItem->setVisible(true);
     }
 
-    // 4. 恢复视图
+    // 5. 恢复视图
     m_view->resetTransform();
     m_view->scale(1.0, 1.0);
     m_view->centerOn(0, 0);
@@ -854,6 +891,47 @@ int MainWindow::getColumnIndexByName(const QString &columnName) const
     }
 
     return -1;   // 未找到
+}
+
+void MainWindow::sceneToGeo(double sceneX, double sceneY, double &latitude, double &longitude) const
+{
+    // 简单线性映射：场景坐标(单位：米) -> 地理坐标(单位：度)
+    // 场景原点(0,0) 对应参考点(m_refLatitude, m_refLongitude)
+    // 注意：Y轴向北为正，X轴向东为正
+    latitude = m_refLatitude + (sceneY / m_metersPerDegreeLat);
+    longitude = m_refLongitude + (sceneX / m_metersPerDegreeLon);
+}
+
+void MainWindow::syncUavDataToMap()
+{
+    if (!m_mapWidget)
+        return;
+
+    // 遍历所有UAV，将它们的位置同步到地图
+    for (const auto &uav : m_simManager->getUavs()) {
+        double latitude, longitude;
+        sceneToGeo(uav->getX(), uav->getY(), latitude, longitude);
+
+        // 添加或更新地图标记
+        m_mapWidget->addOrUpdateUavMarker(uav->getId(), latitude, longitude, uav->getName());
+
+        // 根据UAV状态设置标记颜色
+        // 从PPI数据管理器获取状态信息
+        QSharedPointer<Mubiao> mubiao = m_ppiDataManager->getMubiaoHash().value(uav->getId());
+        if (mubiao) {
+            QString color = "blue";   // 默认颜色
+            if (mubiao->daoyin_flag) {
+                color = "red";   // 导引状态：红色
+            }
+            else if (mubiao->zhongdian) {
+                color = "orange";   // 重点关注：橙色
+            }
+            else {
+                color = "green";   // 正常状态：绿色
+            }
+            m_mapWidget->setMarkerColor(uav->getId(), color);
+        }
+    }
 }
 
 void MainWindow::onTableHeaderClicked(int logicalIndex)

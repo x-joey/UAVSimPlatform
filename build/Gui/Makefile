@@ -143,6 +143,30 @@ UavSimApp_autogen/fast:
 	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp_autogen.dir\build.make Gui/CMakeFiles/UavSimApp_autogen.dir/build
 .PHONY : UavSimApp_autogen/fast
 
+DraggableHeaderView.obj: DraggableHeaderView.cpp.obj
+.PHONY : DraggableHeaderView.obj
+
+# target to build an object file
+DraggableHeaderView.cpp.obj:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.obj
+.PHONY : DraggableHeaderView.cpp.obj
+
+DraggableHeaderView.i: DraggableHeaderView.cpp.i
+.PHONY : DraggableHeaderView.i
+
+# target to preprocess a source file
+DraggableHeaderView.cpp.i:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.i
+.PHONY : DraggableHeaderView.cpp.i
+
+DraggableHeaderView.s: DraggableHeaderView.cpp.s
+.PHONY : DraggableHeaderView.s
+
+# target to generate assembly for a file
+DraggableHeaderView.cpp.s:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.s
+.PHONY : DraggableHeaderView.cpp.s
+
 MainWindow.obj: MainWindow.cpp.obj
 .PHONY : MainWindow.obj
 
@@ -166,6 +190,78 @@ MainWindow.s: MainWindow.cpp.s
 MainWindow.cpp.s:
 	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.s
 .PHONY : MainWindow.cpp.s
+
+MapWidget.obj: MapWidget.cpp.obj
+.PHONY : MapWidget.obj
+
+# target to build an object file
+MapWidget.cpp.obj:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.obj
+.PHONY : MapWidget.cpp.obj
+
+MapWidget.i: MapWidget.cpp.i
+.PHONY : MapWidget.i
+
+# target to preprocess a source file
+MapWidget.cpp.i:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.i
+.PHONY : MapWidget.cpp.i
+
+MapWidget.s: MapWidget.cpp.s
+.PHONY : MapWidget.s
+
+# target to generate assembly for a file
+MapWidget.cpp.s:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.s
+.PHONY : MapWidget.cpp.s
+
+PPIGraphicsItem.obj: PPIGraphicsItem.cpp.obj
+.PHONY : PPIGraphicsItem.obj
+
+# target to build an object file
+PPIGraphicsItem.cpp.obj:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.obj
+.PHONY : PPIGraphicsItem.cpp.obj
+
+PPIGraphicsItem.i: PPIGraphicsItem.cpp.i
+.PHONY : PPIGraphicsItem.i
+
+# target to preprocess a source file
+PPIGraphicsItem.cpp.i:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.i
+.PHONY : PPIGraphicsItem.cpp.i
+
+PPIGraphicsItem.s: PPIGraphicsItem.cpp.s
+.PHONY : PPIGraphicsItem.s
+
+# target to generate assembly for a file
+PPIGraphicsItem.cpp.s:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.s
+.PHONY : PPIGraphicsItem.cpp.s
+
+UavSimApp_autogen/EWIEGA46WW/qrc_resources.obj: UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj
+.PHONY : UavSimApp_autogen/EWIEGA46WW/qrc_resources.obj
+
+# target to build an object file
+UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj
+.PHONY : UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj
+
+UavSimApp_autogen/EWIEGA46WW/qrc_resources.i: UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.i
+.PHONY : UavSimApp_autogen/EWIEGA46WW/qrc_resources.i
+
+# target to preprocess a source file
+UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.i:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.i
+.PHONY : UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.i
+
+UavSimApp_autogen/EWIEGA46WW/qrc_resources.s: UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.s
+.PHONY : UavSimApp_autogen/EWIEGA46WW/qrc_resources.s
+
+# target to generate assembly for a file
+UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.s:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Gui\CMakeFiles\UavSimApp.dir\build.make Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.s
+.PHONY : UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.s
 
 UavSimApp_autogen/mocs_compilation.obj: UavSimApp_autogen/mocs_compilation.cpp.obj
 .PHONY : UavSimApp_autogen/mocs_compilation.obj
@@ -345,9 +441,21 @@ help:
 	@echo ... rebuild_cache
 	@echo ... UavSimApp_autogen
 	@echo ... UavSimApp
+	@echo ... DraggableHeaderView.obj
+	@echo ... DraggableHeaderView.i
+	@echo ... DraggableHeaderView.s
 	@echo ... MainWindow.obj
 	@echo ... MainWindow.i
 	@echo ... MainWindow.s
+	@echo ... MapWidget.obj
+	@echo ... MapWidget.i
+	@echo ... MapWidget.s
+	@echo ... PPIGraphicsItem.obj
+	@echo ... PPIGraphicsItem.i
+	@echo ... PPIGraphicsItem.s
+	@echo ... UavSimApp_autogen/EWIEGA46WW/qrc_resources.obj
+	@echo ... UavSimApp_autogen/EWIEGA46WW/qrc_resources.i
+	@echo ... UavSimApp_autogen/EWIEGA46WW/qrc_resources.s
 	@echo ... UavSimApp_autogen/mocs_compilation.obj
 	@echo ... UavSimApp_autogen/mocs_compilation.i
 	@echo ... UavSimApp_autogen/mocs_compilation.s

@@ -8,8 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "D:/myself/cpp/UAV/UAVSimPlatform/Core/CoordinateConverter.cpp" "Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.obj" "gcc" "Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.obj.d"
   "D:/myself/cpp/UAV/UAVSimPlatform/build/Core/Core_autogen/mocs_compilation.cpp" "Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.obj" "gcc" "Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.obj.d"
-  "D:/myself/cpp/UAV/UAVSimPlatform/Core/UavModel.cpp" "Core/CMakeFiles/Core.dir/UavModel.cpp.obj" "gcc" "Core/CMakeFiles/Core.dir/UavModel.cpp.obj.d"
+  "D:/myself/cpp/UAV/UAVSimPlatform/Core/MubiaoAdapter.cpp" "Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.obj" "gcc" "Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.obj.d"
+  "D:/myself/cpp/UAV/UAVSimPlatform/Core/PPIDataManager.cpp" "Core/CMakeFiles/Core.dir/PPIDataManager.cpp.obj" "gcc" "Core/CMakeFiles/Core.dir/PPIDataManager.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

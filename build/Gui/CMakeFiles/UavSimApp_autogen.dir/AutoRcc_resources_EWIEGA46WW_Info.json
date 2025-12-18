@@ -1,0 +1,22 @@
+{
+	"BUILD_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/UavSimApp_autogen",
+	"CMAKE_BINARY_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui",
+	"CMAKE_CURRENT_SOURCE_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform/Gui",
+	"CMAKE_SOURCE_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "MinGW Makefiles",
+	"INCLUDE_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/UavSimApp_autogen/include",
+	"INPUTS" : [ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/qml/MapView.qml" ],
+	"LOCK_FILE" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/CMakeFiles/UavSimApp_autogen.dir/AutoRcc_resources_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "D:/software/qt/5.14.2/mingw73_32/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/CMakeFiles/UavSimApp_autogen.dir/AutoRcc_resources_EWIEGA46WW_Used.txt",
+	"SOURCE" : "D:/myself/cpp/UAV/UAVSimPlatform/Gui/resources.qrc",
+	"USE_BETTER_GRAPH" : false,
+	"VERBOSITY" : 0
+}

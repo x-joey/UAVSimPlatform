@@ -1,4 +1,4 @@
-set(CMAKE_CXX_COMPILER "D:/software/qt/Tools/mingw730_32/bin/g++.exe")
+set(CMAKE_CXX_COMPILER "D:/software/qt/Tools/mingw730_32/bin/c++.exe")
 set(CMAKE_CXX_COMPILER_ARG1 "")
 set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_COMPILER_VERSION "7.3.0")

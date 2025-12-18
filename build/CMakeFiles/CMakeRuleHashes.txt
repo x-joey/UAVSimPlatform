@@ -1,3 +1,5 @@
 # Hashes of file build rules.
-8882ac2f9c8076bea41a30eca99c954e Gui/CMakeFiles/UavSimApp_autogen
-d4ad754cea6f02ee7bb367ec2a986edd Service/CMakeFiles/Service_autogen
+a2b66a733b20cb62d61489efc30708e8 Core/CMakeFiles/Core_autogen
+8251c8dfe9860d53af58575e07d4e0c6 Gui/CMakeFiles/UavSimApp_autogen
+6bbc1d545605836e3e4489ab8e85058c Gui/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp
+d4abbb7a334b5175416cfb07687323f7 Service/CMakeFiles/Service_autogen

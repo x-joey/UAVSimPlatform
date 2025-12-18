@@ -68,6 +68,14 @@ include Gui/CMakeFiles/UavSimApp.dir/progress.make
 # Include the compile flags for this target's objects.
 include Gui/CMakeFiles/UavSimApp.dir/flags.make
 
+Gui/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp: D:/myself/cpp/UAV/UAVSimPlatform/Gui/resources.qrc
+Gui/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp: Gui/CMakeFiles/UavSimApp_autogen.dir/AutoRcc_resources_EWIEGA46WW_Info.json
+Gui/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp: D:/myself/cpp/UAV/UAVSimPlatform/Gui/qml/MapView.qml
+Gui/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp: D:/software/qt/5.14.2/mingw73_32/bin/rcc.exe
+Gui/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp: D:/software/qt/5.14.2/mingw73_32/bin/rcc.exe
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic RCC for resources.qrc"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && "C:\Program Files\CMake\bin\cmake.exe" -E cmake_autorcc D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/CMakeFiles/UavSimApp_autogen.dir/AutoRcc_resources_EWIEGA46WW_Info.json 
+
 Gui/CMakeFiles/UavSimApp.dir/codegen:
 .PHONY : Gui/CMakeFiles/UavSimApp.dir/codegen
 
@@ -75,121 +83,181 @@ Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj: Gui/CMa
 Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/includes_CXX.rsp
 Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj: Gui/UavSimApp_autogen/mocs_compilation.cpp
 Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj -MF CMakeFiles\UavSimApp.dir\UavSimApp_autogen\mocs_compilation.cpp.obj.d -o CMakeFiles\UavSimApp.dir\UavSimApp_autogen\mocs_compilation.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\build\Gui\UavSimApp_autogen\mocs_compilation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj -MF CMakeFiles\UavSimApp.dir\UavSimApp_autogen\mocs_compilation.cpp.obj.d -o CMakeFiles\UavSimApp.dir\UavSimApp_autogen\mocs_compilation.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\build\Gui\UavSimApp_autogen\mocs_compilation.cpp
 
 Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\build\Gui\UavSimApp_autogen\mocs_compilation.cpp > CMakeFiles\UavSimApp.dir\UavSimApp_autogen\mocs_compilation.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\build\Gui\UavSimApp_autogen\mocs_compilation.cpp > CMakeFiles\UavSimApp.dir\UavSimApp_autogen\mocs_compilation.cpp.i
 
 Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\build\Gui\UavSimApp_autogen\mocs_compilation.cpp -o CMakeFiles\UavSimApp.dir\UavSimApp_autogen\mocs_compilation.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\build\Gui\UavSimApp_autogen\mocs_compilation.cpp -o CMakeFiles\UavSimApp.dir\UavSimApp_autogen\mocs_compilation.cpp.s
 
 Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/flags.make
 Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/includes_CXX.rsp
 Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Gui/main.cpp
 Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj -MF CMakeFiles\UavSimApp.dir\main.cpp.obj.d -o CMakeFiles\UavSimApp.dir\main.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj -MF CMakeFiles\UavSimApp.dir\main.cpp.obj.d -o CMakeFiles\UavSimApp.dir\main.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\main.cpp
 
 Gui/CMakeFiles/UavSimApp.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UavSimApp.dir/main.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\main.cpp > CMakeFiles\UavSimApp.dir\main.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\main.cpp > CMakeFiles\UavSimApp.dir\main.cpp.i
 
 Gui/CMakeFiles/UavSimApp.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UavSimApp.dir/main.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\main.cpp -o CMakeFiles\UavSimApp.dir\main.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\main.cpp -o CMakeFiles\UavSimApp.dir\main.cpp.s
 
 Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/flags.make
 Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/includes_CXX.rsp
 Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Gui/MainWindow.cpp
 Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj -MF CMakeFiles\UavSimApp.dir\MainWindow.cpp.obj.d -o CMakeFiles\UavSimApp.dir\MainWindow.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\MainWindow.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj -MF CMakeFiles\UavSimApp.dir\MainWindow.cpp.obj.d -o CMakeFiles\UavSimApp.dir\MainWindow.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\MainWindow.cpp
 
 Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UavSimApp.dir/MainWindow.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\MainWindow.cpp > CMakeFiles\UavSimApp.dir\MainWindow.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\MainWindow.cpp > CMakeFiles\UavSimApp.dir\MainWindow.cpp.i
 
 Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UavSimApp.dir/MainWindow.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\MainWindow.cpp -o CMakeFiles\UavSimApp.dir\MainWindow.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\MainWindow.cpp -o CMakeFiles\UavSimApp.dir\MainWindow.cpp.s
 
 Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/flags.make
 Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/includes_CXX.rsp
 Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Gui/pathitem.cpp
 Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj -MF CMakeFiles\UavSimApp.dir\pathitem.cpp.obj.d -o CMakeFiles\UavSimApp.dir\pathitem.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\pathitem.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.obj -MF CMakeFiles\UavSimApp.dir\pathitem.cpp.obj.d -o CMakeFiles\UavSimApp.dir\pathitem.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\pathitem.cpp
 
 Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UavSimApp.dir/pathitem.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\pathitem.cpp > CMakeFiles\UavSimApp.dir\pathitem.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\pathitem.cpp > CMakeFiles\UavSimApp.dir\pathitem.cpp.i
 
 Gui/CMakeFiles/UavSimApp.dir/pathitem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UavSimApp.dir/pathitem.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\pathitem.cpp -o CMakeFiles\UavSimApp.dir\pathitem.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\pathitem.cpp -o CMakeFiles\UavSimApp.dir\pathitem.cpp.s
 
 Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/flags.make
 Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/includes_CXX.rsp
 Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Gui/uavitem.cpp
 Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.obj -MF CMakeFiles\UavSimApp.dir\uavitem.cpp.obj.d -o CMakeFiles\UavSimApp.dir\uavitem.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\uavitem.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.obj -MF CMakeFiles\UavSimApp.dir\uavitem.cpp.obj.d -o CMakeFiles\UavSimApp.dir\uavitem.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\uavitem.cpp
 
 Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UavSimApp.dir/uavitem.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\uavitem.cpp > CMakeFiles\UavSimApp.dir\uavitem.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\uavitem.cpp > CMakeFiles\UavSimApp.dir\uavitem.cpp.i
 
 Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UavSimApp.dir/uavitem.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\uavitem.cpp -o CMakeFiles\UavSimApp.dir\uavitem.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\uavitem.cpp -o CMakeFiles\UavSimApp.dir\uavitem.cpp.s
 
 Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/flags.make
 Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/includes_CXX.rsp
 Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Gui/uavlabelitem.cpp
 Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj -MF CMakeFiles\UavSimApp.dir\uavlabelitem.cpp.obj.d -o CMakeFiles\UavSimApp.dir\uavlabelitem.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\uavlabelitem.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj -MF CMakeFiles\UavSimApp.dir\uavlabelitem.cpp.obj.d -o CMakeFiles\UavSimApp.dir\uavlabelitem.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\uavlabelitem.cpp
 
 Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\uavlabelitem.cpp > CMakeFiles\UavSimApp.dir\uavlabelitem.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\uavlabelitem.cpp > CMakeFiles\UavSimApp.dir\uavlabelitem.cpp.i
 
 Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\uavlabelitem.cpp -o CMakeFiles\UavSimApp.dir\uavlabelitem.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\uavlabelitem.cpp -o CMakeFiles\UavSimApp.dir\uavlabelitem.cpp.s
 
 Gui/CMakeFiles/UavSimApp.dir/simview.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/flags.make
 Gui/CMakeFiles/UavSimApp.dir/simview.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/includes_CXX.rsp
 Gui/CMakeFiles/UavSimApp.dir/simview.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Gui/simview.cpp
 Gui/CMakeFiles/UavSimApp.dir/simview.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/simview.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/simview.cpp.obj -MF CMakeFiles\UavSimApp.dir\simview.cpp.obj.d -o CMakeFiles\UavSimApp.dir\simview.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\simview.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/simview.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/simview.cpp.obj -MF CMakeFiles\UavSimApp.dir\simview.cpp.obj.d -o CMakeFiles\UavSimApp.dir\simview.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\simview.cpp
 
 Gui/CMakeFiles/UavSimApp.dir/simview.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UavSimApp.dir/simview.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\simview.cpp > CMakeFiles\UavSimApp.dir\simview.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\simview.cpp > CMakeFiles\UavSimApp.dir\simview.cpp.i
 
 Gui/CMakeFiles/UavSimApp.dir/simview.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UavSimApp.dir/simview.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\simview.cpp -o CMakeFiles\UavSimApp.dir\simview.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\simview.cpp -o CMakeFiles\UavSimApp.dir\simview.cpp.s
 
 Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/flags.make
 Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/includes_CXX.rsp
 Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Gui/simscene.cpp
 Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.obj -MF CMakeFiles\UavSimApp.dir\simscene.cpp.obj.d -o CMakeFiles\UavSimApp.dir\simscene.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\simscene.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.obj -MF CMakeFiles\UavSimApp.dir\simscene.cpp.obj.d -o CMakeFiles\UavSimApp.dir\simscene.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\simscene.cpp
 
 Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UavSimApp.dir/simscene.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\simscene.cpp > CMakeFiles\UavSimApp.dir\simscene.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\simscene.cpp > CMakeFiles\UavSimApp.dir\simscene.cpp.i
 
 Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UavSimApp.dir/simscene.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\simscene.cpp -o CMakeFiles\UavSimApp.dir\simscene.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\simscene.cpp -o CMakeFiles\UavSimApp.dir\simscene.cpp.s
+
+Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/flags.make
+Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/includes_CXX.rsp
+Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Gui/PPIGraphicsItem.cpp
+Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.obj -MF CMakeFiles\UavSimApp.dir\PPIGraphicsItem.cpp.obj.d -o CMakeFiles\UavSimApp.dir\PPIGraphicsItem.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\PPIGraphicsItem.cpp
+
+Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.i"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\PPIGraphicsItem.cpp > CMakeFiles\UavSimApp.dir\PPIGraphicsItem.cpp.i
+
+Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.s"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\PPIGraphicsItem.cpp -o CMakeFiles\UavSimApp.dir\PPIGraphicsItem.cpp.s
+
+Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/flags.make
+Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/includes_CXX.rsp
+Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Gui/DraggableHeaderView.cpp
+Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.obj -MF CMakeFiles\UavSimApp.dir\DraggableHeaderView.cpp.obj.d -o CMakeFiles\UavSimApp.dir\DraggableHeaderView.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\DraggableHeaderView.cpp
+
+Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.i"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\DraggableHeaderView.cpp > CMakeFiles\UavSimApp.dir\DraggableHeaderView.cpp.i
+
+Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.s"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\DraggableHeaderView.cpp -o CMakeFiles\UavSimApp.dir\DraggableHeaderView.cpp.s
+
+Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/flags.make
+Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/includes_CXX.rsp
+Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Gui/MapWidget.cpp
+Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.obj -MF CMakeFiles\UavSimApp.dir\MapWidget.cpp.obj.d -o CMakeFiles\UavSimApp.dir\MapWidget.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Gui\MapWidget.cpp
+
+Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UavSimApp.dir/MapWidget.cpp.i"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Gui\MapWidget.cpp > CMakeFiles\UavSimApp.dir\MapWidget.cpp.i
+
+Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UavSimApp.dir/MapWidget.cpp.s"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Gui\MapWidget.cpp -o CMakeFiles\UavSimApp.dir\MapWidget.cpp.s
+
+Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/flags.make
+Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/includes_CXX.rsp
+Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj: Gui/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp
+Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj: Gui/CMakeFiles/UavSimApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj -MF CMakeFiles\UavSimApp.dir\UavSimApp_autogen\EWIEGA46WW\qrc_resources.cpp.obj.d -o CMakeFiles\UavSimApp.dir\UavSimApp_autogen\EWIEGA46WW\qrc_resources.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\build\Gui\UavSimApp_autogen\EWIEGA46WW\qrc_resources.cpp
+
+Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.i"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\build\Gui\UavSimApp_autogen\EWIEGA46WW\qrc_resources.cpp > CMakeFiles\UavSimApp.dir\UavSimApp_autogen\EWIEGA46WW\qrc_resources.cpp.i
+
+Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.s"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\build\Gui\UavSimApp_autogen\EWIEGA46WW\qrc_resources.cpp -o CMakeFiles\UavSimApp.dir\UavSimApp_autogen\EWIEGA46WW\qrc_resources.cpp.s
 
 # Object files for target UavSimApp
 UavSimApp_OBJECTS = \
@@ -200,7 +268,11 @@ UavSimApp_OBJECTS = \
 "CMakeFiles/UavSimApp.dir/uavitem.cpp.obj" \
 "CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj" \
 "CMakeFiles/UavSimApp.dir/simview.cpp.obj" \
-"CMakeFiles/UavSimApp.dir/simscene.cpp.obj"
+"CMakeFiles/UavSimApp.dir/simscene.cpp.obj" \
+"CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.obj" \
+"CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.obj" \
+"CMakeFiles/UavSimApp.dir/MapWidget.cpp.obj" \
+"CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj"
 
 # External object files for target UavSimApp
 UavSimApp_EXTERNAL_OBJECTS =
@@ -213,17 +285,30 @@ Gui/UavSimApp.exe: Gui/CMakeFiles/UavSimApp.dir/uavitem.cpp.obj
 Gui/UavSimApp.exe: Gui/CMakeFiles/UavSimApp.dir/uavlabelitem.cpp.obj
 Gui/UavSimApp.exe: Gui/CMakeFiles/UavSimApp.dir/simview.cpp.obj
 Gui/UavSimApp.exe: Gui/CMakeFiles/UavSimApp.dir/simscene.cpp.obj
+Gui/UavSimApp.exe: Gui/CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.obj
+Gui/UavSimApp.exe: Gui/CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.obj
+Gui/UavSimApp.exe: Gui/CMakeFiles/UavSimApp.dir/MapWidget.cpp.obj
+Gui/UavSimApp.exe: Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj
 Gui/UavSimApp.exe: Gui/CMakeFiles/UavSimApp.dir/build.make
-Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5Widgets.a
 Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5Concurrent.a
 Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5Sql.a
+Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5Location.a
+Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5QuickWidgets.a
+Gui/UavSimApp.exe: Core/libCore.a
 Gui/UavSimApp.exe: Service/libService.a
+Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5PositioningQuick.a
+Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5Widgets.a
+Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5Quick.a
+Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5QmlModels.a
+Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5Qml.a
+Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5Network.a
+Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5Positioning.a
 Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5Gui.a
 Gui/UavSimApp.exe: D:/software/qt/5.14.2/mingw73_32/lib/libQt5Core.a
 Gui/UavSimApp.exe: Gui/CMakeFiles/UavSimApp.dir/linkLibs.rsp
 Gui/UavSimApp.exe: Gui/CMakeFiles/UavSimApp.dir/objects1.rsp
 Gui/UavSimApp.exe: Gui/CMakeFiles/UavSimApp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable UavSimApp.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable UavSimApp.exe"
 	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\UavSimApp.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -234,7 +319,7 @@ Gui/CMakeFiles/UavSimApp.dir/clean:
 	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && $(CMAKE_COMMAND) -P CMakeFiles\UavSimApp.dir\cmake_clean.cmake
 .PHONY : Gui/CMakeFiles/UavSimApp.dir/clean
 
-Gui/CMakeFiles/UavSimApp.dir/depend:
+Gui/CMakeFiles/UavSimApp.dir/depend: Gui/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp
 	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\myself\cpp\UAV\UAVSimPlatform D:\myself\cpp\UAV\UAVSimPlatform\Gui D:\myself\cpp\UAV\UAVSimPlatform\build D:\myself\cpp\UAV\UAVSimPlatform\build\Gui D:\myself\cpp\UAV\UAVSimPlatform\build\Gui\CMakeFiles\UavSimApp.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : Gui/CMakeFiles/UavSimApp.dir/depend
 

@@ -76,75 +76,75 @@ Service/CMakeFiles/Service.dir/Service_autogen/mocs_compilation.cpp.obj: Service
 Service/CMakeFiles/Service.dir/Service_autogen/mocs_compilation.cpp.obj: Service/Service_autogen/mocs_compilation.cpp
 Service/CMakeFiles/Service.dir/Service_autogen/mocs_compilation.cpp.obj: Service/CMakeFiles/Service.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object Service/CMakeFiles/Service.dir/Service_autogen/mocs_compilation.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Service/CMakeFiles/Service.dir/Service_autogen/mocs_compilation.cpp.obj -MF CMakeFiles\Service.dir\Service_autogen\mocs_compilation.cpp.obj.d -o CMakeFiles\Service.dir\Service_autogen\mocs_compilation.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\build\Service\Service_autogen\mocs_compilation.cpp
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Service/CMakeFiles/Service.dir/Service_autogen/mocs_compilation.cpp.obj -MF CMakeFiles\Service.dir\Service_autogen\mocs_compilation.cpp.obj.d -o CMakeFiles\Service.dir\Service_autogen\mocs_compilation.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\build\Service\Service_autogen\mocs_compilation.cpp
 
 Service/CMakeFiles/Service.dir/Service_autogen/mocs_compilation.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Service.dir/Service_autogen/mocs_compilation.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\build\Service\Service_autogen\mocs_compilation.cpp > CMakeFiles\Service.dir\Service_autogen\mocs_compilation.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\build\Service\Service_autogen\mocs_compilation.cpp > CMakeFiles\Service.dir\Service_autogen\mocs_compilation.cpp.i
 
 Service/CMakeFiles/Service.dir/Service_autogen/mocs_compilation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Service.dir/Service_autogen/mocs_compilation.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\build\Service\Service_autogen\mocs_compilation.cpp -o CMakeFiles\Service.dir\Service_autogen\mocs_compilation.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\build\Service\Service_autogen\mocs_compilation.cpp -o CMakeFiles\Service.dir\Service_autogen\mocs_compilation.cpp.s
 
 Service/CMakeFiles/Service.dir/UavModel.cpp.obj: Service/CMakeFiles/Service.dir/flags.make
 Service/CMakeFiles/Service.dir/UavModel.cpp.obj: Service/CMakeFiles/Service.dir/includes_CXX.rsp
 Service/CMakeFiles/Service.dir/UavModel.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Service/UavModel.cpp
 Service/CMakeFiles/Service.dir/UavModel.cpp.obj: Service/CMakeFiles/Service.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object Service/CMakeFiles/Service.dir/UavModel.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Service/CMakeFiles/Service.dir/UavModel.cpp.obj -MF CMakeFiles\Service.dir\UavModel.cpp.obj.d -o CMakeFiles\Service.dir\UavModel.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Service\UavModel.cpp
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Service/CMakeFiles/Service.dir/UavModel.cpp.obj -MF CMakeFiles\Service.dir\UavModel.cpp.obj.d -o CMakeFiles\Service.dir\UavModel.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Service\UavModel.cpp
 
 Service/CMakeFiles/Service.dir/UavModel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Service.dir/UavModel.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Service\UavModel.cpp > CMakeFiles\Service.dir\UavModel.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Service\UavModel.cpp > CMakeFiles\Service.dir\UavModel.cpp.i
 
 Service/CMakeFiles/Service.dir/UavModel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Service.dir/UavModel.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Service\UavModel.cpp -o CMakeFiles\Service.dir\UavModel.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Service\UavModel.cpp -o CMakeFiles\Service.dir\UavModel.cpp.s
 
 Service/CMakeFiles/Service.dir/flightpath.cpp.obj: Service/CMakeFiles/Service.dir/flags.make
 Service/CMakeFiles/Service.dir/flightpath.cpp.obj: Service/CMakeFiles/Service.dir/includes_CXX.rsp
 Service/CMakeFiles/Service.dir/flightpath.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Service/flightpath.cpp
 Service/CMakeFiles/Service.dir/flightpath.cpp.obj: Service/CMakeFiles/Service.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object Service/CMakeFiles/Service.dir/flightpath.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Service/CMakeFiles/Service.dir/flightpath.cpp.obj -MF CMakeFiles\Service.dir\flightpath.cpp.obj.d -o CMakeFiles\Service.dir\flightpath.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Service\flightpath.cpp
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Service/CMakeFiles/Service.dir/flightpath.cpp.obj -MF CMakeFiles\Service.dir\flightpath.cpp.obj.d -o CMakeFiles\Service.dir\flightpath.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Service\flightpath.cpp
 
 Service/CMakeFiles/Service.dir/flightpath.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Service.dir/flightpath.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Service\flightpath.cpp > CMakeFiles\Service.dir\flightpath.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Service\flightpath.cpp > CMakeFiles\Service.dir\flightpath.cpp.i
 
 Service/CMakeFiles/Service.dir/flightpath.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Service.dir/flightpath.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Service\flightpath.cpp -o CMakeFiles\Service.dir\flightpath.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Service\flightpath.cpp -o CMakeFiles\Service.dir\flightpath.cpp.s
 
 Service/CMakeFiles/Service.dir/trajectorygenerator.cpp.obj: Service/CMakeFiles/Service.dir/flags.make
 Service/CMakeFiles/Service.dir/trajectorygenerator.cpp.obj: Service/CMakeFiles/Service.dir/includes_CXX.rsp
 Service/CMakeFiles/Service.dir/trajectorygenerator.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Service/trajectorygenerator.cpp
 Service/CMakeFiles/Service.dir/trajectorygenerator.cpp.obj: Service/CMakeFiles/Service.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object Service/CMakeFiles/Service.dir/trajectorygenerator.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Service/CMakeFiles/Service.dir/trajectorygenerator.cpp.obj -MF CMakeFiles\Service.dir\trajectorygenerator.cpp.obj.d -o CMakeFiles\Service.dir\trajectorygenerator.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Service\trajectorygenerator.cpp
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Service/CMakeFiles/Service.dir/trajectorygenerator.cpp.obj -MF CMakeFiles\Service.dir\trajectorygenerator.cpp.obj.d -o CMakeFiles\Service.dir\trajectorygenerator.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Service\trajectorygenerator.cpp
 
 Service/CMakeFiles/Service.dir/trajectorygenerator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Service.dir/trajectorygenerator.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Service\trajectorygenerator.cpp > CMakeFiles\Service.dir\trajectorygenerator.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Service\trajectorygenerator.cpp > CMakeFiles\Service.dir\trajectorygenerator.cpp.i
 
 Service/CMakeFiles/Service.dir/trajectorygenerator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Service.dir/trajectorygenerator.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Service\trajectorygenerator.cpp -o CMakeFiles\Service.dir\trajectorygenerator.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Service\trajectorygenerator.cpp -o CMakeFiles\Service.dir\trajectorygenerator.cpp.s
 
 Service/CMakeFiles/Service.dir/simulationmanager.cpp.obj: Service/CMakeFiles/Service.dir/flags.make
 Service/CMakeFiles/Service.dir/simulationmanager.cpp.obj: Service/CMakeFiles/Service.dir/includes_CXX.rsp
 Service/CMakeFiles/Service.dir/simulationmanager.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Service/simulationmanager.cpp
 Service/CMakeFiles/Service.dir/simulationmanager.cpp.obj: Service/CMakeFiles/Service.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object Service/CMakeFiles/Service.dir/simulationmanager.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Service/CMakeFiles/Service.dir/simulationmanager.cpp.obj -MF CMakeFiles\Service.dir\simulationmanager.cpp.obj.d -o CMakeFiles\Service.dir\simulationmanager.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Service\simulationmanager.cpp
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Service/CMakeFiles/Service.dir/simulationmanager.cpp.obj -MF CMakeFiles\Service.dir\simulationmanager.cpp.obj.d -o CMakeFiles\Service.dir\simulationmanager.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Service\simulationmanager.cpp
 
 Service/CMakeFiles/Service.dir/simulationmanager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Service.dir/simulationmanager.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Service\simulationmanager.cpp > CMakeFiles\Service.dir\simulationmanager.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Service\simulationmanager.cpp > CMakeFiles\Service.dir\simulationmanager.cpp.i
 
 Service/CMakeFiles/Service.dir/simulationmanager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Service.dir/simulationmanager.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Service\simulationmanager.cpp -o CMakeFiles\Service.dir\simulationmanager.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Service && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Service\simulationmanager.cpp -o CMakeFiles\Service.dir\simulationmanager.cpp.s
 
 # Object files for target Service
 Service_OBJECTS = \

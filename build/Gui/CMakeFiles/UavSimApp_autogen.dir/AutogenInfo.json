@@ -5,7 +5,11 @@
 	"CMAKE_CURRENT_BINARY_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui",
 	"CMAKE_CURRENT_SOURCE_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform/Gui",
 	"CMAKE_EXECUTABLE" : "C:/Program Files/CMake/bin/cmake.exe",
-	"CMAKE_LIST_FILES" : [ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/CMakeLists.txt" ],
+	"CMAKE_LIST_FILES" : 
+	[
+		"D:/myself/cpp/UAV/UAVSimPlatform/Gui/CMakeLists.txt",
+		"D:/myself/cpp/UAV/UAVSimPlatform/Gui/resources.qrc"
+	],
 	"CMAKE_SOURCE_DIR" : "D:/myself/cpp/UAV/UAVSimPlatform",
 	"CROSS_CONFIG" : false,
 	"DEP_FILE" : "",
@@ -13,9 +17,33 @@
 	"HEADERS" : 
 	[
 		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Gui/DraggableHeaderView.h",
+			"MU",
+			"EWIEGA46WW/moc_DraggableHeaderView.cpp",
+			null
+		],
+		[
 			"D:/myself/cpp/UAV/UAVSimPlatform/Gui/MainWindow.h",
 			"MU",
 			"EWIEGA46WW/moc_MainWindow.cpp",
+			null
+		],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Gui/MapWidget.h",
+			"MU",
+			"EWIEGA46WW/moc_MapWidget.cpp",
+			null
+		],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Gui/PPIGraphicsItem.h",
+			"MU",
+			"EWIEGA46WW/moc_PPIGraphicsItem.cpp",
+			null
+		],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Gui/SortableTableWidgetItem.h",
+			"MU",
+			"EWIEGA46WW/moc_SortableTableWidgetItem.cpp",
 			null
 		],
 		[
@@ -57,6 +85,15 @@
 		"QT_CONCURRENT_LIB",
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
+		"QT_LOCATION_LIB",
+		"QT_NETWORK_LIB",
+		"QT_NO_DEBUG",
+		"QT_POSITIONINGQUICK_LIB",
+		"QT_POSITIONING_LIB",
+		"QT_QMLMODELS_LIB",
+		"QT_QML_LIB",
+		"QT_QUICKWIDGETS_LIB",
+		"QT_QUICK_LIB",
 		"QT_SQL_LIB",
 		"QT_WIDGETS_LIB"
 	],
@@ -69,6 +106,7 @@
 	],
 	"MOC_INCLUDES" : 
 	[
+		"D:/myself/cpp/UAV/UAVSimPlatform/Core",
 		"D:/myself/cpp/UAV/UAVSimPlatform/Service",
 		"D:/software/qt/5.14.2/mingw73_32/include",
 		"D:/software/qt/5.14.2/mingw73_32/include/QtWidgets",
@@ -78,6 +116,14 @@
 		"D:/software/qt/5.14.2/mingw73_32/mkspecs/win32-g++",
 		"D:/software/qt/5.14.2/mingw73_32/include/QtConcurrent",
 		"D:/software/qt/5.14.2/mingw73_32/include/QtSql",
+		"D:/software/qt/5.14.2/mingw73_32/include/QtLocation",
+		"D:/software/qt/5.14.2/mingw73_32/include/QtPositioningQuick",
+		"D:/software/qt/5.14.2/mingw73_32/include/QtPositioning",
+		"D:/software/qt/5.14.2/mingw73_32/include/QtQuick",
+		"D:/software/qt/5.14.2/mingw73_32/include/QtQmlModels",
+		"D:/software/qt/5.14.2/mingw73_32/include/QtQml",
+		"D:/software/qt/5.14.2/mingw73_32/include/QtNetwork",
+		"D:/software/qt/5.14.2/mingw73_32/include/QtQuickWidgets",
 		"D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++",
 		"D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32",
 		"D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward",
@@ -90,7 +136,7 @@
 	"MOC_PATH_PREFIX" : false,
 	"MOC_PREDEFS_CMD" : 
 	[
-		"D:/software/qt/Tools/mingw730_32/bin/g++.exe",
+		"D:/software/qt/Tools/mingw730_32/bin/c++.exe",
 		"-std=gnu++1z",
 		"-w",
 		"-dM",
@@ -110,7 +156,18 @@
 	"SETTINGS_FILE" : "D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/CMakeFiles/UavSimApp_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Gui/DraggableHeaderView.cpp",
+			"MU",
+			null
+		],
 		[ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/MainWindow.cpp", "MU", null ],
+		[ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/MapWidget.cpp", "MU", null ],
+		[
+			"D:/myself/cpp/UAV/UAVSimPlatform/Gui/PPIGraphicsItem.cpp",
+			"MU",
+			null
+		],
 		[ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/main.cpp", "MU", null ],
 		[ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/pathitem.cpp", "MU", null ],
 		[ "D:/myself/cpp/UAV/UAVSimPlatform/Gui/simscene.cpp", "MU", null ],

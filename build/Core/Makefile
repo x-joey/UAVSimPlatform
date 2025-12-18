@@ -143,6 +143,30 @@ Core_autogen/fast:
 	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core_autogen.dir\build.make Core/CMakeFiles/Core_autogen.dir/build
 .PHONY : Core_autogen/fast
 
+CoordinateConverter.obj: CoordinateConverter.cpp.obj
+.PHONY : CoordinateConverter.obj
+
+# target to build an object file
+CoordinateConverter.cpp.obj:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.obj
+.PHONY : CoordinateConverter.cpp.obj
+
+CoordinateConverter.i: CoordinateConverter.cpp.i
+.PHONY : CoordinateConverter.i
+
+# target to preprocess a source file
+CoordinateConverter.cpp.i:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.i
+.PHONY : CoordinateConverter.cpp.i
+
+CoordinateConverter.s: CoordinateConverter.cpp.s
+.PHONY : CoordinateConverter.s
+
+# target to generate assembly for a file
+CoordinateConverter.cpp.s:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.s
+.PHONY : CoordinateConverter.cpp.s
+
 Core_autogen/mocs_compilation.obj: Core_autogen/mocs_compilation.cpp.obj
 .PHONY : Core_autogen/mocs_compilation.obj
 
@@ -167,29 +191,53 @@ Core_autogen/mocs_compilation.cpp.s:
 	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.s
 .PHONY : Core_autogen/mocs_compilation.cpp.s
 
-UavModel.obj: UavModel.cpp.obj
-.PHONY : UavModel.obj
+MubiaoAdapter.obj: MubiaoAdapter.cpp.obj
+.PHONY : MubiaoAdapter.obj
 
 # target to build an object file
-UavModel.cpp.obj:
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/UavModel.cpp.obj
-.PHONY : UavModel.cpp.obj
+MubiaoAdapter.cpp.obj:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.obj
+.PHONY : MubiaoAdapter.cpp.obj
 
-UavModel.i: UavModel.cpp.i
-.PHONY : UavModel.i
+MubiaoAdapter.i: MubiaoAdapter.cpp.i
+.PHONY : MubiaoAdapter.i
 
 # target to preprocess a source file
-UavModel.cpp.i:
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/UavModel.cpp.i
-.PHONY : UavModel.cpp.i
+MubiaoAdapter.cpp.i:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.i
+.PHONY : MubiaoAdapter.cpp.i
 
-UavModel.s: UavModel.cpp.s
-.PHONY : UavModel.s
+MubiaoAdapter.s: MubiaoAdapter.cpp.s
+.PHONY : MubiaoAdapter.s
 
 # target to generate assembly for a file
-UavModel.cpp.s:
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/UavModel.cpp.s
-.PHONY : UavModel.cpp.s
+MubiaoAdapter.cpp.s:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.s
+.PHONY : MubiaoAdapter.cpp.s
+
+PPIDataManager.obj: PPIDataManager.cpp.obj
+.PHONY : PPIDataManager.obj
+
+# target to build an object file
+PPIDataManager.cpp.obj:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/PPIDataManager.cpp.obj
+.PHONY : PPIDataManager.cpp.obj
+
+PPIDataManager.i: PPIDataManager.cpp.i
+.PHONY : PPIDataManager.i
+
+# target to preprocess a source file
+PPIDataManager.cpp.i:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/PPIDataManager.cpp.i
+.PHONY : PPIDataManager.cpp.i
+
+PPIDataManager.s: PPIDataManager.cpp.s
+.PHONY : PPIDataManager.s
+
+# target to generate assembly for a file
+PPIDataManager.cpp.s:
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build && $(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/PPIDataManager.cpp.s
+.PHONY : PPIDataManager.cpp.s
 
 # Help Target
 help:
@@ -201,12 +249,18 @@ help:
 	@echo ... rebuild_cache
 	@echo ... Core_autogen
 	@echo ... Core
+	@echo ... CoordinateConverter.obj
+	@echo ... CoordinateConverter.i
+	@echo ... CoordinateConverter.s
 	@echo ... Core_autogen/mocs_compilation.obj
 	@echo ... Core_autogen/mocs_compilation.i
 	@echo ... Core_autogen/mocs_compilation.s
-	@echo ... UavModel.obj
-	@echo ... UavModel.i
-	@echo ... UavModel.s
+	@echo ... MubiaoAdapter.obj
+	@echo ... MubiaoAdapter.i
+	@echo ... MubiaoAdapter.s
+	@echo ... PPIDataManager.obj
+	@echo ... PPIDataManager.i
+	@echo ... PPIDataManager.s
 .PHONY : help
 
 

@@ -67,7 +67,7 @@ include Gui/CMakeFiles/UavSimApp_autogen.dir/progress.make
 
 Gui/CMakeFiles/UavSimApp_autogen:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target UavSimApp"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && "C:\Program Files\CMake\bin\cmake.exe" -E cmake_autogen D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/CMakeFiles/UavSimApp_autogen.dir/AutogenInfo.json Debug
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Gui && "C:\Program Files\CMake\bin\cmake.exe" -E cmake_autogen D:/myself/cpp/UAV/UAVSimPlatform/build/Gui/CMakeFiles/UavSimApp_autogen.dir/AutogenInfo.json ""
 
 Gui/CMakeFiles/UavSimApp_autogen.dir/codegen:
 .PHONY : Gui/CMakeFiles/UavSimApp_autogen.dir/codegen

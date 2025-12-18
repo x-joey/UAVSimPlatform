@@ -20,6 +20,7 @@
 #include "PPIDataManager.h"         // 新增：PPI数据管理器
 #include "DraggableHeaderView.h"    // 新增：可拖动列表头
 #include "SortableTableWidgetItem.h" // 新增：自定义排序表格项
+#include "MapWidget.h"              // 新增：地图组件
 
 #include <QDockWidget>
 #include <QGraphicsScene>
@@ -205,6 +206,14 @@ private:
     void syncUavDataToPPI();
 
     /**
+     * @brief 同步UAV数据到地图
+     * @details 将UAV模型数据转换为地理坐标并更新到地图上
+     *          设计原因：保持UAV数据和地图显示的同步
+     *          提升：自动同步数据，确保地图显示一致性
+     */
+    void syncUavDataToMap();
+
+    /**
      * @brief 应用纯雷达模式
      * @details 隐藏地图元素，只显示PPI雷达界面
      *          提升：聚焦雷达显示，减少视觉干扰
@@ -226,6 +235,17 @@ private:
      *          提升：支持灵活的列顺序，提升用户体验
      */
     int getColumnIndexByName(const QString &columnName) const;
+
+    /**
+     * @brief 将场景坐标转换为地理坐标
+     * @param sceneX 场景X坐标（笛卡尔坐标系）
+     * @param sceneY 场景Y坐标（笛卡尔坐标系）
+     * @param latitude 输出纬度
+     * @param longitude 输出经度
+     * @details 使用简单线性映射将场景坐标转换为经纬度
+     *          提升：统一坐标转换，便于地图显示
+     */
+    void sceneToGeo(double sceneX, double sceneY, double &latitude, double &longitude) const;
 
     // ========== 数据管理 ==========
     /**
@@ -324,6 +344,14 @@ private:
      */
     PPIGraphicsItem *m_ppiItem = nullptr;
 
+    // ========== 地图组件 ==========
+    /**
+     * @brief 地图显示组件
+     * @details 使用Qt Location显示地理地图和UAV位置
+     *          使用Qt对象树，自动管理内存
+     */
+    MapWidget *m_mapWidget = nullptr;
+
     // ========== 传统图元（可选保留） ==========
     /**
      * @brief 路径图元指针（已废弃，保留以兼容旧代码）
@@ -373,5 +401,26 @@ private:
      *          当列被拖动时，通过列名动态查找新的列索引进行排序
      */
     QString m_sortColumnName = "Status";
+
+    // ========== 坐标转换参数 ==========
+    /**
+     * @brief 地图参考点纬度（原点对应的纬度）
+     * @details 场景坐标(0,0)对应的纬度，默认为天安门
+     */
+    const double m_refLatitude = 39.9042;
+
+    /**
+     * @brief 地图参考点经度（原点对应的经度）
+     * @details 场景坐标(0,0)对应的经度，默认为天安门
+     */
+    const double m_refLongitude = 116.4074;
+
+    /**
+     * @brief 坐标转换比例尺（米/度）
+     * @details 在北纬40度附近，1度纬度约111km，1度经度约85km
+     *          这里使用平均值约100km/度，即1000米约0.01度
+     */
+    const double m_metersPerDegreeLat = 111000.0;  // 纬度方向：约111km/度
+    const double m_metersPerDegreeLon = 85000.0;   // 经度方向：约85km/度（北纬40度附近）
 };
 #endif   // UAVITEM_H

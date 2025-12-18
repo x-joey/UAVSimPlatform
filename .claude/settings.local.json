@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmake:*)",
+      "Read(//usr/**)",
+      "Bash(pkg-config:*)",
+      "Bash(mingw32-make:*)",
+      "Bash(make:*)",
+      "Bash(tee:*)",
+      "Bash(sudo apt-get:*)",
+      "Bash(sudo apt-get install -y qtlocation5-dev qtpositioning5-dev qtdeclarative5-dev qtquickcontrols2-5-dev)",
+      "Bash(git log:*)",
+      "Bash(cat:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

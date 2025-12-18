@@ -1,6 +1,14 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.obj"
+  "CMakeFiles/UavSimApp.dir/DraggableHeaderView.cpp.obj.d"
   "CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj"
   "CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj.d"
+  "CMakeFiles/UavSimApp.dir/MapWidget.cpp.obj"
+  "CMakeFiles/UavSimApp.dir/MapWidget.cpp.obj.d"
+  "CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.obj"
+  "CMakeFiles/UavSimApp.dir/PPIGraphicsItem.cpp.obj.d"
+  "CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj"
+  "CMakeFiles/UavSimApp.dir/UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp.obj.d"
   "CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj"
   "CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj.d"
   "CMakeFiles/UavSimApp.dir/main.cpp.obj"
@@ -21,6 +29,7 @@ file(REMOVE_RECURSE
   "UavSimApp.exe"
   "UavSimApp.exe.manifest"
   "UavSimApp.pdb"
+  "UavSimApp_autogen/EWIEGA46WW/qrc_resources.cpp"
   "libUavSimApp.dll.a"
 )
 

@@ -76,44 +76,78 @@ Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.obj: Core/CMakeFiles/
 Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.obj: Core/Core_autogen/mocs_compilation.cpp
 Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.obj: Core/CMakeFiles/Core.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.obj -MF CMakeFiles\Core.dir\Core_autogen\mocs_compilation.cpp.obj.d -o CMakeFiles\Core.dir\Core_autogen\mocs_compilation.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\build\Core\Core_autogen\mocs_compilation.cpp
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.obj -MF CMakeFiles\Core.dir\Core_autogen\mocs_compilation.cpp.obj.d -o CMakeFiles\Core.dir\Core_autogen\mocs_compilation.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\build\Core\Core_autogen\mocs_compilation.cpp
 
 Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\build\Core\Core_autogen\mocs_compilation.cpp > CMakeFiles\Core.dir\Core_autogen\mocs_compilation.cpp.i
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\build\Core\Core_autogen\mocs_compilation.cpp > CMakeFiles\Core.dir\Core_autogen\mocs_compilation.cpp.i
 
 Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\build\Core\Core_autogen\mocs_compilation.cpp -o CMakeFiles\Core.dir\Core_autogen\mocs_compilation.cpp.s
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\build\Core\Core_autogen\mocs_compilation.cpp -o CMakeFiles\Core.dir\Core_autogen\mocs_compilation.cpp.s
 
-Core/CMakeFiles/Core.dir/UavModel.cpp.obj: Core/CMakeFiles/Core.dir/flags.make
-Core/CMakeFiles/Core.dir/UavModel.cpp.obj: Core/CMakeFiles/Core.dir/includes_CXX.rsp
-Core/CMakeFiles/Core.dir/UavModel.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Core/UavModel.cpp
-Core/CMakeFiles/Core.dir/UavModel.cpp.obj: Core/CMakeFiles/Core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object Core/CMakeFiles/Core.dir/UavModel.cpp.obj"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Core/CMakeFiles/Core.dir/UavModel.cpp.obj -MF CMakeFiles\Core.dir\UavModel.cpp.obj.d -o CMakeFiles\Core.dir\UavModel.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Core\UavModel.cpp
+Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.obj: Core/CMakeFiles/Core.dir/flags.make
+Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.obj: Core/CMakeFiles/Core.dir/includes_CXX.rsp
+Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Core/MubiaoAdapter.cpp
+Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.obj: Core/CMakeFiles/Core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.obj -MF CMakeFiles\Core.dir\MubiaoAdapter.cpp.obj.d -o CMakeFiles\Core.dir\MubiaoAdapter.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Core\MubiaoAdapter.cpp
 
-Core/CMakeFiles/Core.dir/UavModel.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Core.dir/UavModel.cpp.i"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Core\UavModel.cpp > CMakeFiles\Core.dir\UavModel.cpp.i
+Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Core.dir/MubiaoAdapter.cpp.i"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Core\MubiaoAdapter.cpp > CMakeFiles\Core.dir\MubiaoAdapter.cpp.i
 
-Core/CMakeFiles/Core.dir/UavModel.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Core.dir/UavModel.cpp.s"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Core\UavModel.cpp -o CMakeFiles\Core.dir\UavModel.cpp.s
+Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Core.dir/MubiaoAdapter.cpp.s"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Core\MubiaoAdapter.cpp -o CMakeFiles\Core.dir\MubiaoAdapter.cpp.s
+
+Core/CMakeFiles/Core.dir/PPIDataManager.cpp.obj: Core/CMakeFiles/Core.dir/flags.make
+Core/CMakeFiles/Core.dir/PPIDataManager.cpp.obj: Core/CMakeFiles/Core.dir/includes_CXX.rsp
+Core/CMakeFiles/Core.dir/PPIDataManager.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Core/PPIDataManager.cpp
+Core/CMakeFiles/Core.dir/PPIDataManager.cpp.obj: Core/CMakeFiles/Core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object Core/CMakeFiles/Core.dir/PPIDataManager.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Core/CMakeFiles/Core.dir/PPIDataManager.cpp.obj -MF CMakeFiles\Core.dir\PPIDataManager.cpp.obj.d -o CMakeFiles\Core.dir\PPIDataManager.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Core\PPIDataManager.cpp
+
+Core/CMakeFiles/Core.dir/PPIDataManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Core.dir/PPIDataManager.cpp.i"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Core\PPIDataManager.cpp > CMakeFiles\Core.dir\PPIDataManager.cpp.i
+
+Core/CMakeFiles/Core.dir/PPIDataManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Core.dir/PPIDataManager.cpp.s"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Core\PPIDataManager.cpp -o CMakeFiles\Core.dir\PPIDataManager.cpp.s
+
+Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.obj: Core/CMakeFiles/Core.dir/flags.make
+Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.obj: Core/CMakeFiles/Core.dir/includes_CXX.rsp
+Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.obj: D:/myself/cpp/UAV/UAVSimPlatform/Core/CoordinateConverter.cpp
+Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.obj: Core/CMakeFiles/Core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.obj"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.obj -MF CMakeFiles\Core.dir\CoordinateConverter.cpp.obj.d -o CMakeFiles\Core.dir\CoordinateConverter.cpp.obj -c D:\myself\cpp\UAV\UAVSimPlatform\Core\CoordinateConverter.cpp
+
+Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Core.dir/CoordinateConverter.cpp.i"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\myself\cpp\UAV\UAVSimPlatform\Core\CoordinateConverter.cpp > CMakeFiles\Core.dir\CoordinateConverter.cpp.i
+
+Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Core.dir/CoordinateConverter.cpp.s"
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && D:\software\qt\Tools\mingw730_32\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\myself\cpp\UAV\UAVSimPlatform\Core\CoordinateConverter.cpp -o CMakeFiles\Core.dir\CoordinateConverter.cpp.s
 
 # Object files for target Core
 Core_OBJECTS = \
 "CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.obj" \
-"CMakeFiles/Core.dir/UavModel.cpp.obj"
+"CMakeFiles/Core.dir/MubiaoAdapter.cpp.obj" \
+"CMakeFiles/Core.dir/PPIDataManager.cpp.obj" \
+"CMakeFiles/Core.dir/CoordinateConverter.cpp.obj"
 
 # External object files for target Core
 Core_EXTERNAL_OBJECTS =
 
 Core/libCore.a: Core/CMakeFiles/Core.dir/Core_autogen/mocs_compilation.cpp.obj
-Core/libCore.a: Core/CMakeFiles/Core.dir/UavModel.cpp.obj
+Core/libCore.a: Core/CMakeFiles/Core.dir/MubiaoAdapter.cpp.obj
+Core/libCore.a: Core/CMakeFiles/Core.dir/PPIDataManager.cpp.obj
+Core/libCore.a: Core/CMakeFiles/Core.dir/CoordinateConverter.cpp.obj
 Core/libCore.a: Core/CMakeFiles/Core.dir/build.make
 Core/libCore.a: Core/CMakeFiles/Core.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libCore.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library libCore.a"
 	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && $(CMAKE_COMMAND) -P CMakeFiles\Core.dir\cmake_clean_target.cmake
 	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Core.dir\link.txt --verbose=$(VERBOSE)
 

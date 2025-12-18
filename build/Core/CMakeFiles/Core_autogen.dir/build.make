@@ -67,7 +67,7 @@ include Core/CMakeFiles/Core_autogen.dir/progress.make
 
 Core/CMakeFiles/Core_autogen:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\myself\cpp\UAV\UAVSimPlatform\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target Core"
-	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && "C:\Program Files\CMake\bin\cmake.exe" -E cmake_autogen D:/myself/cpp/UAV/UAVSimPlatform/build/Core/CMakeFiles/Core_autogen.dir/AutogenInfo.json Debug
+	cd /d D:\myself\cpp\UAV\UAVSimPlatform\build\Core && "C:\Program Files\CMake\bin\cmake.exe" -E cmake_autogen D:/myself/cpp/UAV/UAVSimPlatform/build/Core/CMakeFiles/Core_autogen.dir/AutogenInfo.json ""
 
 Core/CMakeFiles/Core_autogen.dir/codegen:
 .PHONY : Core/CMakeFiles/Core_autogen.dir/codegen

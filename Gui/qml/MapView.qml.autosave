@@ -1,0 +1,162 @@
+import QtQuick 2.14
+import QtLocation 5.14
+import QtPositioning 5.14
+
+Item {
+    id: root
+
+    // 地图插件配置
+    Plugin {
+        id: mapPlugin
+        name: "osm" // OpenStreetMap插件
+
+        // 如果需要使用其他地图源，可以配置：
+//         PluginParameter {
+//             name: "osm.mapping.custom.host"
+//             value: "http://tile.openstreetmap.org/%z/%x/%y.png"
+//         }
+    }
+
+    // 主地图组件 
+    Map {
+        id: map
+        anchors.fill: parent
+        plugin: mapPlugin
+
+        // 初始中心点：天安门
+        center: QtPositioning.coordinate(39.9042, 116.4074)
+        zoomLevel: 14
+
+        // 启用手势操作
+        gesture.enabled: true
+        gesture.acceptedGestures: MapGestureArea.PanGesture | MapGestureArea.PinchGesture
+
+        // 地图类型（可选：卫星图、街道图等）
+        activeMapType: supportedMapTypes[0]
+
+        // UAV标记模型
+        MapItemView {
+            model: uavModel
+            delegate: MapQuickItem {
+                coordinate: QtPositioning.coordinate(model.latitude, model.longitude)
+                anchorPoint.x: markerImage.width / 2
+                anchorPoint.y: markerImage.height / 2
+
+                sourceItem: Item {
+                    width: 40
+                    height: 40
+
+                    // UAV图标
+                    Rectangle {
+                        id: markerImage
+                        width: 30
+                        height: 30
+                        radius: 15
+                        color: model.color
+                        border.color: "white"
+                        border.width: 2
+                        anchors.centerIn: parent
+
+                        // UAV符号
+                        Text {
+                            text: "✈"
+                            font.pixelSize: 16
+                            color: "white"
+                            anchors.centerIn: parent
+                        }
+                    }
+
+                    // UAV标签
+                    Rectangle {
+                        width: labelText.width + 8
+                        height: labelText.height + 4
+                        color: "#80000000"
+                        radius: 3
+                        anchors.top: markerImage.bottom
+                        anchors.topMargin: 2
+                        anchors.horizontalCenter: markerImage.horizontalCenter
+
+                        Text {
+                            id: labelText
+                            text: model.name
+                            color: "white"
+                            font.pixelSize: 10
+                            font.bold: true
+                            anchors.centerIn: parent
+                        }
+                    }
+
+                    // 点击响应
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            mapWidget.uavMarkerClicked(model.uavId)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // UAV标记数据模型
+    ListModel {
+        id: uavModel
+    }
+
+    // 地图控制函数
+    function setMapCenter(lat, lon) {
+        map.center = QtPositioning.coordinate(lat, lon)
+    }
+
+    function setZoomLevel(level) {
+        map.zoomLevel = level
+    }
+
+    function addOrUpdateMarker(uavId, lat, lon, name) {
+        // 查找是否已存在
+        for (var i = 0; i < uavModel.count; i++) {
+            if (uavModel.get(i).uavId === uavId) {
+                // 更新现有标记
+                uavModel.set(i, {
+                    "uavId": uavId,
+                    "latitude": lat,
+                    "longitude": lon,
+                    "name": name,
+                    "color": uavModel.get(i).color
+                })
+                return
+            }
+        }
+
+        // 添加新标记
+        uavModel.append({
+            "uavId": uavId,
+            "latitude": lat,
+            "longitude": lon,
+            "name": name,
+            "color": "green"
+        })
+    }
+
+    function removeMarker(uavId) {
+        for (var i = 0; i < uavModel.count; i++) {
+            if (uavModel.get(i).uavId === uavId) {
+                uavModel.remove(i)
+                return
+            }
+        }
+    }
+
+    function clearMarkers() {
+        uavModel.clear()
+    }
+
+    function setMarkerColor(uavId, color) {
+        for (var i = 0; i < uavModel.count; i++) {
+            if (uavModel.get(i).uavId === uavId) {
+                uavModel.setProperty(i, "color", color)
+                return
+            }
+        }
+    }
+}

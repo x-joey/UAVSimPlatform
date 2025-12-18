@@ -116,6 +116,32 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named Core
+
+# Build rule for target.
+Core: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Core
+.PHONY : Core
+
+# fast build rule for target.
+Core/fast:
+	$(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core.dir\build.make Core/CMakeFiles/Core.dir/build
+.PHONY : Core/fast
+
+#=============================================================================
+# Target rules for targets named Core_autogen
+
+# Build rule for target.
+Core_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Core_autogen
+.PHONY : Core_autogen
+
+# fast build rule for target.
+Core_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f Core\CMakeFiles\Core_autogen.dir\build.make Core/CMakeFiles/Core_autogen.dir/build
+.PHONY : Core_autogen/fast
+
+#=============================================================================
 # Target rules for targets named Service
 
 # Build rule for target.
@@ -175,8 +201,10 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... Core_autogen
 	@echo ... Service_autogen
 	@echo ... UavSimApp_autogen
+	@echo ... Core
 	@echo ... Service
 	@echo ... UavSimApp
 .PHONY : help
