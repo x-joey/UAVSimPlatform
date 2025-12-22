@@ -1,14 +1,19 @@
 #include "MainWindow.h"
 #include "trajectorygenerator.h"
 #include <QDebug>
+#include <QFormLayout>
+#include <QFrame>
 #include <QGridLayout>
 #include <QHeaderView>
 #include <QLabel>
 #include <QPushButton>
+#include <QQuickWindow>
+#include <QSizePolicy>
 #include <QSlider>
-#include <QSplitter>
+#include <QTimer>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <cmath>
 #include <limits>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -40,6 +45,11 @@ MainWindow::MainWindow(QWidget *parent)
         connect(m_mapWidget, &MapWidget::uavMarkerClicked, this, &MainWindow::onUavClicked, Qt::QueuedConnection);
     }
 
+    // 初始化PPI位置
+    if (m_ppiItem) {
+        m_lastPPIPos = m_ppiItem->pos();
+    }
+
     updatePathTimer->start(1000);
 }
 
@@ -54,6 +64,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::updatePathTimeout()
 {
+    // 检查PPI位置变化（拖动检测）
+    if (m_ppiItem && m_ppiItem->getDraggable()) {
+        QPointF currentPos = m_ppiItem->pos();
+        if (currentPos != m_lastPPIPos) {
+            onPPIPositionChanged();
+            m_lastPPIPos = currentPos;
+        }
+    }
+
     // 先更新所有UAV的位置
     for (const auto &uav : m_simManager->getUavs()) {
         uav->updatePosition(m_currentStep);
@@ -123,18 +142,22 @@ void MainWindow::setupUI()
 
     // 设置场景的边界（坐标范围）
     m_scene->setSceneRect(-20000, -20000, 40000, 40000);
+
     m_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    m_view->setDragMode(QGraphicsView::ScrollHandDrag);
+    // 禁用默认的拖拽模式，后续通过自定义方式控制地图移动
+    m_view->setDragMode(QGraphicsView::NoDrag);
     m_view->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     m_view->setRenderHint(QPainter::Antialiasing);
 
     // ========== 新增：创建PPI图元 ==========
     m_ppiItem = new PPIGraphicsItem();
-    m_ppiItem->setRadius(340);    // 设置PPI半径
-    m_ppiItem->setHuanJu(1000);   // 设置距离环为1km，使当前仿真尺度下目标分布更均匀
-    m_ppiItem->setPos(0, 0);      // 设置PPI位置在场景中心
-    m_ppiItem->setZValue(-10);    // 设置为最底层
+    m_ppiItem->setRadius(400);             // 设置PPI半径（稍大以便在地图上可见）
+    m_ppiItem->setHuanJu(1000);            // 设置距离环为1km，使当前仿真尺度下目标分布更均匀
+    m_ppiItem->setPos(0, 0);               // 设置PPI位置在场景中心
+    m_ppiItem->setZValue(10);              // 设置为上层，覆盖在地图上
+    m_ppiItem->setPPIOpacity(0.7);         // 设置半透明，让地图可透过PPI显示
+    m_ppiItem->setDrawBackground(false);   // 不绘制PPI背景，使用地图作为背景
     m_scene->addItem(m_ppiItem);
     // =======================================
 
@@ -217,6 +240,11 @@ void MainWindow::setupUI()
     layout->addWidget(new QLabel("UAV Telemetry:"), 5, 0, 1, 2);
     layout->addWidget(m_uavTable, 6, 0, 1, 2);
 
+    //
+    m_ringDistanceEdit = new QLineEdit(this);
+    layout->addWidget(new QLabel("Ring Distance(m):"), 7, 0, 1, 1);
+    layout->addWidget(m_ringDistanceEdit, 7, 1, 1, 1);
+
     dockContents->setLayout(layout);
     controlDock->setWidget(dockContents);
 
@@ -224,22 +252,40 @@ void MainWindow::setupUI()
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
 
-    // 使用 QSplitter 支持地图和雷达同时显示
-    QSplitter *splitter = new QSplitter(Qt::Horizontal, centralWidget);
-    splitter->addWidget(m_mapWidget);   // 左侧显示地图
-    splitter->addWidget(m_view);        // 右侧显示雷达
-    splitter->setStretchFactor(0, 1);   // 地图和雷达各占一半
-    splitter->setStretchFactor(1, 1);
+    // 创建层叠容器：地图在底层，PPI视图在上层
+    m_stackWidget = new QWidget(centralWidget);
+    m_stackWidget->setMinimumSize(800, 600);
+    m_stackWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    // 使用绝对定位实现层叠
+    m_mapWidget->setParent(m_stackWidget);
+    m_view->setParent(m_stackWidget);
+
+    // 设置视图背景透明，让地图可以透过来显示
+    m_view->setStyleSheet("background: transparent;");
+    m_view->viewport()->setStyleSheet("background: transparent;");
+    m_view->setFrameStyle(QFrame::NoFrame);
+
+    // 设置场景背景透明
+    m_scene->setBackgroundBrush(Qt::transparent);
+
+    // 地图和视图初始大小会在 resizeEvent 中设置
+    m_mapWidget->lower();   // 地图在底层
+    m_view->raise();        // PPI视图在上层
 
     QVBoxLayout *vlayout   = new QVBoxLayout(centralWidget);
-    QLabel      *infoLabel = new QLabel("PPI Radar Display - Ready to fly...", this);
+    QLabel      *infoLabel = new QLabel("PPI Radar Display overlayed on Map - Ready to fly...", this);
 
-    vlayout->addWidget(splitter);
+    vlayout->addWidget(m_stackWidget);
     vlayout->addWidget(infoLabel);
     connect(m_controlButton, &QPushButton::clicked, this, &MainWindow::toggleSimulation);
     connect(m_modeButton, &QPushButton::clicked, this, &MainWindow::switchDisplayMode);
     connect(m_dragButton, &QPushButton::clicked, this, &MainWindow::togglePPIDrag);
-
+    connect(m_ringDistanceEdit, &QLineEdit::returnPressed, this, [=]() {
+        int huanju = m_ringDistanceEdit->text().toInt();
+        m_ppiItem->setHuanJu(huanju);
+        qDebug() << "环距已输入" << endl;
+    });
     // 4. 创建传统图元（可选，用于对比）
     //    for (const auto &uav : m_simManager->getUavs()) {
     //        // 创建PathItem并添加到场景
@@ -269,6 +315,19 @@ void MainWindow::setupUI()
     //    }
 
     resize(1400, 800);   // 调整窗口大小
+
+    // 手动触发一次布局更新，确保地图和视图大小正确
+    QTimer::singleShot(100, this, [this]() {
+        if (m_stackWidget && m_mapWidget && m_view) {
+            QSize stackSize = m_stackWidget->size();
+            m_mapWidget->setGeometry(0, 0, stackSize.width(), stackSize.height());
+            m_view->setGeometry(0, 0, stackSize.width(), stackSize.height());
+            qDebug() << "Initial layout: Stack size =" << stackSize;
+        }
+
+        // 同步地图中心到PPI圆心
+        syncMapCenter();
+    });
 }
 
 void MainWindow::updateTelemetry(UavModel *uav)
@@ -317,7 +376,6 @@ void MainWindow::initUavTable()
         SortableTableWidgetItem *statusItem = new SortableTableWidgetItem("Normal");
         statusItem->setData(Qt::UserRole, 2);   // 设置排序键：Normal=2
         m_uavTable->setItem(row, 4, statusItem);
-
         ++row;
     }
 
@@ -394,12 +452,12 @@ void MainWindow::updateUavStatus(int uavId)
 
             // 根据状态设置文本和排序键（移除数字前缀，使用UserRole排序）
             if (mb->daoyin_flag) {
-                statusItem->setText("★ Guidance");
+                statusItem->setText("Guidance");
                 statusItem->setData(Qt::UserRole, 0);   // Guidance=0，排在最前
                 statusItem->setForeground(QBrush(Qt::red));
             }
             else if (mb->zhongdian) {
-                statusItem->setText("◆ Priority");
+                statusItem->setText("Priority");
                 statusItem->setData(Qt::UserRole, 1);                     // Priority=1，排在中间
                 statusItem->setForeground(QBrush(QColor(255, 165, 0)));   // 橙色
             }
@@ -761,6 +819,7 @@ void MainWindow::switchDisplayMode()
     if (m_displayMode == DisplayMode::MapRadar) {
         // 切换到纯雷达模式
         m_displayMode = DisplayMode::RadarOnly;
+        m_scene->setShowGrid(false);
         applyRadarOnlyMode();
         m_modeButton->setText("Switch to Map+Radar Mode");
     }
@@ -777,19 +836,26 @@ void MainWindow::applyRadarOnlyMode()
     if (!m_ppiItem || !m_scene || !m_view)
         return;
 
-    // 1. 隐藏地图组件
+    qDebug() << "=== Applying Radar-Only Mode ===";
+
+    // 1. 将地图移出视野（而不是hide），避免QQuickWidget的显示问题
     if (m_mapWidget) {
-        m_mapWidget->hide();
+        // 移动到屏幕外，保持存活状态
+        m_mapWidget->setGeometry(-10000, -10000, 100, 100);
+        qDebug() << "Map moved out of view";
     }
 
-    // 2. 隐藏网格背景
+    // 2. 设置场景和视图背景为黑色（纯雷达模式）
     m_scene->setShowGrid(false);
+    m_scene->setBackgroundBrush(QBrush(QColor(0, 0, 0)));   // 黑色背景
+    m_view->setStyleSheet("background: black;");            // 视图背景黑色
+    m_view->viewport()->setStyleSheet("background: black;");
 
-    // 3. 放大PPI半径
-    m_ppiItem->setRadius(900);
-    m_ppiItem->setPPIOpacity(1.0);
-    m_ppiItem->setDrawBackground(true);
-    m_ppiItem->setZValue(10);   // 提升到前景
+    //     3. 调整PPI显示：不透明，显示背景，放大半径
+    m_ppiItem->setRadius(450);            // 放大半径以填充更多视图
+    m_ppiItem->setPPIOpacity(1.0);        // 完全不透明
+    m_ppiItem->setDrawBackground(true);   // 绘制PPI背景
+    m_ppiItem->setZValue(10);             // 保持在上层
 
     // 4. 隐藏传统图元
     for (auto *pathItem : m_pathItemMap) {
@@ -805,9 +871,9 @@ void MainWindow::applyRadarOnlyMode()
             labelItem->setVisible(false);
     }
 
-    // 5. 调整视图（可选）
+    // 5. 调整视图缩放和居中
     m_view->resetTransform();
-    m_view->scale(0.8, 0.8);
+    m_view->scale(1.0, 1.0);
     m_view->centerOn(0, 0);
 
     qDebug() << "Switched to Radar-Only Mode";
@@ -818,42 +884,80 @@ void MainWindow::applyMapRadarMode()
     if (!m_ppiItem || !m_scene || !m_view)
         return;
 
-    // 1. 显示地图组件
-    if (m_mapWidget) {
+    qDebug() << "=== Applying Map+Radar Mode ===";
+
+    // 2. 先设置场景和视图背景为透明（让地图透过来）
+    m_scene->setBackgroundBrush(Qt::transparent);
+    m_scene->setShowGrid(false);
+    m_view->setStyleSheet("background: transparent;");
+    m_view->viewport()->setStyleSheet("background: transparent;");
+
+    // 3. 调整PPI显示：半透明，不显示背景，叠加在地图上
+    m_ppiItem->setRadius(400);
+    m_ppiItem->setPPIOpacity(0.7);
+    m_ppiItem->setDrawBackground(false);
+    m_ppiItem->setZValue(10);
+
+    // 1. 恢复地图到正确位置和大小（关键！）
+    if (m_mapWidget && m_stackWidget) {
+        QSize stackSize = m_stackWidget->size();
+
+        qDebug() << "Before restore - Map geometry:" << m_mapWidget->geometry();
+        qDebug() << "Stack size:" << stackSize;
+
+        // 移回正确位置
+        m_mapWidget->setGeometry(0, 0, stackSize.width(), stackSize.height());
+
+        // 确保可见
+        m_mapWidget->setVisible(true);
         m_mapWidget->show();
-        // 同步当前UAV数据到地图
-        syncUavDataToMap();
+
+        // 层叠顺序
+        m_mapWidget->lower();
+
+        qDebug() << "After restore - Map geometry:" << m_mapWidget->geometry();
+        qDebug() << "Map visible:" << m_mapWidget->isVisible();
+
+        // 强制QQuickWidget刷新
+        m_mapWidget->quickWindow()->update();
+        m_mapWidget->update();
+
+        // 同步地图中心和数据
+        QTimer::singleShot(100, this, [this]() {
+            syncMapCenter();
+            syncUavDataToMap();
+        });
     }
 
-    // 2. 显示网格背景
-    m_scene->setShowGrid(true);
+    // 4. 确保视图在地图之上
+    if (m_view && m_stackWidget) {
+        QSize stackSize = m_stackWidget->size();
+        m_view->setGeometry(0, 0, stackSize.width(), stackSize.height());
+        m_view->setVisible(true);
+        m_view->show();
+        m_view->raise();
+    }
 
-    // 3. 缩小PPI半径，添加透明度
-    m_ppiItem->setRadius(400);
-    m_ppiItem->setPPIOpacity(0.6);
-    m_ppiItem->setDrawBackground(false);
-    m_ppiItem->setZValue(-10);   // 降到背景层
-
-    // 4. 显示传统图元
+    // 5. 隐藏传统图元
     for (auto *pathItem : m_pathItemMap) {
         if (pathItem)
-            pathItem->setVisible(true);
+            pathItem->setVisible(false);
     }
     for (auto *uavItem : m_uavItemMap) {
         if (uavItem)
-            uavItem->setVisible(true);
+            uavItem->setVisible(false);
     }
     for (auto *labelItem : m_uavLabelMap) {
         if (labelItem)
-            labelItem->setVisible(true);
+            labelItem->setVisible(false);
     }
 
-    // 5. 恢复视图
+    // 6. 恢复视图缩放
     m_view->resetTransform();
     m_view->scale(1.0, 1.0);
     m_view->centerOn(0, 0);
 
-    qDebug() << "Switched to Map+Radar Mode";
+    qDebug() << "=== Map+Radar Mode Applied ===";
 }
 
 void MainWindow::togglePPIDrag()
@@ -866,14 +970,19 @@ void MainWindow::togglePPIDrag()
 
     m_ppiItem->setDraggable(newState);
 
-    // 更新按钮文本
+    // 更新按钮文本和记录PPI位置
     if (newState) {
         m_dragButton->setText("Disable PPI Drag");
-        qDebug() << "PPI Drag Enabled - You can now drag the radar display";
+        // 记录当前PPI位置，用于后续计算偏移
+        m_lastPPIPos = m_ppiItem->pos();
+        qDebug() << "PPI Drag Enabled - Drag to move map around radar position";
     }
     else {
         m_dragButton->setText("Enable PPI Drag");
-        qDebug() << "PPI Drag Disabled - Click targets to select them";
+        // 禁用拖动时，将PPI恢复到原点
+        m_ppiItem->setPos(0, 0);
+        m_lastPPIPos = QPointF(0, 0);
+        qDebug() << "PPI Drag Disabled - PPI reset to center";
     }
 }
 
@@ -898,8 +1007,76 @@ void MainWindow::sceneToGeo(double sceneX, double sceneY, double &latitude, doub
     // 简单线性映射：场景坐标(单位：米) -> 地理坐标(单位：度)
     // 场景原点(0,0) 对应参考点(m_refLatitude, m_refLongitude)
     // 注意：Y轴向北为正，X轴向东为正
-    latitude = m_refLatitude + (sceneY / m_metersPerDegreeLat);
+    latitude  = m_refLatitude + (sceneY / m_metersPerDegreeLat);
     longitude = m_refLongitude + (sceneX / m_metersPerDegreeLon);
+}
+
+double MainWindow::calculateMapZoomLevel(double huanJuMeters) const
+{
+    // 根据PPI的距离环半径计算合适的地图缩放级别
+    // OpenStreetMap缩放级别：每增加1级，地图缩放2倍
+    // 在赤道上，zoom=0时，256像素代表整个地球周长40075km
+    // zoom级别n时，每像素代表的距离 = 40075000 / (256 * 2^n) 米
+
+    // 假设地图显示区域宽度为800像素，我们希望PPI的最大半径正好显示在这个范围内
+    // 那么需要的缩放级别为：huanJuMeters * 4（因为PPI半径到直径，再留一些边距）
+
+    // 经验公式：zoom = 16 - log2(huanJuMeters / 1000)
+    // huanJuMeters = 1000米 -> zoom = 16
+    // huanJuMeters = 2000米 -> zoom = 15
+    // huanJuMeters = 500米 -> zoom = 17
+
+    if (huanJuMeters <= 0) {
+        return 14;   // 默认缩放级别
+    }
+
+    double zoom = 16.0 - std::log2(huanJuMeters / 1000.0);
+
+    // 限制缩放范围在 10-18 之间
+    if (zoom < 10)
+        zoom = 10;
+    if (zoom > 18)
+        zoom = 18;
+
+    return zoom;
+}
+
+void MainWindow::syncMapCenter()
+{
+    if (!m_mapWidget)
+        return;
+
+    // 将地图中心设置为PPI圆心（天安门）
+    m_mapWidget->setCenter(m_refLatitude, m_refLongitude);
+
+    // 根据当前PPI的距离环设置地图缩放级别
+    if (m_ppiItem) {
+        double huanJu    = m_ppiItem->getHuanJu();   // 获取当前距离环（米）
+        double zoomLevel = calculateMapZoomLevel(huanJu);
+        m_mapWidget->setZoomLevel(zoomLevel);
+        m_ringDistanceEdit->setText(QString::number(huanJu));
+        qDebug() << "Sync map center: HuanJu =" << huanJu << "m, Zoom level =" << zoomLevel;
+    }
+}
+
+bool MainWindow::isUavInPPIRange(double uavX, double uavY) const
+{
+    if (!m_ppiItem)
+        return false;
+
+    // PPI圆心在场景原点(0, 0)
+    // 计算UAV到圆心的距离
+    double distance = std::sqrt(uavX * uavX + uavY * uavY);
+
+    // 获取PPI的最大显示半径
+    double ppiRadius = m_ppiItem->getRadius();   // 这是屏幕像素半径
+    double huanJu    = m_ppiItem->getHuanJu();   // 这是实际距离（米）
+
+    // PPI显示的最大距离是 radius / huanJu 倍的距离环
+    // 通常PPI显示多圈距离环，假设显示3圈
+    double maxDisplayDistance = huanJu * 3.0;   // 可以根据实际情况调整
+
+    return distance <= maxDisplayDistance;
 }
 
 void MainWindow::syncUavDataToMap()
@@ -907,29 +1084,42 @@ void MainWindow::syncUavDataToMap()
     if (!m_mapWidget)
         return;
 
-    // 遍历所有UAV，将它们的位置同步到地图
+    // 遍历所有UAV，根据距离判断是否显示在地图上
     for (const auto &uav : m_simManager->getUavs()) {
-        double latitude, longitude;
-        sceneToGeo(uav->getX(), uav->getY(), latitude, longitude);
+        int    uavId = uav->getId();
+        double uavX  = uav->getX();
+        double uavY  = uav->getY();
 
-        // 添加或更新地图标记
-        m_mapWidget->addOrUpdateUavMarker(uav->getId(), latitude, longitude, uav->getName());
+        // 判断UAV是否在PPI范围内
+        bool inPPIRange = isUavInPPIRange(uavX, uavY);
 
-        // 根据UAV状态设置标记颜色
-        // 从PPI数据管理器获取状态信息
-        QSharedPointer<Mubiao> mubiao = m_ppiDataManager->getMubiaoHash().value(uav->getId());
-        if (mubiao) {
-            QString color = "blue";   // 默认颜色
-            if (mubiao->daoyin_flag) {
-                color = "red";   // 导引状态：红色
+        if (inPPIRange) {
+            // 在PPI范围内，从地图上移除该标记（避免重复显示）
+            m_mapWidget->removeUavMarker(uavId);
+        }
+        else {
+            // 在PPI范围外，显示在地图上
+            double latitude, longitude;
+            sceneToGeo(uavX, uavY, latitude, longitude);
+
+            // 添加或更新地图标记
+            m_mapWidget->addOrUpdateUavMarker(uavId, latitude, longitude, uav->getName());
+
+            // 根据UAV状态设置标记颜色
+            QSharedPointer<Mubiao> mubiao = m_ppiDataManager->getMubiaoHash().value(uavId);
+            if (mubiao) {
+                QString color = "blue";   // 默认颜色
+                if (mubiao->daoyin_flag) {
+                    color = "red";   // 导引状态：红色
+                }
+                else if (mubiao->zhongdian) {
+                    color = "orange";   // 重点关注：橙色
+                }
+                else {
+                    color = "green";   // 正常状态：绿色
+                }
+                m_mapWidget->setMarkerColor(uavId, color);
             }
-            else if (mubiao->zhongdian) {
-                color = "orange";   // 重点关注：橙色
-            }
-            else {
-                color = "green";   // 正常状态：绿色
-            }
-            m_mapWidget->setMarkerColor(uav->getId(), color);
         }
     }
 }
@@ -945,4 +1135,91 @@ void MainWindow::onTableHeaderClicked(int logicalIndex)
         m_sortColumnName = headerItem->text();
         qDebug() << "Sorting by column:" << m_sortColumnName;
     }
+}
+
+void MainWindow::onPPIPositionChanged()
+{
+    if (!m_ppiItem || !m_mapWidget || m_displayMode != DisplayMode::MapRadar)
+        return;
+
+    // 获取PPI当前位置（场景坐标）
+    QPointF ppiPos = m_ppiItem->pos();
+
+    // PPI的位置偏移代表"雷达中心"的移动
+    // PPI从(0,0)移动到(ppiPos.x(), ppiPos.y())
+    // 意味着雷达中心从天安门移动了这个距离
+
+    // 将场景偏移转换为地理坐标
+    double newLatitude, newLongitude;
+    sceneToGeo(ppiPos.x(), ppiPos.y(), newLatitude, newLongitude);
+
+    // 更新地图中心到新位置
+    m_mapWidget->setCenter(newLatitude, newLongitude);
+
+    qDebug() << "PPI dragged: offset =" << ppiPos << "-> Map center:" << newLatitude << "," << newLongitude;
+
+    // 重新同步UAV数据到地图（因为地图中心变了）
+    syncUavDataToMap();
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    QMainWindow::resizeEvent(event);
+
+    // 同步调整地图和视图的大小，确保它们始终保持一致并填充整个容器
+    if (m_stackWidget && m_mapWidget && m_view) {
+        // 使用 stackWidget 的实际大小
+        QSize stackSize = m_stackWidget->size();
+
+        // 确保地图和视图完全覆盖 stackWidget
+        m_mapWidget->setGeometry(0, 0, stackSize.width(), stackSize.height());
+        m_view->setGeometry(0, 0, stackSize.width(), stackSize.height());
+
+        qDebug() << "Resized: Stack size =" << stackSize << "Map/View geometry updated";
+    }
+}
+
+void MainWindow::wheelEvent(QWheelEvent *event)
+{
+    // 只在地图+雷达模式下处理滚轮缩放
+    if (m_displayMode != DisplayMode::MapRadar || !m_ppiItem) {
+        QMainWindow::wheelEvent(event);
+        return;
+    }
+
+    // 获取滚轮的滚动方向和步数
+    int delta = event->angleDelta().y();   // 正数表示向上滚（放大），负数表示向下滚（缩小）
+
+    // 计算缩放步长
+    double scaleFactor = 1.0;
+    if (delta > 0) {
+        scaleFactor = 0.8;   // 向上滚，缩小距离环（放大显示）
+    }
+    else if (delta < 0) {
+        scaleFactor = 1.25;   // 向下滚，放大距离环（缩小显示）
+    }
+
+    // 调整PPI的距离环
+    double currentHuanJu = m_ppiItem->getHuanJu();
+    double newHuanJu     = currentHuanJu * scaleFactor;
+
+    // 限制距离环范围（100米到10000米）
+    if (newHuanJu < 100)
+        newHuanJu = 100;
+    if (newHuanJu > 10000)
+        newHuanJu = 10000;
+
+    // 设置新的距离环
+    m_ppiItem->setHuanJu(newHuanJu);
+
+    // 同步地图缩放级别
+    syncMapCenter();
+
+    // 重新同步UAV数据（因为PPI范围改变了）
+    syncUavDataToPPI();
+    syncUavDataToMap();
+
+    qDebug() << "Wheel zoom: HuanJu changed from" << currentHuanJu << "to" << newHuanJu << "meters";
+
+    event->accept();
 }

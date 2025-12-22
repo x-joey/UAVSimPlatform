@@ -9,6 +9,11 @@
 #define MAINWINDOW_H
 #pragma once
 
+#include "DraggableHeaderView.h"       // 新增：可拖动列表头
+#include "MapWidget.h"                 // 新增：地图组件
+#include "PPIDataManager.h"            // 新增：PPI数据管理器
+#include "PPIGraphicsItem.h"           // 新增：PPI图元
+#include "SortableTableWidgetItem.h"   // 新增：自定义排序表格项
 #include "UavModel.h"
 #include "pathitem.h"
 #include "simscene.h"
@@ -16,20 +21,18 @@
 #include "simview.h"
 #include "uavitem.h"
 #include "uavlabelitem.h"
-#include "PPIGraphicsItem.h"        // 新增：PPI图元
-#include "PPIDataManager.h"         // 新增：PPI数据管理器
-#include "DraggableHeaderView.h"    // 新增：可拖动列表头
-#include "SortableTableWidgetItem.h" // 新增：自定义排序表格项
-#include "MapWidget.h"              // 新增：地图组件
 
 #include <QDockWidget>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QLabel>
+#include <QLineEdit>
 #include <QMainWindow>
 #include <QPushButton>
+#include <QResizeEvent>
 #include <QTableWidget>
 #include <QTimer>
+#include <QWheelEvent>
 #include <memory>   // 引入智能指针
 
 /**
@@ -38,9 +41,10 @@
  * @details 定义应用程序的显示模式，支持不同的可视化方式
  *          设计原因：支持多种显示模式，提升用户体验和系统灵活性
  */
-enum class DisplayMode {
-    RadarOnly,      // 纯雷达模式：只显示PPI雷达界面
-    MapRadar        // 地图+雷达模式：同时显示地图和PPI雷达
+enum class DisplayMode
+{
+    RadarOnly,   // 纯雷达模式：只显示PPI雷达界面
+    MapRadar     // 地图+雷达模式：同时显示地图和PPI雷达
 };
 
 /**
@@ -62,14 +66,14 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT   // Qt 宏，允许使用信号和槽 (Signals & Slots)
 
-public:
-    /**
-     * @brief 构造函数
-     * @param parent 父窗口指针
-     * @details 初始化主窗口，创建所有UI组件和数据对象
-     *          提升：使用智能指针管理资源，自动处理内存
-     */
-    MainWindow(QWidget *parent = nullptr);
+        public :
+        /**
+         * @brief 构造函数
+         * @param parent 父窗口指针
+         * @details 初始化主窗口，创建所有UI组件和数据对象
+         *          提升：使用智能指针管理资源，自动处理内存
+         */
+        MainWindow(QWidget *parent = nullptr);
 
     /**
      * @brief 析构函数
@@ -149,6 +153,28 @@ public slots:
      *          支持列拖动后的正确排序
      */
     void onTableHeaderClicked(int logicalIndex);
+
+    /**
+     * @brief 处理PPI位置变化（拖动）
+     * @details 当PPI被拖动时，同步移动地图而非PPI本身
+     *          PPI圆心代表战车雷达位置，拖动查看周围区域
+     */
+    void onPPIPositionChanged();
+
+protected:
+    /**
+     * @brief 窗口大小改变事件
+     * @param event 事件对象
+     * @details 当窗口大小改变时，同步调整地图和视图的大小
+     */
+    void resizeEvent(QResizeEvent *event) override;
+
+    /**
+     * @brief 鼠标滚轮事件
+     * @param event 事件对象
+     * @details 处理滚轮缩放，同步PPI距离环和地图缩放级别
+     */
+    void wheelEvent(QWheelEvent *event) override;
 
 private:
     /**
@@ -247,6 +273,28 @@ private:
      */
     void sceneToGeo(double sceneX, double sceneY, double &latitude, double &longitude) const;
 
+    /**
+     * @brief 根据PPI距离环计算地图缩放级别
+     * @param huanJuMeters PPI距离环半径（米）
+     * @return 地图缩放级别
+     * @details 将PPI的距离环半径映射到地图的缩放级别
+     */
+    double calculateMapZoomLevel(double huanJuMeters) const;
+
+    /**
+     * @brief 同步地图中心到PPI中心（天安门）
+     * @details 确保地图的中心与PPI的圆心对齐
+     */
+    void syncMapCenter();
+
+    /**
+     * @brief 根据UAV距离判断应该显示在PPI还是地图上
+     * @param uavX UAV的X坐标
+     * @param uavY UAV的Y坐标
+     * @return true表示在PPI范围内，false表示在PPI范围外
+     */
+    bool isUavInPPIRange(double uavX, double uavY) const;
+
     // ========== 数据管理 ==========
     /**
      * @brief 仿真管理器
@@ -303,6 +351,11 @@ private:
     QPushButton *m_controlButton = nullptr;
 
     /**
+     * @brief 距离环距离编辑框
+     * @details 用于输入圆环环距离
+     */
+    QLineEdit *m_ringDistanceEdit = nullptr;
+    /**
      * @brief 模式切换按钮
      * @details 用于切换显示模式（纯雷达/地图+雷达）
      */
@@ -351,6 +404,18 @@ private:
      *          使用Qt对象树，自动管理内存
      */
     MapWidget *m_mapWidget = nullptr;
+
+    /**
+     * @brief 层叠容器组件
+     * @details 包含地图和视图的层叠容器，用于resize时同步大小
+     */
+    QWidget *m_stackWidget = nullptr;
+
+    /**
+     * @brief PPI上次位置
+     * @details 用于计算拖动偏移量，从而移动地图
+     */
+    QPointF m_lastPPIPos;
 
     // ========== 传统图元（可选保留） ==========
     /**
@@ -420,7 +485,7 @@ private:
      * @details 在北纬40度附近，1度纬度约111km，1度经度约85km
      *          这里使用平均值约100km/度，即1000米约0.01度
      */
-    const double m_metersPerDegreeLat = 111000.0;  // 纬度方向：约111km/度
-    const double m_metersPerDegreeLon = 85000.0;   // 经度方向：约85km/度（北纬40度附近）
+    const double m_metersPerDegreeLat = 111000.0;   // 纬度方向：约111km/度
+    const double m_metersPerDegreeLon = 85000.0;    // 经度方向：约85km/度（北纬40度附近）
 };
 #endif   // UAVITEM_H

@@ -9,7 +9,7 @@ void SimScene::drawBackground(QPainter *painter, const QRectF &rect)
 {
     // 如果不显示网格，填充纯黑色背景
     if (!m_showGrid) {
-        painter->fillRect(rect, Qt::black);
+        //            painter->fillRect(rect, Qt::black);
         return;
     }
 

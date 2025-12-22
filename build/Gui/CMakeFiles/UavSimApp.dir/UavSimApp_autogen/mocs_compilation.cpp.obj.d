@@ -572,6 +572,7 @@ Gui/CMakeFiles/UavSimApp.dir/UavSimApp_autogen/mocs_compilation.cpp.obj: \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QPushButton \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qpushbutton.h \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qabstractbutton.h \
+ D:/software/qt/5.14.2/mingw73_32/include/QtGui/QResizeEvent \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QTableWidget \
  D:\myself\cpp\UAV\UAVSimPlatform\build\Gui\UavSimApp_autogen\EWIEGA46WW/moc_MapWidget.cpp \
  D:/myself/cpp/UAV/UAVSimPlatform/Gui/MapWidget.h \

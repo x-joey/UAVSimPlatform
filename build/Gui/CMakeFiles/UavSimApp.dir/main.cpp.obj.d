@@ -569,6 +569,7 @@ Gui/CMakeFiles/UavSimApp.dir/main.cpp.obj: \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QPushButton \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qpushbutton.h \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qabstractbutton.h \
+ D:/software/qt/5.14.2/mingw73_32/include/QtGui/QResizeEvent \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QTableWidget \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QApplication \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qapplication.h \

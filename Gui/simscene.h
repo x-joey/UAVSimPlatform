@@ -39,7 +39,11 @@ public:
      * @details 控制网格背景的显示/隐藏，并触发场景更新
      *          提升：支持动态切换显示模式，提升灵活性
      */
-    void setShowGrid(bool show) { m_showGrid = show; update(); }
+    void setShowGrid(bool show)
+    {
+        m_showGrid = show;
+        update();
+    }
 
     /**
      * @brief 获取网格显示状态
@@ -81,7 +85,7 @@ private:
      * @details 控制网格背景的显示状态，默认显示
      *          提升：支持动态切换，适应不同显示模式
      */
-    bool m_showGrid = true;
+    bool m_showGrid = false;
 };
 
 #endif   // SIMSCENE_H

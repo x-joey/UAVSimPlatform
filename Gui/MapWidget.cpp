@@ -17,6 +17,13 @@ MapWidget::MapWidget(QWidget *parent)
     // 设置Qt Quick渲染设置
     setResizeMode(QQuickWidget::SizeRootObjectToView);
 
+    // 关键：设置更新行为，确保在隐藏后能正确恢复显示
+    setAttribute(Qt::WA_AlwaysStackOnTop, false);
+    setAttribute(Qt::WA_TranslucentBackground, false);
+
+    // 设置clearColor为白色而非透明，避免显示问题
+    setClearColor(Qt::white);
+
     // 初始化QML
     initQml();
 }

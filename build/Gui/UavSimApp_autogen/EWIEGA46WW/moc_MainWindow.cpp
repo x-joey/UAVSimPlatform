@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[16];
-    char stringdata0[224];
+    QByteArrayData data[17];
+    char stringdata0[245];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -47,7 +47,8 @@ QT_MOC_LITERAL(11, 150, 7), // "guiding"
 QT_MOC_LITERAL(12, 158, 17), // "switchDisplayMode"
 QT_MOC_LITERAL(13, 176, 13), // "togglePPIDrag"
 QT_MOC_LITERAL(14, 190, 20), // "onTableHeaderClicked"
-QT_MOC_LITERAL(15, 211, 12) // "logicalIndex"
+QT_MOC_LITERAL(15, 211, 12), // "logicalIndex"
+QT_MOC_LITERAL(16, 224, 20) // "onPPIPositionChanged"
 
     },
     "MainWindow\0updatePathTimeout\0\0"
@@ -55,7 +56,8 @@ QT_MOC_LITERAL(15, 211, 12) // "logicalIndex"
     "onTargetFocusToggled\0targetId\0focused\0"
     "onTargetDoubleClicked\0onTargetGuidanceToggled\0"
     "guiding\0switchDisplayMode\0togglePPIDrag\0"
-    "onTableHeaderClicked\0logicalIndex"
+    "onTableHeaderClicked\0logicalIndex\0"
+    "onPPIPositionChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -65,7 +67,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -73,15 +75,16 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   59,    2, 0x0a /* Public */,
-       3,    0,   60,    2, 0x0a /* Public */,
-       4,    1,   61,    2, 0x0a /* Public */,
-       6,    2,   64,    2, 0x0a /* Public */,
-       9,    1,   69,    2, 0x0a /* Public */,
-      10,    2,   72,    2, 0x0a /* Public */,
-      12,    0,   77,    2, 0x0a /* Public */,
-      13,    0,   78,    2, 0x0a /* Public */,
-      14,    1,   79,    2, 0x0a /* Public */,
+       1,    0,   64,    2, 0x0a /* Public */,
+       3,    0,   65,    2, 0x0a /* Public */,
+       4,    1,   66,    2, 0x0a /* Public */,
+       6,    2,   69,    2, 0x0a /* Public */,
+       9,    1,   74,    2, 0x0a /* Public */,
+      10,    2,   77,    2, 0x0a /* Public */,
+      12,    0,   82,    2, 0x0a /* Public */,
+      13,    0,   83,    2, 0x0a /* Public */,
+      14,    1,   84,    2, 0x0a /* Public */,
+      16,    0,   87,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -93,6 +96,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   15,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -112,6 +116,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 6: _t->switchDisplayMode(); break;
         case 7: _t->togglePPIDrag(); break;
         case 8: _t->onTableHeaderClicked((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: _t->onPPIPositionChanged(); break;
         default: ;
         }
     }
@@ -146,13 +151,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 10;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 10)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 9;
+        _id -= 10;
     }
     return _id;
 }

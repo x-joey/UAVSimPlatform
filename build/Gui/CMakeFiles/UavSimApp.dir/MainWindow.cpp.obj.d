@@ -569,21 +569,42 @@ Gui/CMakeFiles/UavSimApp.dir/MainWindow.cpp.obj: \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QPushButton \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qpushbutton.h \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qabstractbutton.h \
+ D:/software/qt/5.14.2/mingw73_32/include/QtGui/QResizeEvent \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QTableWidget \
  D:/myself/cpp/UAV/UAVSimPlatform/Service/trajectorygenerator.h \
  D:/software/qt/5.14.2/mingw73_32/include/QtCore/QDebug \
  D:/software/qt/5.14.2/mingw73_32/include/QtCore/qdebug.h \
+ D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QFrame \
+ D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qframe.h \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QGridLayout \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qgridlayout.h \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qlayout.h \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qlayoutitem.h \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qboxlayout.h \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qgridlayout.h \
+ D:/software/qt/5.14.2/mingw73_32/include/QtQuick/QQuickWindow \
+ D:/software/qt/5.14.2/mingw73_32/include/QtQuick/qquickwindow.h \
+ D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QSizePolicy \
+ D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qsizepolicy.h \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QSlider \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qslider.h \
- D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QSplitter \
- D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qsplitter.h \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QVBoxLayout \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qboxlayout.h \
  D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/QWidget \
- D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qwidget.h
+ D:/software/qt/5.14.2/mingw73_32/include/QtWidgets/qwidget.h \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/cmath \
+ D:/software/qt/Tools/mingw730_32/i686-w64-mingw32/include/math.h \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/bits/specfun.h \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/tr1/gamma.tcc \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/tr1/special_function_util.h \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/tr1/bessel_function.tcc \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/tr1/special_function_util.h \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/tr1/beta_function.tcc \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/tr1/ell_integral.tcc \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/tr1/exp_integral.tcc \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/tr1/hypergeometric.tcc \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/tr1/legendre_function.tcc \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/tr1/modified_bessel_func.tcc \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/tr1/poly_hermite.tcc \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/tr1/poly_laguerre.tcc \
+ D:/software/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/tr1/riemann_zeta.tcc

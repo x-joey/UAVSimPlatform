@@ -11,8 +11,8 @@ UavModel::UavModel(int id, QString name)
     , m_name(name)
     , m_x(0.0)
     , m_y(0.0)   // 初始化列表，C++ 特有且推荐的写法
-    // 提升：使用初始化列表而非构造函数体内赋值，避免先默认构造再赋值
-    //       对于基本类型性能提升不明显，但对于复杂类型可避免不必要的构造和析构
+// 提升：使用初始化列表而非构造函数体内赋值，避免先默认构造再赋值
+//       对于基本类型性能提升不明显，但对于复杂类型可避免不必要的构造和析构
 {}
 
 void UavModel::updatePosition(int stepIndex)
@@ -36,7 +36,7 @@ void UavModel::updatePosition(int stepIndex)
 
     // 调试输出：记录位置更新信息
     // 提升：便于调试和跟踪无人机运动轨迹
-    qDebug() << "UAV moved to index" << safeIndex << ":" << m_x << m_y;
+    //    qDebug() << "UAV moved to index" << safeIndex << ":" << m_x << m_y;
 }
 
 void UavModel::setFlightPath(const QVector<QPointF> &path)
